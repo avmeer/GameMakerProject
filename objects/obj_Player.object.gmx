@@ -182,15 +182,18 @@ health = clamp(health,0,100);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>currentWeapon = equippedItems[equippableItem.WEAPON];
-with(currentWeapon){
-    instance_destroy();
+            <string>if (other.canCollide){
+    currentWeapon = equippedItems[equippableItem.WEAPON];
+    with(currentWeapon){
+        instance_destroy();
+    }
+    equippedItems[equippableItem.WEAPON] = other;
+    other.x = 80;
+    other.y = 80;
+    other.canCollide = false;
 }
-equippedItems[equippableItem.WEAPON] = other;
-other.visible = false;
-other.x = 80;
-other.y = 80;
-other.visible = true;
+
+
 </string>
           </argument>
         </arguments>

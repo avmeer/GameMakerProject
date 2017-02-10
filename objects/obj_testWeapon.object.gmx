@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>damage = 20;
+canCollide = true;
 </string>
           </argument>
         </arguments>
