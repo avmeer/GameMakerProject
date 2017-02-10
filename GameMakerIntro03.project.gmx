@@ -14,6 +14,9 @@
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <shaders name="shaders">
+    <shader type="GLSLES">shaders\shd_hit.shader</shader>
+  </shaders>
   <objects name="objects">
     <object>objects\obj_Wall</object>
     <object>objects\obj_Collect</object>
