@@ -14,9 +14,13 @@
     <sprite>sprites\spr_Gun</sprite>
     <sprite>sprites\spr_Pistol</sprite>
     <sprite>sprites\spr_Health</sprite>
+    <sprite>sprites\spr_Border</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\scr_itemPickup.gml</script>
+  </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_hit.shader</shader>
   </shaders>
@@ -31,6 +35,7 @@
     <object>objects\obj_Weapon</object>
     <object>objects\obj_Health</object>
     <object>objects\obj_SpawnTesting</object>
+    <object>objects\obj_Inventory</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_Game</room>
