@@ -26,11 +26,11 @@
           <argument>
             <kind>1</kind>
             <string>if keyboard_check_pressed(ord('H')){
-    instance_create(mouse_x,mouse_y,obj_Health);
+    tempHealth = instance_create(mouse_x,mouse_y,obj_Health);
 }
 
 if keyboard_check_pressed(ord('G')){
-    instance_create(mouse_x, mouse_y, obj_testWeapon);
+    tempWeapon = instance_create(mouse_x, mouse_y, obj_testWeapon);
 }
 </string>
           </argument>
