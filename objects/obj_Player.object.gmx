@@ -27,6 +27,25 @@
             <kind>1</kind>
             <string>globalvar S ; // score
 globalvar B ; // number of bullets
+
+enum equippableItem{
+    HEAD,
+    BODY,
+    GLOVES,
+    FEET,
+    WEAPON
+}
+
+for (i = 0; i &lt; 5; i++){
+    equippedItems[i] = "none";
+}
+
+newWeapon = instance_create(80,80, obj_Weapon);
+
+equippedItems[equippableItem.WEAPON] = newWeapon;
+
+
+hit = false;
 health = 100;
 S = 0 ;
 
@@ -34,13 +53,31 @@ B = 3;
 
 max_spd=10; 
 
-key_right=vk_right; // move right
-key_left=vk_left ; // move left
-key_down=vk_down ; // move down
-key_up=vk_up ; // move up
-
 // randomize the seed
 randomize() ;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>hit = false;
 </string>
           </argument>
         </arguments>
@@ -65,7 +102,7 @@ randomize() ;
             <kind>1</kind>
             <string>if (mouse_check_button(mb_right)){
     speed = 10;
-    image_angle = point_direction(x, y, mouse_x, mouse_y) - 90;
+    //image_angle = point_direction(x, y, mouse_x, mouse_y) - 90;
     direction = point_direction(x, y, mouse_x, mouse_y);
 }
 else{
@@ -75,7 +112,8 @@ else{
 
 if( mouse_check_button_pressed(mb_left) &amp;&amp; instance_number(obj_Bullet) &lt; 3) 
 {
-    instance_create( x, y, obj_Bullet );
+    bullet = instance_create( x, y, obj_Bullet );
+    bullet.damage = equippedItems[equippableItem.WEAPON].damage;
 }
 
    
@@ -88,6 +126,101 @@ if(health &lt;= 0){
     show_message("You died, restarting game");
     game_restart();
 }
+
+if (hit &amp;&amp; alarm[0] &lt;= 0) {
+   alarm[0] = 0.08 * room_speed; // Flashes for 0.8 seconds before turning back to normal
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_Health">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(health &lt; 100){ //maxHealth later on
+    with (other){
+        instance_destroy();
+    }
+}
+health += 20;
+health = clamp(health,0,100);
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_testWeapon">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (other.canCollide){
+    currentWeapon = equippedItems[equippableItem.WEAPON];
+    with(currentWeapon){
+        instance_destroy();
+    }
+    equippedItems[equippableItem.WEAPON] = other;
+    other.x = 80;
+    other.y = 80;
+    other.canCollide = false;
+}
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_EnemyBullet">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>with(other){
+    instance_destroy();
+}
+health -= 10;
+hit = true;
 </string>
           </argument>
         </arguments>
@@ -120,7 +253,6 @@ with( other )
 S++
 
 instance_create(random_range(64,room_width-64), random_range(64,room_height-64),obj_Enemy) ;
-
 </string>
           </argument>
         </arguments>
@@ -171,7 +303,45 @@ y=yprevious;
 
 draw_text(150,64,"Ammo: "+string(B - instance_number(obj_Bullet)));
 
-draw_text(250,64,"Health: "+string(health));
+draw_text(250,64,"Health: "+string(obj_Player.health));
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Draw event
+if (hit) { 
+    shader_set(shd_hit);    // Sets the shader to our shader file we created earlier
+    draw_self();  // Draws the sprite, but now we have a shader set so it draws it as white
+    shader_reset(); // Resets the shader to the default one (does nothing)
+
+} else if (health &lt; 30){
+    //d3d_set_fog(true, c_red, 1, 1);
+    draw_self();
+} 
+
+
+else {
+    //d3d_set_fog(false, c_black, 0, 0);
+    draw_self(); // If hit is false, no shader is applied.
+}
 </string>
           </argument>
         </arguments>
