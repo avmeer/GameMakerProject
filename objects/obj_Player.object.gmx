@@ -27,6 +27,24 @@
             <kind>1</kind>
             <string>globalvar S ; // score
 globalvar B ; // number of bullets
+
+enum equippableItem{
+    HEAD,
+    BODY,
+    GLOVES,
+    FEET,
+    WEAPON
+}
+
+for (i = 0; i &lt; 5; i++){
+    equippedItems[i] = "none";
+}
+
+newWeapon = instance_create(80,80, obj_Weapon);
+
+equippedItems[equippableItem.WEAPON] = newWeapon;
+
+
 hit = false;
 health = 100;
 S = 0 ;
@@ -94,7 +112,8 @@ else{
 
 if( mouse_check_button_pressed(mb_left) &amp;&amp; instance_number(obj_Bullet) &lt; 3) 
 {
-    instance_create( x, y, obj_Bullet );
+    bullet = instance_create( x, y, obj_Bullet );
+    bullet.damage = equippedItems[equippableItem.WEAPON].damage;
 }
 
    
@@ -111,6 +130,67 @@ if(health &lt;= 0){
 if (hit &amp;&amp; alarm[0] &lt;= 0) {
    alarm[0] = 0.08 * room_speed; // Flashes for 0.8 seconds before turning back to normal
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_Health">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(health &lt; 100){ //maxHealth later on
+    with (other){
+        instance_destroy();
+    }
+}
+health += 20;
+health = clamp(health,0,100);
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_testWeapon">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>currentWeapon = equippedItems[equippableItem.WEAPON];
+with(currentWeapon){
+    instance_destroy();
+}
+equippedItems[equippableItem.WEAPON] = other;
+other.visible = false;
+other.x = 80;
+other.y = 80;
+other.visible = true;
 </string>
           </argument>
         </arguments>
@@ -170,7 +250,6 @@ with( other )
 S++
 
 instance_create(random_range(64,room_width-64), random_range(64,room_height-64),obj_Enemy) ;
-
 </string>
           </argument>
         </arguments>

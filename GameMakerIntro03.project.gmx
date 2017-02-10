@@ -11,6 +11,9 @@
     <sprite>sprites\spr_Player</sprite>
     <sprite>sprites\spr_Enemy</sprite>
     <sprite>sprites\spr_Bullet</sprite>
+    <sprite>sprites\spr_Gun</sprite>
+    <sprite>sprites\spr_Pistol</sprite>
+    <sprite>sprites\spr_Health</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -24,9 +27,14 @@
     <object>objects\obj_Enemy</object>
     <object>objects\obj_Bullet</object>
     <object>objects\obj_EnemyBullet</object>
+    <object>objects\obj_testWeapon</object>
+    <object>objects\obj_Weapon</object>
+    <object>objects\obj_Health</object>
+    <object>objects\obj_SpawnTesting</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_Game</room>
+    <room>rooms\room1</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
