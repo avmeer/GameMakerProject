@@ -27,19 +27,97 @@
             <kind>1</kind>
             <string>globalvar showInv;
 globalvar maxItems;
-showInv = true;
+showInv = false;
 maxItems = 16;
 
+enum equipSlots{
+    HEAD,
+    CHEST,
+    LEGS,
+    GLOVES,
+    FEET,
+    WEAPON
+}
+
+//initialize inventory to -1 to inidcate no items in those slots
 for (i = 0; i &lt; 4; i++){
     for (j = 0; j &lt; 4; j++){
         global.inventory[i,j] = -1;
     }
 }
 
+//initialize equipped items to -1
+for (i = 0; i &lt; 6; i++){
+    global.equippedItems[i] = -1;
+}
+
+//where to put instances in map that are in inventory?
+//starting weapon is measly pistol
+newWeapon = instance_create(-10,-10, obj_Weapon);
+global.equippedItems[equipSlots.WEAPON] = newWeapon;
+
 //testing
-global.inventory[0,0] = obj_testWeapon;
+//global.inventory[0,0] = instance_create(0,0,obj_testWeapon);
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var x1,x2,y1,y2;
+x1 = view_xview[0] + 256;
+x2 = x1 + 166;
+y1 = view_yview[0] + 256;
+y2 = y1 + 360;
+initOff = 24;
+initSpace = 40;
+boxDimension = 32;
+objectHeld = -1;
+
+if(mouse_check_button_pressed(mb_left) &amp;&amp; objectHeld == -1){
+    for (i = 0; i &lt; 4; i++){
+        for (j = 0; j &lt; 4; j++){
+            boxCenterX = x1 + initOff + (i * initSpace);
+            boxCenterY = y1 + initOff + (j * initSpace);
+            if(scr_MouseInBox(boxCenterX, boxCenterY, boxDimension) &amp;&amp; global.inventory[i,j] != -1){
+                objectHeld = global.inventory[i,j];
+                global.inventory[i,j] = -1;
+            }
+        }
+    } 
+}
+
+if(mouse_check_button_pressed(mb_left) &amp;&amp; objectHeld != -1){
+    for (i = 0; i &lt; 4; i++){
+        for (j = 0; j &lt; 4; j++){
+            boxCenterX = x1 + initOff + (i * initSpace);
+            boxCenterY = y1 + initOff + (j * initSpace);
+            if(scr_MouseInBox(boxCenterX, boxCenterY, boxDimension) &amp;&amp; global.inventory[i,j] == -1){
+                objectHeld = global.inventory[i,j] = objectHeld;
+                objectHeld = -1;
+            }
+        }
+    } 
+}
+    
 </string>
           </argument>
         </arguments>
@@ -65,21 +143,57 @@ global.inventory[0,0] = obj_testWeapon;
             <string>if (showInv){
     var x1,x2,y1,y2;
     x1 = view_xview[0] + 256;
-    x2 = x1 + 184;
+    x2 = x1 + 166;
     y1 = view_yview[0] + 256;
-    y2 = y1 + 256;
+    y2 = y1 + 360;
+    
+    initOff = 24;
+    initSpace = 40;
     
     draw_set_color(c_black);
     draw_set_alpha(0.8);
     draw_rectangle(x1,y1,x2,y2,0);
     draw_set_alpha(1);
     
+    //draw inventory for pickups
     for (i = 0; i &lt; 4; i++){
         for (j = 0; j &lt; 4; j++){
-            draw_sprite(spr_Border,0,x1 + 24 + (i * 40), y1 + 24 + (j * 40));
+            draw_sprite(spr_Border,0,x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace));
             if (global.inventory[i,j] != -1){
-                draw_sprite(object_get_sprite(global.inventory[i,j]), 0, x1 + 24 + (i * 40), y1 + 24 + (j * 40));
+                draw_sprite(global.inventory[i,j].sprite_index, 0, x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace));
             }
+        }
+    }
+    
+    midx = (x1 + x2) / 2;
+    midy = (y1 + y2) / 2;
+    
+    //draw inventory for equippable items
+    for (i = 0; i &lt; 4; i++){
+        draw_sprite(spr_Border,0,midx, midy + initOff + (i * initSpace));
+    }
+    draw_sprite(spr_Border,0,midx + initSpace, midy + initOff + initSpace);
+    draw_sprite(spr_Border,0,midx - initSpace, midy + initOff + initSpace);
+    for (i = 0; i &lt; 6; i++){
+        if(global.equippedItems[i] != -1){
+            if(i = equipSlots.HEAD){
+                draw_sprite(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (0 * initSpace));
+            }
+            if(i = equipSlots.CHEST){
+                draw_sprite(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (1 * initSpace));
+            }
+            if(i = equipSlots.LEGS){
+                draw_sprite(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (2 * initSpace));
+            }
+            if(i = equipSlots.FEET){
+                draw_sprite(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (3 * initSpace));
+            }
+            if(i = equipSlots.WEAPON){
+                draw_sprite(global.equippedItems[i].sprite_index, 0, midx + 40, midy + initOff + (1 * initSpace));
+            }
+            if(i = equipSlots.GLOVES){
+                draw_sprite(global.equippedItems[i].sprite_index, 0, midx - 40, midy + initOff + (1 * initSpace));
+            } 
         }
     }
     
