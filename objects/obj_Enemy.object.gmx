@@ -268,7 +268,7 @@ bumped = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(x,y,string(hp));
+            <string>draw_text(x-15,y-60,string(hp));
 </string>
           </argument>
         </arguments>
