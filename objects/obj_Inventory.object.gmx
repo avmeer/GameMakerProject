@@ -38,6 +38,8 @@ maxItems = 16;
 global.objectHeld = -1;
 global.takenFromX = -1;
 global.takenFromY = -1;
+displayItemInfo = false;
+itemToDisplay = -1;
 
 enum equipSlots{
     HEAD,
@@ -106,6 +108,23 @@ weaponY = midy + initOff + (1 * initSpace);
 
 
 if(showInv){
+    foundOne = false;
+    for (i = 0; i &lt; 4; i++){
+        for (j = 0; j &lt; 4; j++){
+            boxCenterX = x1 + initOff + (i * initSpace);
+            boxCenterY = y1 + initOff + (j * initSpace);
+            if(scr_MouseInBox(boxCenterX, boxCenterY, boxDimension) &amp;&amp; global.inventory[i,j] != -1){
+                foundOne = true;
+                displayItemInfo = true;
+                itemToDisplay = global.inventory[i,j];
+            }
+            else if (i == 3 &amp;&amp; j == 3 &amp;&amp; foundOne = false){
+                displayItemInfo = false;
+                itemToDisplay = -1;
+            }
+        }
+    }
+
     if(mouse_check_button_pressed(mb_left) &amp;&amp; global.objectHeld == -1){
         //this does checking for normal inventory slots
         for (i = 0; i &lt; 4; i++){
@@ -121,6 +140,10 @@ if(showInv){
             }
         }
         //now check equippable slots
+        if(scr_MouseInBox(weaponX, weaponY, boxDimension)){
+            scr_itemPickup(global.equippedItems[equipSlots.WEAPON]);
+            global.equippedItems[equipSlots.WEAPON] = -1;
+        }
         
     }
     
@@ -242,6 +265,14 @@ if(showInv){
     if (global.objectHeld != -1){
         draw_sprite(global.objectHeld.sprite_index, 0, mouse_x, mouse_y);
     }
+    
+    if(displayItemInfo){
+        draw_set_color(c_black);
+        draw_rectangle(mouse_x, mouse_y, mouse_x + 200, mouse_y - 50,0);
+        draw_set_color(c_white);
+        draw_text(mouse_x + 10, mouse_y - 20, "Damage: " + string(itemToDisplay.damage));
+    }
+    draw_set_color(c_black);
     
 }
 </string>

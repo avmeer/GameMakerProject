@@ -24,6 +24,7 @@
   <scripts name="scripts">
     <script>scripts\scr_itemPickup.gml</script>
     <script>scripts\scr_MouseInBox.gml</script>
+    <script>scripts\scr_showWeaponDescription.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_hit.shader</shader>
@@ -42,8 +43,8 @@
     <object>objects\obj_Inventory</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_TestingEnemy</room>
     <room>rooms\rm_TestingInventory</room>
+    <room>rooms\rm_TestingEnemy</room>
     <room>rooms\rm_Game</room>
   </rooms>
   <help>

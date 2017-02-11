@@ -3,8 +3,8 @@ Script used for placing items into inventory
 2/10/17 Preliminary inventory system being used
 */
 
-for (i = 0; i < 4; i++){
-    for (j = 0; j < 4; j++){
+for (j = 0; j < 4; j++){
+    for (i = 0; i < 4; i++){
         if (global.inventory[i,j] == -1){ //empty
             //move the object out of sight
             argument0.x = -10;
