@@ -25,19 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>globalvar S ; // score
+            <string>health = 100;
+hit = false; //boolean to make player flash when hit by enemy
+
 globalvar B ; // number of bullets
-
-hit = false;
-health = 100;
-S = 0 ;
-
 B = 3;
-
-max_spd=10; 
-
-// randomize the seed
-randomize() ;
 </string>
           </argument>
         </arguments>
@@ -83,36 +75,38 @@ randomize() ;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (keyboard_check_pressed(ord("I"))){
+            <string>//for toggling the inventory, only available in testing room as of 2/10/17
+if (keyboard_check_pressed(ord("I")) &amp;&amp; room = rm_TestingInventory){
     showInv = !showInv;
 }
 
-//disable player controls if in inventory
+//player controls only applicable if not in inventory
+//consider changing to state machine script later, as of now preliminary inventory testing
 if(!showInv){
+    //always move towards mouse cursor when right mouse button is held down
     if (mouse_check_button(mb_right)){
         speed = 10;
-        //image_angle = point_direction(x, y, mouse_x, mouse_y) - 90;
         direction = point_direction(x, y, mouse_x, mouse_y);
     }
     else{
         speed = 0;
     }
     
-    
+    //if able to shoot then shoot
     if( mouse_check_button_pressed(mb_left) &amp;&amp; instance_number(obj_Bullet) &lt; 3) 
     {
         bullet = instance_create( x, y, obj_Bullet );
-        bullet.damage = global.equippedItems[equipSlots.WEAPON].damage;
+        bullet.damage = global.equippedItems[equipSlots.WEAPON].damage;//alter the damage of bullet created to reflect weapon damage
     }
-}else{
-    speed = 0;
-}
+}else{speed = 0;}//disable player controls if in inventory
 
+//monitor player health
 if(health &lt;= 0){
     show_message("You died, restarting game");
     game_restart();
 }
 
+//player flashes if hit
 if (hit &amp;&amp; alarm[0] &lt;= 0) {
    alarm[0] = 0.08 * room_speed; // Flashes for 0.8 seconds before turning back to normal
 }
@@ -138,13 +132,14 @@ if (hit &amp;&amp; alarm[0] &lt;= 0) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(health &lt; 100){ //maxHealth later on
+            <string>//if player health is below their max health, heal and destroy the health pot
+if(health &lt; 100){ //maxHealth later on
     with (other){
         instance_destroy();
     }
 }
 health += 20;
-health = clamp(health,0,100);
+health = clamp(health,0,100);//never go above max health
 
 </string>
           </argument>
@@ -216,7 +211,8 @@ health = clamp(health,0,100);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>with(other){
+            <string>//take damage from the enemy bullet, destroy the enemy bullet
+with(other){
     instance_destroy();
 }
 health -= 10;
@@ -243,7 +239,8 @@ hit = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x=xprevious;
+            <string>//collision with wall prevents movement through it...for now!
+x=xprevious;
 y=yprevious;
 </string>
           </argument>
@@ -267,8 +264,8 @@ y=yprevious;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(150,64,"Ammo: "+string(B - instance_number(obj_Bullet)));
-
+            <string>//simple gui for testing purposes that displays ammo and health of player
+draw_text(150,64,"Ammo: "+string(B - instance_number(obj_Bullet)));
 draw_text(250,64,"Health: "+string(obj_Player.health));
 </string>
           </argument>
@@ -292,21 +289,14 @@ draw_text(250,64,"Health: "+string(obj_Player.health));
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Draw event
+            <string>//drawing player depends on whether or not hit, if hit use the hit shader
 if (hit) { 
-    shader_set(shd_hit);    // Sets the shader to our shader file we created earlier
-    draw_self();  // Draws the sprite, but now we have a shader set so it draws it as white
-    shader_reset(); // Resets the shader to the default one (does nothing)
-
-} else if (health &lt; 30){
-    //d3d_set_fog(true, c_red, 1, 1);
-    draw_self();
-} 
-
-
+    shader_set(shd_hit);   
+    draw_self();  
+    shader_reset();
+}
 else {
-    //d3d_set_fog(false, c_black, 0, 0);
-    draw_self(); // If hit is false, no shader is applied.
+    draw_self();
 }
 </string>
           </argument>

@@ -25,7 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>globalvar showInv;
+            <string>/*
+Created 2/10/17
+First pass at inventory system, lots of hardcoding of numbers that need to be changed
+Used in the inventory test room
+*/
+
+globalvar showInv;
 globalvar maxItems;
 showInv = false;
 maxItems = 16;

@@ -25,9 +25,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>canShoot = true;
+            <string>/*set boolens for whether or not the enemy can shoot at the player,
+if the enemy has bumped into another enemy,
+and the health/whether or not enemy has been hit
+*/
+canShoot = true;
 bumped = false ;
-max_espeed = 8 ;
 hp = 100;
 hit = false;
 
@@ -124,22 +127,27 @@ hit = false;
           <argument>
             <kind>1</kind>
             <string>speed = 7;
+
+//bumping into another enemy causes this enemy to reposition itself
 if (!bumped &amp;&amp; point_distance(x,y,obj_Player.x, obj_Player.y) &gt; 250){
     direction = point_direction(x, y, obj_Player.x, obj_Player.y);
 }
 
+//move towards the player if a certain distance away
 if (point_distance(x,y,obj_Player.x, obj_Player.y) &lt;= 250){
     speed = 0;
 }
 
+//shoot at the player if able to
 if (canShoot){
     instance_create(x,y,obj_EnemyBullet);
     canShoot = false;
     alarm[0] = 15;
 }
 
+//same hit shader as player
 if (hit &amp;&amp; alarm[1] &lt;= 0) {
-   alarm[1] = 0.08 * room_speed; // Flashes for 0.8 seconds before turning back to normal
+   alarm[1] = 0.08 * room_speed;
 }
 </string>
           </argument>
@@ -163,7 +171,9 @@ if (hit &amp;&amp; alarm[1] &lt;= 0) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>hp -= other.damage;
+            <string>//damage enemy based on bullet damage (which comes from weapon the player is using) and destroy enemy if health falls to 0
+//also destroy the bullet that hit the enemy and enable hit boolean
+hp -= other.damage;
 if (hp &lt;= 0){
     instance_destroy();
 }
@@ -194,34 +204,10 @@ with(other){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>bumped = true;
-
+            <string>//reposition if bump into another enemy
+bumped = true;
 direction = -point_direction(x, y, other.x, other.y);
-
 alarm[2] = 15;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_Player">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>other.health -= 20;
 </string>
           </argument>
         </arguments>
@@ -244,8 +230,9 @@ alarm[2] = 15;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>speed = 20;
-bumped = false;
+            <string>//enemies cant go through walls
+x = xprevious;
+y = yprevious;
 </string>
           </argument>
         </arguments>
@@ -268,7 +255,8 @@ bumped = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(x-15,y-60,string(hp));
+            <string>//display enemy health above them
+draw_text(x-15,y-60,string(hp));
 </string>
           </argument>
         </arguments>
@@ -291,21 +279,14 @@ bumped = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Draw event
+            <string>//same draw event as player, use hit shader to flash if enemy is shot
 if (hit) { 
-    shader_set(shd_hit);    // Sets the shader to our shader file we created earlier
-    draw_self();  // Draws the sprite, but now we have a shader set so it draws it as white
-    shader_reset(); // Resets the shader to the default one (does nothing)
-
-} else if (health &lt; 30){
-    //d3d_set_fog(true, c_red, 1, 1);
-    draw_self();
+    shader_set(shd_hit);
+    draw_self();  
+    shader_reset(); 
 } 
-
-
 else {
-    //d3d_set_fog(false, c_black, 0, 0);
-    draw_self(); // If hit is false, no shader is applied.
+    draw_self();
 }
 </string>
           </argument>

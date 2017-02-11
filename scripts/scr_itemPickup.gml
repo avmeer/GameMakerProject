@@ -1,3 +1,8 @@
+/*
+Script used for placing items into inventory
+2/10/17 Preliminary inventory system being used
+*/
+
 for (i = 0; i < 4; i++){
     for (j = 0; j < 4; j++){
         if (global.inventory[i,j] == -1){ //empty

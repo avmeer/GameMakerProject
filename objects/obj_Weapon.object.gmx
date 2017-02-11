@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>damage = 10;
+            <string>//base weapon that player starts out with (used in inventory testing and enemy test room)
+damage = 10;
 </string>
           </argument>
         </arguments>
