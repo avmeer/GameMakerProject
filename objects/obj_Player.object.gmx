@@ -107,11 +107,6 @@ if(!showInv){
 }else{
     speed = 0;
 }
-  
-// check and create a new collect object
-if( instance_number( obj_Collect ) &lt; 1 ){
-    instance_create( random_range(64,room_width-64), random_range(64,room_height-64), obj_Collect );
-}
 
 if(health &lt;= 0){
     show_message("You died, restarting game");
@@ -151,6 +146,29 @@ if (hit &amp;&amp; alarm[0] &lt;= 0) {
 health += 20;
 health = clamp(health,0,100);
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_Weapon">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>scr_itemPickup(other);
 </string>
           </argument>
         </arguments>
@@ -208,38 +226,6 @@ hit = true;
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_Collect">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>// destory the collect object (other)
-with( other )
-{
-    instance_destroy() ;
-}
-
-// Add to score
-S++
-
-instance_create(random_range(64,room_width-64), random_range(64,room_height-64),obj_Enemy) ;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="4" ename="obj_Wall">
       <action>
         <libid>1</libid>
@@ -281,9 +267,7 @@ y=yprevious;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(64,64,"Score: "+string(S));
-
-draw_text(150,64,"Ammo: "+string(B - instance_number(obj_Bullet)));
+            <string>draw_text(150,64,"Ammo: "+string(B - instance_number(obj_Bullet)));
 
 draw_text(250,64,"Health: "+string(obj_Player.health));
 </string>

@@ -30,6 +30,8 @@ globalvar maxItems;
 showInv = false;
 maxItems = 16;
 global.objectHeld = -1;
+global.takenFromX = -1;
+global.takenFromY = -1;
 
 enum equipSlots{
     HEAD,
@@ -91,34 +93,67 @@ y2 = y1 + 360;
 initOff = 24;
 initSpace = 40;
 boxDimension = 32;
+midx = (x1 + x2) / 2;
+midy = (y1 + y2) / 2;
+weaponX = midx + 40;
+weaponY = midy + initOff + (1 * initSpace);
 
 
-if(mouse_check_button_pressed(mb_left) &amp;&amp; global.objectHeld == -1){
-    for (i = 0; i &lt; 4; i++){
-        for (j = 0; j &lt; 4 &amp;&amp; global.objectHeld = -1; j++){
-            boxCenterX = x1 + initOff + (i * initSpace);
-            boxCenterY = y1 + initOff + (j * initSpace);
-            if(scr_MouseInBox(boxCenterX, boxCenterY, boxDimension) &amp;&amp; global.inventory[i,j] != -1){
-                global.objectHeld = global.inventory[i,j];
-                global.inventory[i,j] = -1;
+if(showInv){
+    if(mouse_check_button_pressed(mb_left) &amp;&amp; global.objectHeld == -1){
+        //this does checking for normal inventory slots
+        for (i = 0; i &lt; 4; i++){
+            for (j = 0; j &lt; 4 &amp;&amp; global.objectHeld = -1; j++){
+                boxCenterX = x1 + initOff + (i * initSpace);
+                boxCenterY = y1 + initOff + (j * initSpace);
+                if(scr_MouseInBox(boxCenterX, boxCenterY, boxDimension) &amp;&amp; global.inventory[i,j] != -1){
+                    global.objectHeld = global.inventory[i,j];
+                    global.takenFromX = i;
+                    global.takenFromY = j;
+                    global.inventory[i,j] = -1;
+                }
             }
         }
-    } 
-}
-
-else if(mouse_check_button_pressed(mb_left) &amp;&amp; global.objectHeld != -1){
-    for (i = 0; i &lt; 4; i++){
-        for (j = 0; j &lt; 4; j++){
-            boxCenterX = x1 + initOff + (i * initSpace);
-            boxCenterY = y1 + initOff + (j * initSpace);
-            if(scr_MouseInBox(boxCenterX, boxCenterY, boxDimension) &amp;&amp; global.inventory[i,j] == -1){
-                global.inventory[i,j] = global.objectHeld;
-                global.objectHeld = -1;
-            }
-        }
-    } 
-}
+        //now check equippable slots
+        
+    }
     
+    else if(mouse_check_button_pressed(mb_left) &amp;&amp; global.objectHeld != -1){
+        
+        //now check equippable slots 
+        //check for weapon slot
+        if(scr_MouseInBox(weaponX, weaponY, boxDimension)){
+            global.inventory[global.takenFromX,global.takenFromY] = global.equippedItems[equipSlots.WEAPON];
+            global.equippedItems[equipSlots.WEAPON] = global.objectHeld;
+            global.objectHeld = -1;
+            global.takenFromX = -1;
+            global.takenFromY = -1;
+        }
+    
+        //this does checking for normal inventory slots
+        for (i = 0; i &lt; 4; i++){
+            for (j = 0; j &lt; 4; j++){
+                boxCenterX = x1 + initOff + (i * initSpace);
+                boxCenterY = y1 + initOff + (j * initSpace);
+                //if placing in empty, simply place and register new location
+                if(scr_MouseInBox(boxCenterX, boxCenterY, boxDimension) &amp;&amp; global.inventory[i,j] == -1){
+                    global.inventory[i,j] = global.objectHeld;
+                    global.objectHeld = -1;
+                }
+                //if placing in taken spot, swap the locations of the items
+                else if(scr_MouseInBox(boxCenterX, boxCenterY, boxDimension) &amp;&amp; global.inventory[i,j] != -1){
+                    global.inventory[global.takenFromX,global.takenFromY] = global.inventory[i,j];
+                    global.inventory[i,j] = global.objectHeld;
+                    global.objectHeld = -1;
+                    global.takenFromX = -1;
+                    global.takenFromY = -1;
+                }
+                
+            }
+        }
+
+    }
+}
 </string>
           </argument>
         </arguments>
