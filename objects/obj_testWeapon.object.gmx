@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>obj_Weapon</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -26,7 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>//simple weapon that differs from the other weapon in damage (used in inventory testing)
+randomize();
 damage = 20;
+damage = random_range(10,20);
 </string>
           </argument>
         </arguments>

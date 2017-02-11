@@ -161,7 +161,6 @@
     <instance objName="obj_Wall" x="992" y="704" name="inst_38B9C24A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Wall" x="992" y="672" name="inst_FB14F3E4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_TestingInventorySpawning" x="352" y="480" name="inst_6FA106AE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_Inventory" x="416" y="256" name="inst_59DF1402" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

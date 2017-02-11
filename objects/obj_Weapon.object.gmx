@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -26,7 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>//base weapon that player starts out with (used in inventory testing and enemy test room)
+randomize();
 damage = 10;
+damage = random_range(1,10);
 </string>
           </argument>
         </arguments>

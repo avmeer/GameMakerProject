@@ -51,12 +51,10 @@
             <string>//object placed into testing room for spawning inventory items to play with in inventory
 if keyboard_check_pressed(ord('1')){
     tempWeapon = instance_create(mouse_x, mouse_y, obj_testWeapon);
-    tempWeapon.damage = random_range(10,20);
 }
 
 if keyboard_check_pressed(ord('2')){
     tempWeapon = instance_create(mouse_x, mouse_y, obj_Weapon);
-    tempWeapon.damage = random_range(1,10);
 }
 </string>
           </argument>
