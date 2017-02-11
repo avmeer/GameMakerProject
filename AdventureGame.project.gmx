@@ -43,8 +43,8 @@
     <object>objects\obj_Inventory</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_TestingInventory</room>
     <room>rooms\rm_TestingEnemy</room>
+    <room>rooms\rm_TestingInventory</room>
     <room>rooms\rm_Game</room>
   </rooms>
   <help>
