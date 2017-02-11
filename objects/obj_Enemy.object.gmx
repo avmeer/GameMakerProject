@@ -175,8 +175,12 @@ if (hit &amp;&amp; alarm[1] &lt;= 0) {
 //also destroy the bullet that hit the enemy and enable hit boolean
 hp -= other.damage;
 if (hp &lt;= 0){
+    audio_play_sound(DeathScream, 10, false);
     instance_destroy();
+}else{
+    audio_play_sound(InjuryScream, 10, false);
 }
+
 hit = true;
 with(other){
     instance_destroy();
