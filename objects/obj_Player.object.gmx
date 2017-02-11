@@ -95,8 +95,9 @@ if(!showInv){
     //if able to shoot then shoot
     if( mouse_check_button_pressed(mb_left) &amp;&amp; instance_number(obj_Bullet) &lt; 3 &amp;&amp; global.equippedItems[equipSlots.WEAPON] != -1) 
     {
-        bullet = instance_create( x, y, obj_Bullet );
-        bullet.damage = global.equippedItems[equipSlots.WEAPON].damage;//alter the damage of bullet created to reflect weapon damage
+            bullet = instance_create( x, y, obj_Bullet );
+            bullet.damage = global.equippedItems[equipSlots.WEAPON].damage;//alter the damage of bullet created to reflect weapon damage
+        
     }
 }else{speed = 0;}//disable player controls if in inventory
 
