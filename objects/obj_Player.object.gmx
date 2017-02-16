@@ -29,7 +29,7 @@
 hit = false; //boolean to make player flash when hit by enemy
 
 globalvar B ; // number of bullets
-B = 3;
+B = 100;
 </string>
           </argument>
         </arguments>
@@ -83,17 +83,16 @@ if (keyboard_check_pressed(ord("I"))){
 //player controls only applicable if not in inventory
 //consider changing to state machine script later, as of now preliminary inventory testing
 if(!showInv){
+    shiftClick = mouse_check_button_pressed(mb_left) &amp;&amp; keyboard_check(vk_shift);
+    normalClick = mouse_check_button(mb_left) &amp;&amp; !keyboard_check(vk_shift);
+    speed = 0;
     //always move towards mouse cursor when right mouse button is held down
-    if (mouse_check_button(mb_right)){
+    if (normalClick){
         speed = 10;
         direction = point_direction(x, y, mouse_x, mouse_y);
     }
-    else{
-        speed = 0;
-    }
-    
     //if able to shoot then shoot
-    if( mouse_check_button_pressed(mb_left) &amp;&amp; instance_number(obj_Bullet) &lt; 3 &amp;&amp; global.equippedItems[equipSlots.WEAPON] != -1) 
+    else if( shiftClick &amp;&amp; instance_number(obj_Bullet) &lt; B &amp;&amp; global.equippedItems[equipSlots.WEAPON] != -1) 
     {
             bullet = instance_create( x, y, obj_Bullet );
             bullet.damage = global.equippedItems[equipSlots.WEAPON].damage;//alter the damage of bullet created to reflect weapon damage
