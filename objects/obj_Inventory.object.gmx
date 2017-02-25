@@ -65,7 +65,9 @@ for (i = 0; i &lt; 6; i++){
 //where to put instances in map that are in inventory?
 //starting weapon is measly pistol
 newWeapon = instance_create(-10,-10, obj_Weapon);
+newHelmet = instance_create(-10,-10, obj_Helmet);
 global.equippedItems[equipSlots.WEAPON] = newWeapon;
+global.equippedItems[equipSlots.HEAD] = newHelmet;
 
 //testing
 //global.inventory[0,0] = instance_create(0,0,obj_testWeapon);

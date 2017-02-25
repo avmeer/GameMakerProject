@@ -30,6 +30,31 @@ hit = false; //boolean to make player flash when hit by enemy
 
 globalvar B ; // number of bullets
 B = 100;
+
+collision = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>collision = true;
 </string>
           </argument>
         </arguments>
@@ -257,9 +282,20 @@ hit = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//collision with wall prevents movement through it...for now!
-x=xprevious;
-y=yprevious;
+            <string>random_get_seed();
+
+quant = random_range(0,10000);
+if(0 &lt; quant &amp;&amp; quant &lt; 5){
+    collision = false;
+    alarm[3] = 50;
+}
+
+//collision with wall prevents movement through it...for now!
+if (collision == true){
+    x=xprevious;
+    y=yprevious;
+}
+
 </string>
           </argument>
         </arguments>
@@ -286,6 +322,7 @@ y=yprevious;
 draw_text(150,64,"Ammo: "+string(B - instance_number(obj_Bullet)));
 draw_text(250,64,"Health: "+string(obj_Player.health));
 draw_text(400,64,"Room: "+string(room));
+draw_text(700,64,"Collision: "+string(collision));
 numObj = 0;
 for (i = 0; i &lt; 4; i++){
     for (j = 0; j &lt; 4; j++){

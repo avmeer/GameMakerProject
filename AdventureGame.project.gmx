@@ -18,6 +18,7 @@
     <sprite>sprites\spr_Pistol</sprite>
     <sprite>sprites\spr_Health</sprite>
     <sprite>sprites\spr_Border</sprite>
+    <sprite>sprites\spr_Helmet</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -41,11 +42,12 @@
     <object>objects\obj_TestingInventorySpawning</object>
     <object>objects\obj_TestingEnemySpawning</object>
     <object>objects\obj_Inventory</object>
+    <object>objects\obj_Helmet</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_TestingEnemy</room>
     <room>rooms\rm_TestingInventory</room>
-    <room>rooms\rm_Game</room>
+    <room>rooms\rm_TestingQuantum</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
