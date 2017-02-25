@@ -284,7 +284,7 @@ hit = true;
             <kind>1</kind>
             <string>random_get_seed();
 
-quant = random_range(0,10000);
+quant = random_range(0,100);
 if(0 &lt; quant &amp;&amp; quant &lt; 5){
     collision = false;
     alarm[3] = 50;
