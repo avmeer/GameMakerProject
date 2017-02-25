@@ -28,8 +28,9 @@
             <string>health = 100;
 hit = false; //boolean to make player flash when hit by enemy
 
-globalvar B ; // number of bullets
-B = 100;
+//used to be B
+globalvar numBullets ; // number of bullets
+numBullets = 100;
 
 collision = true;
 </string>
@@ -117,10 +118,12 @@ if(!showInv){
         direction = point_direction(x, y, mouse_x, mouse_y);
     }
     //if able to shoot then shoot
-    else if( shiftClick &amp;&amp; instance_number(obj_Bullet) &lt; B &amp;&amp; global.equippedItems[equipSlots.WEAPON] != -1) 
+    else if( shiftClick &amp;&amp; instance_number(obj_Bullet) &lt; numBullets &amp;&amp; 
+        global.equippedItems[equipSlots.WEAPON] != -1) 
     {
             bullet = instance_create( x, y, obj_Bullet );
-            bullet.damage = global.equippedItems[equipSlots.WEAPON].damage;//alter the damage of bullet created to reflect weapon damage
+            //alter the damage of bullet created to reflect weapon damage
+            bullet.damage = global.equippedItems[equipSlots.WEAPON].damage;
         
     }
 }else{speed = 0;}//disable player controls if in inventory
@@ -319,7 +322,7 @@ if (collision == true){
           <argument>
             <kind>1</kind>
             <string>//simple gui for testing purposes that displays ammo and health of player
-draw_text(150,64,"Ammo: "+string(B - instance_number(obj_Bullet)));
+draw_text(150,64,"Ammo: "+string(numBullets - instance_number(obj_Bullet)));
 draw_text(250,64,"Health: "+string(obj_Player.health));
 draw_text(400,64,"Room: "+string(room));
 draw_text(700,64,"Collision: "+string(collision));

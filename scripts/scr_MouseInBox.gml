@@ -1,5 +1,6 @@
 //params (x,y,dimension)
-//Script used to check if mouse cursor is within a box (x and y are the center of box and dimension is width/height, square is assumed)
+//Script used to check if mouse cursor is within a box
+//(x and y are the center of box and dimension is width/height, square is assumed)
 
 inX = false;
 inY = false;
