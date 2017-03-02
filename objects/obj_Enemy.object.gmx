@@ -194,19 +194,16 @@ if (hit &amp;&amp; alarm[1] &lt;= 0) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var exploding = false;
-var alreadyHit = false;
+            <string>var inRange = false;
+var distance = scr_CalcDistance(x, y, other.x, other.y);
+if(other.image_index == 1 &amp;&amp; distance &lt;= 75)
+    inRange = true;
 
-if(other.image_index == 1)
-    exploding = true;
-
-if(exploding) {
-    if(ds_list_find_index(grenadesHitBy, other.id) != -1) {
-        alreadyHit = true;
-    } else {
+if(inRange) {
+    if(ds_list_find_index(grenadesHitBy, other.id) == -1) {
         ds_list_add(grenadesHitBy, other.id);
         alarm[3] = 2 * room_speed;
-        hp -= other.damage;
+        hp -= (other.damage - other.damage * distance/75);
         if (hp &lt;= 0){
             audio_play_sound(DeathScream, 10, false);
             instance_destroy();
@@ -214,7 +211,6 @@ if(exploding) {
             audio_play_sound(InjuryScream, 10, false);
         }
     }
-    
 }
 
 </string>
