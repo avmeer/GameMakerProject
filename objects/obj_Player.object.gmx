@@ -35,6 +35,7 @@ numGrenades = 3;
 
 firing = false; // whether the player is holding down shift to fire
 canFire = true; // whether the player can fire
+fireRateTimerDone = true;
 
 collision = true;
 </string>
@@ -82,7 +83,7 @@ collision = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>canFire = true;
+            <string>fireRateTimerDone = true;
 </string>
           </argument>
         </arguments>
@@ -413,14 +414,18 @@ canFire = true;
     }
     // if able to shoot then shoot
     else if( firing &amp;&amp; instance_number(obj_Bullet) &lt; numBullets &amp;&amp; 
-        global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; canFire) 
+        global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; canFire &amp;&amp; fireRateTimerDone) 
     {
             bullet = instance_create( x, y, obj_Bullet );
             // alter the damage of bullet created to reflect weapon damage
             currWeapon = global.equippedItems[equipSlots.WEAPON]
             bullet.damage = currWeapon.damage;
-            canFire = false;
+            canFire = false; // ensures a pistol, shotgun, etc. can't be auto-fired
+            
             if (global.equippedItems[equipSlots.WEAPON].fireRate != 0) {
+                // ensures automatic weapon can't be fired each time mouse is clicked
+                fireRateTimerDone = false;
+                canFire = true;
                 alarm[1] = 1 / currWeapon.fireRate * room_speed;
             }
     }
