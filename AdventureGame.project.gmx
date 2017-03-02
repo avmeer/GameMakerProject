@@ -22,7 +22,6 @@
     <sprite>sprites\spr_Grenade</sprite>
     <sprite>sprites\spr_Explode</sprite>
     <sprite>sprites\spr_GiantExplode</sprite>
-    <sprite>sprites\sprite12</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
