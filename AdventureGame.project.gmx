@@ -19,12 +19,9 @@
     <sprite>sprites\spr_Health</sprite>
     <sprite>sprites\spr_Border</sprite>
     <sprite>sprites\spr_Helmet</sprite>
-<<<<<<< HEAD
     <sprite>sprites\spr_Grenade</sprite>
-=======
     <sprite>sprites\spr_Explode</sprite>
     <sprite>sprites\spr_GiantExplode</sprite>
->>>>>>> e2bad3ae5b8ffbf7717d04c232687a3b2ce3fa19
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
