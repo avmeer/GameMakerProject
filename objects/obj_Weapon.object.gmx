@@ -29,6 +29,7 @@
 randomize();
 damage = 10;
 damage = random_range(1,10);
+itemType = equipSlots.WEAPON;
 </string>
           </argument>
         </arguments>

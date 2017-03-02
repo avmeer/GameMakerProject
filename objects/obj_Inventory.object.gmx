@@ -143,6 +143,12 @@ if(showInv){
             }
         }
     }
+    
+    if(scr_MouseInBox(weaponX, weaponY, boxDimension) &amp;&amp; global.equippedItems[equipSlots.WEAPON] != -1){
+        foundOne = true;
+        displayItemInfo = true;
+        itemToDisplay = global.equippedItems[equipSlots.WEAPON]
+    }
 
     if(mouse_check_button_pressed(mb_left) &amp;&amp; global.objectHeld == -1){
         //this does checking for normal inventory slots
@@ -391,10 +397,12 @@ if (global.savedEquippedItems[equipSlots.WEAPON] != -1){
     }
     
     if(displayItemInfo){
-        draw_set_color(c_black);
-        draw_rectangle(mouse_x, mouse_y, mouse_x + 200, mouse_y - 50,0);
-        draw_set_color(c_white);
-        draw_text(mouse_x + 10, mouse_y - 20, "Damage: " + string(itemToDisplay.damage));
+        if(itemToDisplay.itemType == equipSlots.WEAPON){
+            draw_set_color(c_black);
+            draw_rectangle(mouse_x, mouse_y, mouse_x + 200, mouse_y - 50,0);
+            draw_set_color(c_white);
+            draw_text(mouse_x + 10, mouse_y - 20, "Damage: " + string(itemToDisplay.damage));
+        }
     }
     draw_set_color(c_black);
     
