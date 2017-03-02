@@ -31,6 +31,7 @@ hit = false; //boolean to make player flash when hit by enemy
 //used to be B
 globalvar numBullets ; // number of bullets
 numBullets = 100;
+numGrenades = 3;
 
 collision = true;
 </string>
@@ -161,6 +162,32 @@ if (keyboard_check_pressed(vk_left) &amp;&amp; room != room_first){
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_GrenadeAmmo">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>with (other) {
+    instance_destroy()
+}
+numGrenades++;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_Health">
       <action>
         <libid>1</libid>
@@ -261,7 +288,7 @@ health = clamp(health,0,100);//never go above max health
 with(other){
     instance_destroy();
 }
-health -= 10;
+health -= 1;
 hit = true;
 </string>
           </argument>
@@ -304,6 +331,30 @@ if (collision == true){
         </arguments>
       </action>
     </event>
+    <event eventtype="6" enumb="54">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>instance_create(mouse_x, mouse_y, obj_Grenade)
+numGrenades--;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -322,8 +373,9 @@ if (collision == true){
           <argument>
             <kind>1</kind>
             <string>//simple gui for testing purposes that displays ammo and health of player
-draw_text(150,64,"Ammo: "+string(numBullets - instance_number(obj_Bullet)));
-draw_text(250,64,"Health: "+string(obj_Player.health));
+draw_text(150,64,"Bullets: "+string(numBullets - instance_number(obj_Bullet)));
+draw_text(150,74,"Grenades: "+string(numGrenades));
+draw_text(255,64,"Health: "+string(obj_Player.health));
 draw_text(400,64,"Room: "+string(room));
 draw_text(700,64,"Collision: "+string(collision));
 numObj = 0;
