@@ -20,6 +20,7 @@
     <sprite>sprites\spr_Border</sprite>
     <sprite>sprites\spr_Helmet</sprite>
     <sprite>sprites\spr_Explode</sprite>
+    <sprite>sprites\spr_GiantExplode</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
