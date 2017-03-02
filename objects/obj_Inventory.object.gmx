@@ -33,6 +33,8 @@ Used in the inventory test room
 
 globalvar showInv;
 globalvar maxItems;
+globalvar savedInventory;
+globalvar savedEquippedItems;
 showInv = false;
 maxItems = 16;
 global.objectHeld = -1;
@@ -71,6 +73,21 @@ global.equippedItems[equipSlots.HEAD] = newHelmet;
 
 //testing
 //global.inventory[0,0] = instance_create(0,0,obj_testWeapon);
+
+/*SAVING INVENTORY ACROSS ROOMS*/
+for (i = 0; i &lt; 4; i++){
+    for (j = 0; j &lt; 4; j++){
+        savedInventory[i,j] = -1;
+    }
+}
+
+for (i = 0; i &lt; 6; i++){
+    savedEquippedItems[i] = -1;
+}
+
+derp[0] = 6;
+derp[1] = newWeapon.damage;
+savedEquippedItems[equipSlots.WEAPON] = derp;
 
 
 </string>
@@ -184,6 +201,111 @@ if(showInv){
         }
 
     }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>for (i = 0; i &lt; 4; i++){
+    for (j = 0; j &lt; 4; j++){
+        savedItem = -1;
+        if (global.inventory[i,j] != -1){
+            savedItem[0] = global.inventory[i,j].object_index;
+            savedItem[1] = global.inventory[i,j].damage;
+        }
+        //save properties
+        savedInventory[i,j] = savedItem;
+    }
+}
+
+for (i = 0; i &lt; 6; i++){
+    savedEquippedItems[i] = -1;
+}
+
+if (global.equippedItems[equipSlots.WEAPON] != -1){
+    savedItem[0] = global.equippedItems[equipSlots.WEAPON].object_index;
+    savedItem[1] = global.equippedItems[equipSlots.WEAPON].damage;
+    savedEquippedItems[equipSlots.WEAPON] = savedItem;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/*for (i = 0; i &lt; 4; i++){
+    for (j = 0; j &lt; 4; j++){
+        savedItem = -1;
+        if (global.inventory[i,j] != -1){
+            savedItem[0] = global.inventory[i,j].object_index;
+            savedItem[1] = global.inventory[i,j].damage;
+        }
+        //save properties
+        savedInventory[i,j] = savedItem;
+    }
+}
+
+for (i = 0; i &lt; 6; i++){
+    savedEquippedItems[i] = -1;
+}
+
+if (global.equippedItems[equipSlots.WEAPON] != -1){
+    savedItem[0] = global.equippedItems[equipSlots.WEAPON].object_index;
+    savedItem[1] = global.equippedItems[equipSlots.WEAPON].damage;
+    savedEquippedItems[equipSlots.WEAPON] = savedItem;
+}*/
+
+for (i = 0; i &lt; 4; i++){
+    for (j = 0; j &lt; 4; j++){
+        if (global.savedInventory[i,j] != -1){
+            //create new instances based on the properties
+            savedItem = savedInventory[i,j];
+            newInstance = instance_create(-1,-1,savedItem[0]);
+            newInstance.damage = savedItem[1];
+            global.inventory[i,j] = newInstance;
+        }
+    }
+}
+
+if (global.savedEquippedItems[equipSlots.WEAPON] != -1){
+    savedItem = global.savedEquippedItems[equipSlots.WEAPON];
+    newInstance = instance_create(-1,-1,savedItem[0]);
+    newInstance.damage = savedItem[1];
+    global.equippedItems[equipSlots.WEAPON] = newInstance;
 }
 </string>
           </argument>
