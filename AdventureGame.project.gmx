@@ -19,6 +19,7 @@
     <sprite>sprites\spr_Health</sprite>
     <sprite>sprites\spr_Border</sprite>
     <sprite>sprites\spr_Helmet</sprite>
+    <sprite>sprites\spr_Explode</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
