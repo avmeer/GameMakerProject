@@ -179,10 +179,12 @@ if (keyboard_check_pressed(vk_left) &amp;&amp; room != room_first){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>with (other) {
-    instance_destroy()
+            <string>if(numGrenades + 1 &lt; 4) {
+    with (other) {
+        instance_destroy()
+    }
+    numGrenades++;
 }
-numGrenades++;
 </string>
           </argument>
         </arguments>
@@ -348,8 +350,10 @@ if (collision == true){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(mouse_x, mouse_y, obj_Grenade)
-numGrenades--;
+            <string>if(numGrenades &gt; 0) {
+    instance_create(mouse_x, mouse_y, obj_Grenade)
+    numGrenades--;
+}
 </string>
           </argument>
         </arguments>
@@ -374,7 +378,7 @@ numGrenades--;
             <kind>1</kind>
             <string>//simple gui for testing purposes that displays ammo and health of player
 draw_text(150,64,"Bullets: "+string(numBullets - instance_number(obj_Bullet)));
-draw_text(150,74,"Grenades: "+string(numGrenades));
+draw_text(150,79,"Grenades: "+string(numGrenades));
 draw_text(255,64,"Health: "+string(obj_Player.health));
 draw_text(400,64,"Room: "+string(room));
 draw_text(700,64,"Collision: "+string(collision));
