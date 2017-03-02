@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited();
+damage = random_range(10,20);
 fireRate = 4;
 </string>
           </argument>
