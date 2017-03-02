@@ -33,6 +33,10 @@ globalvar numBullets ; // number of bullets
 numBullets = 100;
 numGrenades = 3;
 
+firing = false; // whether the player is holding down shift to fire
+canFire = true; // whether the player can fire
+fireRateTimerDone = true;
+
 collision = true;
 </string>
           </argument>
@@ -57,6 +61,29 @@ collision = true;
           <argument>
             <kind>1</kind>
             <string>collision = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>fireRateTimerDone = true;
 </string>
           </argument>
         </arguments>
@@ -106,28 +133,6 @@ collision = true;
 if (keyboard_check_pressed(ord("I"))){
     showInv = !showInv;
 }
-
-//player controls only applicable if not in inventory
-//consider changing to state machine script later, as of now preliminary inventory testing
-if(!showInv){
-    shiftClick = mouse_check_button_pressed(mb_left) &amp;&amp; keyboard_check(vk_shift);
-    normalClick = mouse_check_button(mb_left) &amp;&amp; !keyboard_check(vk_shift);
-    speed = 0;
-    //always move towards mouse cursor when right mouse button is held down
-    if (normalClick &amp;&amp; point_distance(x,y,mouse_x,mouse_y) &gt; 5){
-        speed = 10;
-        direction = point_direction(x, y, mouse_x, mouse_y);
-    }
-    //if able to shoot then shoot
-    else if( shiftClick &amp;&amp; instance_number(obj_Bullet) &lt; numBullets &amp;&amp; 
-        global.equippedItems[equipSlots.WEAPON] != -1) 
-    {
-            bullet = instance_create( x, y, obj_Bullet );
-            //alter the damage of bullet created to reflect weapon damage
-            bullet.damage = global.equippedItems[equipSlots.WEAPON].damage;
-        
-    }
-}else{speed = 0;}//disable player controls if in inventory
 
 //monitor player health
 if(health &lt;= 0){
@@ -333,6 +338,30 @@ if (collision == true){
         </arguments>
       </action>
     </event>
+    <event eventtype="6" enumb="56">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>speed = 0;
+canFire = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="6" enumb="54">
       <action>
         <libid>1</libid>
@@ -351,9 +380,66 @@ if (collision == true){
           <argument>
             <kind>1</kind>
             <string>if(numGrenades &gt; 0) {
-    instance_create(mouse_x, mouse_y, obj_Grenade)
+    //instance_create(mouse_x, mouse_y, obj_Grenade);
+    grenade = instance_create(x, y - 0.5 * sprite_height, obj_Grenade);
+    grenade.targetX = mouse_x;
+    grenade.targetY = mouse_y;
+    angleToTarget = point_direction(x,y - 0.5 * sprite_height, mouse_x, mouse_y);
+    grenade.speed = 5;
+    grenade.direction = angleToTarget;
+    
+    
+    
+    
     numGrenades--;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="50">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(!showInv){
+    speed = 0;
+    // always move towards mouse cursor when right mouse button is held down
+    if (!firing &amp;&amp; point_distance(x,y,mouse_x,mouse_y) &gt; 5){
+        speed = 10;
+        direction = point_direction(x, y, mouse_x, mouse_y);
+    }
+    // if able to shoot then shoot
+    else if( firing &amp;&amp; instance_number(obj_Bullet) &lt; numBullets &amp;&amp; 
+        global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; canFire &amp;&amp; fireRateTimerDone) 
+    {
+            bullet = instance_create( x, y - 0.5 * sprite_height, obj_Bullet );
+            // alter the damage of bullet created to reflect weapon damage
+            currWeapon = global.equippedItems[equipSlots.WEAPON]
+            bullet.damage = currWeapon.damage;
+            canFire = false; // ensures a pistol, shotgun, etc. can't be auto-fired
+            
+            if (global.equippedItems[equipSlots.WEAPON].fireRate != 0) {
+                // ensures automatic weapon can't be fired each time mouse is clicked
+                fireRateTimerDone = false;
+                canFire = true;
+                alarm[1] = 1 / currWeapon.fireRate * room_speed;
+            }
+    }
+}else{speed = 0;}// disable player controls if in inventory
 </string>
           </argument>
         </arguments>
@@ -422,6 +508,52 @@ if (hit) {
 else {
     draw_self();
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="16">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>firing = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="10" enumb="16">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>firing = false;
 </string>
           </argument>
         </arguments>

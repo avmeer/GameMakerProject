@@ -87,6 +87,7 @@ for (i = 0; i &lt; 6; i++){
 
 derp[0] = 6;
 derp[1] = newWeapon.damage;
+derp[2] = newWeapon.fireRate;
 savedEquippedItems[equipSlots.WEAPON] = derp;
 
 
@@ -236,6 +237,7 @@ if(showInv){
         if (global.inventory[i,j] != -1){
             savedItem[0] = global.inventory[i,j].object_index;
             savedItem[1] = global.inventory[i,j].damage;
+            savedItem[2] = global.inventory[i,j].fireRate;
         }
         //save properties
         savedInventory[i,j] = savedItem;
@@ -249,6 +251,7 @@ for (i = 0; i &lt; 6; i++){
 if (global.equippedItems[equipSlots.WEAPON] != -1){
     savedItem[0] = global.equippedItems[equipSlots.WEAPON].object_index;
     savedItem[1] = global.equippedItems[equipSlots.WEAPON].damage;
+    savedItem[2] = global.equippedItems[equipSlots.WEAPON].fireRate;
     savedEquippedItems[equipSlots.WEAPON] = savedItem;
 }
 </string>
@@ -302,6 +305,7 @@ for (i = 0; i &lt; 4; i++){
             savedItem = savedInventory[i,j];
             newInstance = instance_create(-1,-1,savedItem[0]);
             newInstance.damage = savedItem[1];
+            newInstance.fireRate = savedItem[2];
             global.inventory[i,j] = newInstance;
         }
     }
@@ -311,6 +315,7 @@ if (global.savedEquippedItems[equipSlots.WEAPON] != -1){
     savedItem = global.savedEquippedItems[equipSlots.WEAPON];
     newInstance = instance_create(-1,-1,savedItem[0]);
     newInstance.damage = savedItem[1];
+    newInstance.fireRate = savedItem[2];
     global.equippedItems[equipSlots.WEAPON] = newInstance;
 }
 </string>

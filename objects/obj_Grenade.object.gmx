@@ -28,8 +28,16 @@
             <string>alarm[0] = room_speed * 2
 image_index = 0
 image_speed = 0
-
 damage = 50;
+
+targetX = 0;
+targetY = 0;
+/*
+accelerationX = 0;
+accelerationY = 0;
+velocityX = 0;
+velocityY = 0;
+*/
 </string>
           </argument>
         </arguments>
@@ -52,7 +60,8 @@ damage = 50;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sprite_index = spr_Explode;
+            <string>speed = 0;
+sprite_index = spr_Explode;
 image_speed = 1;
 </string>
           </argument>
@@ -79,6 +88,18 @@ image_speed = 1;
             <string>if(sprite_index == spr_Explode &amp;&amp; image_index == image_number - 1) {
     instance_destroy();
 }
+
+if(abs(x - targetX) &lt; 5 &amp;&amp; abs(y - targetY) &lt; 5)
+{
+    speed = 0;
+}
+
+/*
+velocityX += accelerationX;
+velocityY += accelerationY;
+x += velocityX;
+y += velocityY;
+*/
 </string>
           </argument>
         </arguments>
