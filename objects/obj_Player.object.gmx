@@ -114,7 +114,7 @@ if(!showInv){
     normalClick = mouse_check_button(mb_left) &amp;&amp; !keyboard_check(vk_shift);
     speed = 0;
     //always move towards mouse cursor when right mouse button is held down
-    if (normalClick){
+    if (normalClick &amp;&amp; point_distance(x,y,mouse_x,mouse_y) &gt; 5){
         speed = 10;
         direction = point_direction(x, y, mouse_x, mouse_y);
     }
