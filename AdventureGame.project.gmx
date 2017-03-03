@@ -8,6 +8,7 @@
     <sound>sound\DeathScream</sound>
     <sound>sound\Gunshot</sound>
     <sound>sound\InjuryScream</sound>
+    <sound>sound\LargeExplosion</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_Wall</sprite>

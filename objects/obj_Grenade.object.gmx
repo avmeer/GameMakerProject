@@ -63,6 +63,7 @@ velocityY = 0;
             <string>speed = 0;
 sprite_index = spr_Explode;
 image_speed = 1;
+audio_play_sound(LargeExplosion, 10, false);
 </string>
           </argument>
         </arguments>
