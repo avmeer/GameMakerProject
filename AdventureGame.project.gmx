@@ -11,6 +11,9 @@
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_Wall</sprite>
+    <sprite>sprites\spr_Door_Next</sprite>
+    <sprite>sprites\spr_Door_Previous</sprite>
+    <sprite>sprites\spr_CollideWall</sprite>
     <sprite>sprites\spr_Player</sprite>
     <sprite>sprites\spr_Enemy</sprite>
     <sprite>sprites\spr_Bullet</sprite>
@@ -36,6 +39,7 @@
     <shader type="GLSLES">shaders\shd_hit.shader</shader>
   </shaders>
   <objects name="objects">
+    <object>objects\obj_CollideWall</object>
     <object>objects\obj_Wall</object>
     <object>objects\obj_Player</object>
     <object>objects\obj_Enemy</object>
@@ -50,6 +54,8 @@
     <object>objects\obj_Helmet</object>
     <object>objects\obj_Grenade</object>
     <object>objects\obj_GrenadeAmmo</object>
+    <object>objects\obj_Door_Next</object>
+    <object>objects\obj_Door_Previous</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_TestingEnemy</room>

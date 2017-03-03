@@ -167,6 +167,92 @@ if (keyboard_check_pressed(vk_left) &amp;&amp; room != room_first){
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_Door_Previous">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (room != room_first){
+    room_goto_previous();
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_Door_Next">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (room != room_last){
+    room_goto_next();
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_CollideWall">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>random_get_seed();
+
+quant = random_range(0,100);
+if(0 &lt; quant &amp;&amp; quant &lt; 5){
+    collision = false;
+    alarm[3] = 50;
+}
+
+//collision with wall prevents movement through it...for now!
+if (collision == true){
+    x=xprevious;
+    y=yprevious;
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_GrenadeAmmo">
       <action>
         <libid>1</libid>
@@ -319,20 +405,8 @@ hit = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>random_get_seed();
-
-quant = random_range(0,100);
-if(0 &lt; quant &amp;&amp; quant &lt; 5){
-    collision = false;
-    alarm[3] = 50;
-}
-
-//collision with wall prevents movement through it...for now!
-if (collision == true){
-    x=xprevious;
-    y=yprevious;
-}
-
+            <string>x = xprevious;
+y = yprevious;
 </string>
           </argument>
         </arguments>
