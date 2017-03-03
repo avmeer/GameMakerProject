@@ -206,6 +206,15 @@ if(showInv){
                 
             }
         }
+        //if reached here and held object is not -1, no valid inventory slot chosen
+        //if clicked outside of inventory screen drop the weapon
+        if(global.objectHeld != -1 &amp;&amp; !scr_MouseInInventory(midx, midy, 166, 360)){
+            global.objectHeld.x = mouse_x;
+            global.objectHeld.y = mouse_y;
+            global.objectHeld = -1;
+            global.takenFromX = -1;
+            global.takenFromY = -1;
+        }
 
     }
 }
