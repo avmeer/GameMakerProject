@@ -211,8 +211,11 @@ if(showInv){
         if(global.objectHeld != -1 &amp;&amp; !scr_MouseInInventory(midx, midy, 83, 180)){
             //global.objectHeld.x = mouse_x;
             //global.objectHeld.y = mouse_y;
-            global.objectHeld.x = obj_Player.x + 10;
-            global.objectHeld.y = obj_Player.y + 10;
+            deg = random_range(0,360);
+            newX = 30*cos(deg);
+            newY = 30*sin(deg)*-1.0;
+            global.objectHeld.x = obj_Player.x + newX;
+            global.objectHeld.y = obj_Player.y + newY;
             global.objectHeld = -1;
             global.takenFromX = -1;
             global.takenFromY = -1;
@@ -287,29 +290,7 @@ if (global.equippedItems[equipSlots.WEAPON] != -1){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*for (i = 0; i &lt; 4; i++){
-    for (j = 0; j &lt; 4; j++){
-        savedItem = -1;
-        if (global.inventory[i,j] != -1){
-            savedItem[0] = global.inventory[i,j].object_index;
-            savedItem[1] = global.inventory[i,j].damage;
-        }
-        //save properties
-        savedInventory[i,j] = savedItem;
-    }
-}
-
-for (i = 0; i &lt; 6; i++){
-    savedEquippedItems[i] = -1;
-}
-
-if (global.equippedItems[equipSlots.WEAPON] != -1){
-    savedItem[0] = global.equippedItems[equipSlots.WEAPON].object_index;
-    savedItem[1] = global.equippedItems[equipSlots.WEAPON].damage;
-    savedEquippedItems[equipSlots.WEAPON] = savedItem;
-}*/
-
-for (i = 0; i &lt; 4; i++){
+            <string>for (i = 0; i &lt; 4; i++){
     for (j = 0; j &lt; 4; j++){
         if (global.savedInventory[i,j] != -1){
             //create new instances based on the properties
@@ -324,7 +305,7 @@ for (i = 0; i &lt; 4; i++){
 
 if (global.savedEquippedItems[equipSlots.WEAPON] != -1){
     savedItem = global.savedEquippedItems[equipSlots.WEAPON];
-    newInstance = instance_create(-1,-1,savedItem[0]);
+    newInstance = instance_create(-10,-10,savedItem[0]);
     newInstance.damage = savedItem[1];
     newInstance.fireRate = savedItem[2];
     global.equippedItems[equipSlots.WEAPON] = newInstance;
