@@ -26,6 +26,7 @@
     <sprite>sprites\spr_Grenade</sprite>
     <sprite>sprites\spr_Explode</sprite>
     <sprite>sprites\spr_GiantExplode</sprite>
+    <sprite>sprites\spr_BloodExplode</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -58,6 +59,7 @@
     <object>objects\obj_GrenadeAmmo</object>
     <object>objects\obj_Door_Next</object>
     <object>objects\obj_Door_Previous</object>
+    <object>objects\obj_Blood</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_TestingEnemy</room>
