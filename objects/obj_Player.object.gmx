@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>health = 100;
+maxHealth = 100;
 hit = false; //boolean to make player flash when hit by enemy
 
 //used to be B
@@ -190,6 +191,32 @@ if (keyboard_check_pressed(vk_left) &amp;&amp; room != room_first){
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_Small_Ruble_Pile">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>with(other){
+    instance_destroy();
+}
+rubles+=50;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_Door_Previous">
       <action>
         <libid>1</libid>
@@ -286,13 +313,13 @@ if (keyboard_check_pressed(vk_left) &amp;&amp; room != room_first){
           <argument>
             <kind>1</kind>
             <string>//if player health is below their max health, heal and destroy the health pot
-if(health &lt; 100){ //maxHealth later on
+if(health &lt; maxHealth){ //maxHealth later on
     with (other){
         instance_destroy();
     }
 }
 health += 20;
-health = clamp(health,0,100);//never go above max health
+health = clamp(health,0,maxHealth);//never go above max health
 
 </string>
           </argument>
@@ -561,8 +588,9 @@ canFire = true;
             <kind>1</kind>
             <string>//simple gui for testing purposes that displays ammo and health of player
 draw_text(150,64,"Bullets: "+string(numBullets - instance_number(obj_Bullet)));
+draw_text(280,64,"Rubles: " + string(rubles));
 draw_text(150,79,"Grenades: "+string(numGrenades));
-draw_text(255,64,"Health: "+string(obj_Player.health));
+draw_text(150,93,"Health: "+string(obj_Player.health) + " / " + string(maxHealth));
 draw_text(400,64,"Room: "+string(room));
 draw_text(700,64,"Collision: "+string(collision));
 numObj = 0;
