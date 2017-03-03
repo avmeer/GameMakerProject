@@ -281,7 +281,7 @@ if(showInv){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>for (i = 0; i &lt; 4; i++){
+            <string>/*for (i = 0; i &lt; 4; i++){
     for (j = 0; j &lt; 4; j++){
         savedItem = -1;
         if (global.inventory[i,j] != -1){
@@ -321,7 +321,7 @@ if (global.equippedItems[equipSlots.HEAD] != -1){
     savedItem[1] = equipSlots.HEAD;
     savedItem[2] = global.equippedItems[equipSlots.HEAD].health_bonus;
     savedEquippedItems[equipSlots.HEAD] = savedItem;
-}
+}*/
 </string>
           </argument>
         </arguments>
@@ -344,7 +344,7 @@ if (global.equippedItems[equipSlots.HEAD] != -1){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>for (i = 0; i &lt; 4; i++){
+            <string>/*for (i = 0; i &lt; 4; i++){
     for (j = 0; j &lt; 4; j++){
         if (savedInventory[i,j] != -1){
             savedItem = savedInventory[i,j];
@@ -379,7 +379,7 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
     newInstance = instance_create(-10,-10,savedItem[0]);
     newInstance.health_bonus = savedItem[2];
     global.equippedItems[equipSlots.HEAD] = newInstance;
-}
+}*/
 </string>
           </argument>
         </arguments>
@@ -402,7 +402,7 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (showInv){
+            <string>/*if (showInv){
     var x1,x2,y1,y2;
     x1 = view_xview[0] + 256;
     x2 = x1 + 166;
@@ -485,7 +485,7 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
     }
     draw_set_color(c_black);
     
-}
+}*/
 </string>
           </argument>
         </arguments>
