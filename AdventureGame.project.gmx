@@ -55,6 +55,7 @@
     <object>objects\obj_TestingInventorySpawning</object>
     <object>objects\obj_TestingEnemySpawning</object>
     <object>objects\obj_Inventory</object>
+    <object>objects\inv_BACKUP</object>
     <object>objects\obj_Helmet</object>
     <object>objects\obj_Grenade</object>
     <object>objects\obj_GrenadeAmmo</object>
@@ -65,6 +66,7 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_TestingEnemy</room>
+    <room>rooms\rm_TestingMerchant</room>
     <room>rooms\rm_TestingInventory</room>
     <room>rooms\rm_TestingQuantum</room>
   </rooms>

@@ -30,25 +30,7 @@ Created 2/10/17
 First pass at inventory system, lots of hardcoding of numbers that need to be changed
 Used in the inventory test room
 */
-
-globalvar x1,x2,y1,y2,initOff,initSpace,boxDimension, midx,midy, weaponX, weaponY, headX, headY;
-globalvar invHalfWidth, invHalfHeight;
-x1 = view_xview[0] + 650;
-y1 = view_yview[0] + 25;
-x2 = x1 + 166 * 2;
-y2 = y1 + 360 * 2;
-invHalfWidth = 166;//make dynamic
-invHalfHeight = 360;//make dynamic
-initOff = 24 * 2;
-initSpace = 40 * 2;
-boxDimension = 32 * 2;
-midx = (x1 + x2) / 2;
-midy = (y1 + y2) / 2;
-weaponX = midx + initSpace;
-weaponY = midy + initOff + (1 * initSpace);
-headX = midx;
-headY = midy + initOff + (0 * initSpace);
-
+/*
 globalvar rubles;
 rubles = 0;
 globalvar showInv;
@@ -97,6 +79,8 @@ global.equippedItems[equipSlots.HEAD] = newHelmet;
 //global.inventory[0,0] = instance_create(0,0,obj_testWeapon);
 
 /*SAVING INVENTORY ACROSS ROOMS*/
+
+/*
 for (i = 0; i &lt; 4; i++){
     for (j = 0; j &lt; 4; j++){
         savedInventory[i,j] = -1;
@@ -106,6 +90,7 @@ for (i = 0; i &lt; 4; i++){
 for (i = 0; i &lt; 6; i++){
     savedEquippedItems[i] = -1;
 }
+*/
 
 /*
 derp[0] = 6;
@@ -113,7 +98,6 @@ derp[1] = newWeapon.damage;
 derp[2] = newWeapon.fireRate;
 savedEquippedItems[equipSlots.WEAPON] = derp;
 */
-
 
 </string>
           </argument>
@@ -137,7 +121,23 @@ savedEquippedItems[equipSlots.WEAPON] = derp;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(showInv){
+            <string>var x1,x2,y1,y2;
+x1 = view_xview[0] + 256;
+x2 = x1 + 166;
+y1 = view_yview[0] + 256;
+y2 = y1 + 360;
+initOff = 24;
+initSpace = 40;
+boxDimension = 32;
+midx = (x1 + x2) / 2;
+midy = (y1 + y2) / 2;
+weaponX = midx + 40;
+weaponY = midy + initOff + (1 * initSpace);
+headX = midx;
+headY = midy + initOff + (0 * initSpace);
+
+
+if(showInv){
     foundOne = false;
     for (i = 0; i &lt; 4; i++){
         for (j = 0; j &lt; 4; j++){
@@ -244,7 +244,7 @@ savedEquippedItems[equipSlots.WEAPON] = derp;
         }
         //if reached here and held object is not -1, no valid inventory slot chosen
         //if clicked outside of inventory screen drop the weapon
-        if(global.objectHeld != -1 &amp;&amp; !scr_MouseInInventory(midx, midy, invHalfWidth, invHalfHeight)){
+        if(global.objectHeld != -1 &amp;&amp; !scr_MouseInInventory(midx, midy, 83, 180)){
             //global.objectHeld.x = mouse_x;
             //global.objectHeld.y = mouse_y;
             deg = random_range(0,360);
@@ -403,6 +403,15 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
           <argument>
             <kind>1</kind>
             <string>if (showInv){
+    var x1,x2,y1,y2;
+    x1 = view_xview[0] + 256;
+    x2 = x1 + 166;
+    y1 = view_yview[0] + 256;
+    y2 = y1 + 360;
+    
+    initOff = 24;
+    initSpace = 40;
+    
     draw_set_color(c_black);
     draw_set_alpha(0.8);
     draw_rectangle(x1,y1,x2,y2,0);
@@ -411,44 +420,47 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
     //draw inventory for pickups
     for (i = 0; i &lt; 4; i++){
         for (j = 0; j &lt; 4; j++){
-            draw_sprite_ext(spr_Border,0,x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace),2,2,0,c_white,1);
+            draw_sprite(spr_Border,0,x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace));
             if (global.inventory[i,j] != -1){
-                draw_sprite_ext(global.inventory[i,j].sprite_index, 0, x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace),2,2,0,c_white,1);
+                draw_sprite(global.inventory[i,j].sprite_index, 0, x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace));
             }
         }
     }
     
+    midx = (x1 + x2) / 2;
+    midy = (y1 + y2) / 2;
+    
     //draw inventory for equippable items
     for (i = 0; i &lt; 4; i++){
-        draw_sprite_ext(spr_Border,0,midx, midy + initOff + (i * initSpace),2,2,0,c_white,1);
+        draw_sprite(spr_Border,0,midx, midy + initOff + (i * initSpace));
     }
-    draw_sprite_ext(spr_Border,0,midx + initSpace, midy + initOff + initSpace,2,2,0,c_white,1);
-    draw_sprite_ext(spr_Border,0,midx - initSpace, midy + initOff + initSpace,2,2,0,c_white,1);
+    draw_sprite(spr_Border,0,midx + initSpace, midy + initOff + initSpace);
+    draw_sprite(spr_Border,0,midx - initSpace, midy + initOff + initSpace);
     for (i = 0; i &lt; 6; i++){
         if(global.equippedItems[i] != -1){
             if(i = equipSlots.HEAD){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (0 * initSpace),2,2,0,c_white,1);
+                draw_sprite(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (0 * initSpace));
             }
             if(i = equipSlots.CHEST){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (1 * initSpace),2,2,0,c_white,1);
+                draw_sprite(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (1 * initSpace));
             }
             if(i = equipSlots.LEGS){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (2 * initSpace),2,2,0,c_white,1);
+                draw_sprite(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (2 * initSpace));
             }
             if(i = equipSlots.FEET){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (3 * initSpace),2,2,0,c_white,1);
+                draw_sprite(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (3 * initSpace));
             }
             if(i = equipSlots.WEAPON){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx + initSpace, midy + initOff + (1 * initSpace),2,2,0,c_white,1);
+                draw_sprite(global.equippedItems[i].sprite_index, 0, midx + 40, midy + initOff + (1 * initSpace));
             }
             if(i = equipSlots.GLOVES){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx - initSpace, midy + initOff + (1 * initSpace),2,2,0,c_white,1);
+                draw_sprite(global.equippedItems[i].sprite_index, 0, midx - 40, midy + initOff + (1 * initSpace));
             } 
         }
     }
     
     if (global.objectHeld != -1){
-        draw_sprite_ext(global.objectHeld.sprite_index, 0, mouse_x, mouse_y,2,2,0,c_white,1);
+        draw_sprite(global.objectHeld.sprite_index, 0, mouse_x, mouse_y);
     }
     
     if(displayItemInfo){
