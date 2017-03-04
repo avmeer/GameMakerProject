@@ -503,19 +503,22 @@ canFire = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(numGrenades &gt; 0) {
-    //instance_create(mouse_x, mouse_y, obj_Grenade);
-    grenade = instance_create(x, y - 0.5 * sprite_height, obj_Grenade);
-    grenade.targetX = mouse_x;
-    grenade.targetY = mouse_y;
-    angleToTarget = point_direction(x,y - 0.5 * sprite_height, mouse_x, mouse_y);
-    grenade.speed = 5;
-    grenade.direction = angleToTarget;
-    
-    
-    
-    
-    numGrenades--;
+            <string>
+if(!showInv){
+    if(numGrenades &gt; 0) {
+        //instance_create(mouse_x, mouse_y, obj_Grenade);
+        grenade = instance_create(x, y - 0.5 * sprite_height, obj_Grenade);
+        grenade.targetX = mouse_x;
+        grenade.targetY = mouse_y;
+        angleToTarget = point_direction(x,y - 0.5 * sprite_height, mouse_x, mouse_y);
+        grenade.speed = 5;
+        grenade.direction = angleToTarget;
+        
+        
+        
+        
+        numGrenades--;
+    }
 }
 </string>
           </argument>

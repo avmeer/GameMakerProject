@@ -31,8 +31,6 @@ First pass at inventory system, lots of hardcoding of numbers that need to be ch
 Used in the inventory test room
 */
 
-globalvar x1,x2,y1,y2,initOff,initSpace,boxDimension, midx,midy, weaponX, weaponY, headX, headY;
-globalvar invHalfWidth, invHalfHeight;
 x1 = view_xview[0] + 650;
 y1 = view_yview[0] + 25;
 x2 = x1 + 166 * 2;
@@ -78,41 +76,20 @@ for (i = 0; i &lt; 4; i++){
         global.inventory[i,j] = -1;
     }
 }
-
 //initialize equipped items to -1
 for (i = 0; i &lt; 6; i++){
     global.equippedItems[i] = -1;
 }
-
-//where to put instances in map that are in inventory?
-//starting weapon is measly pistol
-/*
-newWeapon = instance_create(-10,-10, obj_Weapon);
-newHelmet = instance_create(-10,-10, obj_Helmet);
-global.equippedItems[equipSlots.WEAPON] = newWeapon;
-global.equippedItems[equipSlots.HEAD] = newHelmet;
-*/
-
-//testing
-//global.inventory[0,0] = instance_create(0,0,obj_testWeapon);
-
 /*SAVING INVENTORY ACROSS ROOMS*/
 for (i = 0; i &lt; 4; i++){
     for (j = 0; j &lt; 4; j++){
         savedInventory[i,j] = -1;
     }
 }
-
 for (i = 0; i &lt; 6; i++){
     savedEquippedItems[i] = -1;
 }
 
-/*
-derp[0] = 6;
-derp[1] = newWeapon.damage;
-derp[2] = newWeapon.fireRate;
-savedEquippedItems[equipSlots.WEAPON] = derp;
-*/
 
 
 </string>

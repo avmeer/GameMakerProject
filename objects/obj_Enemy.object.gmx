@@ -200,7 +200,7 @@ if (hit &amp;&amp; alarm[1] &lt;= 0) {
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_Grenade">
+    <event eventtype="4" ename="obj_Grenade_Explosion">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -219,8 +219,9 @@ if (hit &amp;&amp; alarm[1] &lt;= 0) {
             <kind>1</kind>
             <string>var inRange = false;
 var distance = scr_CalcDistance(x, y, other.x, other.y);
-if(other.image_index == 1 &amp;&amp; distance &lt;= 75)
+if(other.image_index == 1 &amp;&amp; distance &lt;= 75){
     inRange = true;
+}
 
 if(inRange) {
     if(ds_list_find_index(grenadesHitBy, other.id) == -1) {
@@ -235,7 +236,6 @@ if(inRange) {
         }
     }
 }
-
 </string>
           </argument>
         </arguments>
