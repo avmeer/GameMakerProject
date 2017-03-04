@@ -28,6 +28,7 @@
             <string>event_inherited();
 damage = random_range(10,20);
 fireRate = 4;
+displayName = "Dirty Old Assault Rifle";
 </string>
           </argument>
         </arguments>

@@ -25,8 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>health_bonus = 50;
+            <string>randomize();
+health_bonus = random_range(0,100);
 itemType = equipSlots.HEAD;
+displayName = "Dirty Old Helmet"
 </string>
           </argument>
         </arguments>

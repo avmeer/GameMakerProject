@@ -16,6 +16,7 @@
     <sprite>sprites\spr_Door_Previous</sprite>
     <sprite>sprites\spr_CollideWall</sprite>
     <sprite>sprites\spr_Player</sprite>
+    <sprite>sprites\spr_Merchant</sprite>
     <sprite>sprites\spr_Enemy</sprite>
     <sprite>sprites\spr_Bullet</sprite>
     <sprite>sprites\spr_Gun</sprite>
@@ -64,8 +65,10 @@
     <object>objects\obj_Blood</object>
     <object>objects\obj_Small_Ruble_Pile</object>
     <object>objects\obj_Grenade_Explosion</object>
+    <object>objects\obj_Merchant</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_TestingMerchant</room>
     <room>rooms\rm_TestingEnemy</room>
     <room>rooms\rm_TestingInventory</room>
     <room>rooms\rm_TestingQuantum</room>
