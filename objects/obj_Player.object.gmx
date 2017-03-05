@@ -39,6 +39,8 @@ canFire = true; // whether the player can fire
 fireRateTimerDone = true;
 
 collision = true;
+
+numObj = 0;
 </string>
           </argument>
         </arguments>
@@ -596,6 +598,7 @@ draw_text(150,79,"Grenades: "+string(numGrenades));
 draw_text(150,93,"Health: "+string(obj_Player.health) + " / " + string(maxHealth));
 draw_text(400,64,"Room: "+string(room));
 draw_text(700,64,"Collision: "+string(collision));
+
 numObj = 0;
 for (i = 0; i &lt; 4; i++){
     for (j = 0; j &lt; 4; j++){

@@ -44,17 +44,29 @@ potentialItemsArray[0] = obj_Weapon;
 potentialItemsArray[1] = obj_testWeapon;
 potentialItemsArray[2] = obj_Helmet;
 
-itemsToSell[0,0] = -1;
-
 for (i = 0; i &lt; maxItems / 4; i++){
     for (j = 0; j &lt; maxItems / 4; j++){
-        itemIndex = random_range(0,3);
-        itemsToSell[i,j] = instance_create(-10,-10, potentialItemsArray[itemIndex]);
+        itemsToSell[i,j] = -1;
     }
 }
 
-interacting = false;
+//itemsToSell[0,0] = -1;
+test = instance_create(-10,-10, obj_Weapon);
+//itemsToSell[0,1] = test;
 
+/*
+for (i = 0; i &lt; maxItems / 4; i++){
+    for (j = 0; j &lt; maxItems / 4; j++){
+        itemIndex = random_range(0,3);
+        item = instance_create(-10,-10, potentialItemsArray[itemIndex]);
+        itemsToSell[i,j] = item;
+    }
+}
+*/
+
+interacting = false;
+global.I = 0;
+global.J = 0;
 </string>
           </argument>
         </arguments>
@@ -82,6 +94,8 @@ interacting = false;
 }
 
 if(interacting){
+
+    //loop for displaying information
     foundOne = false;
     for (i = 0; i &lt; 4; i++){
         for (j = 0; j &lt; 4; j++){
@@ -98,6 +112,22 @@ if(interacting){
             }
         }
     }
+    /*
+    if(mouse_check_button_pressed(mb_right)){
+        for (i = 0;  i &lt; 4; i++){
+            for (j = 0; j &lt; 4; j++){
+                boxCenterX = x1 + initOff + (i * initSpace);
+                boxCenterY = y1 + initOff + (j * initSpace);
+                if(scr_MouseInBox(boxCenterX, boxCenterY, boxDimension) &amp;&amp; itemsToSell[i,j] != -1){// &amp;&amp; obj_Player.numObj &lt; 16){
+                    global.I = i;
+                    global.J = j;
+                    item = itemsToSell[i,j];
+                    scr_itemPickup(item);
+                    itemsToSell[i,j] = -1;
+                }
+            }
+        }
+    }*/
 }
 </string>
           </argument>
@@ -157,6 +187,10 @@ if(interacting){
             draw_text(mouse_x + 10, mouse_y, "Health: " + string(itemToDisplay.health_bonus));
         }
     }
+    
+    draw_text(250,250,string(global.I));
+    draw_text(300,250,string(global.J));
+    
     
 }
 </string>
