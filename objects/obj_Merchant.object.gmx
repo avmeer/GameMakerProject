@@ -222,6 +222,11 @@ if(interacting){
             <kind>1</kind>
             <string>if (point_distance(obj_Player.x, obj_Player.y, x, y) &lt; 100){
     interacting = !interacting;
+    if(interacting){
+        showInv = true;
+    }else{
+        showInv = false;
+    }
 }
 </string>
           </argument>

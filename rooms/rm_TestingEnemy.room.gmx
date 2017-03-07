@@ -168,6 +168,7 @@ To spawn a health globe where the mouse cursor is, press 1 (must have &lt;100 hp
     <instance objName="obj_Door_Next" x="992" y="128" name="inst_EC2C224E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Weapon" x="896" y="128" name="inst_1FEF91C3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Helmet" x="896" y="224" name="inst_2E83FB30" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_Inventory" x="448" y="320" name="inst_EE4239C8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

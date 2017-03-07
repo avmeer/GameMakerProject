@@ -592,6 +592,7 @@ if(!showInv){
           <argument>
             <kind>1</kind>
             <string>//simple gui for testing purposes that displays ammo and health of player
+draw_set_color(c_white);
 draw_text(150,64,"Bullets: "+string(numBullets - instance_number(obj_Bullet)));
 draw_text(280,64,"Rubles: " + string(rubles));
 draw_text(150,79,"Grenades: "+string(numGrenades));
