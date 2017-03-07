@@ -114,7 +114,18 @@ for (i = 0; i &lt; 6; i++){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(showInv){
+            <string>//for toggling the inventory, only available in testing room as of 2/10/17
+if (keyboard_check_pressed(ord("I"))){
+    showInv = !showInv;
+    if(showInv == false &amp;&amp; global.objectHeld != -1){
+        global.inventory[global.takenFromX, global.takenFromY] = global.objectHeld;
+        global.objectHeld = -1;
+        global.takenFromX = -1;
+        global.takenFromY = -1;
+    }
+}
+
+if(showInv){
     foundOne = false;
     for (i = 0; i &lt; 4; i++){
         for (j = 0; j &lt; 4; j++){
