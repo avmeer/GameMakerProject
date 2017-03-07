@@ -29,6 +29,7 @@
 damage = random_range(10,20);
 fireRate = 4;
 displayName = "Dirty Old Assault Rifle";
+price = 200;
 </string>
           </argument>
         </arguments>

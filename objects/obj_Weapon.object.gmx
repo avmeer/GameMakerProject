@@ -31,6 +31,7 @@ damage = random_range(1,10);
 itemType = equipSlots.WEAPON;
 fireRate = 0;
 displayName = "Dirty Old Pistol";
+price = 100;
 </string>
           </argument>
         </arguments>

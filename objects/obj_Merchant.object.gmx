@@ -50,11 +50,6 @@ for (i = 0; i &lt; maxItems / 4; i++){
     }
 }
 
-//itemsToSell[0,0] = -1;
-test = instance_create(-10,-10, obj_Weapon);
-//itemsToSell[0,1] = test;
-
-/*
 for (i = 0; i &lt; maxItems / 4; i++){
     for (j = 0; j &lt; maxItems / 4; j++){
         itemIndex = random_range(0,3);
@@ -62,7 +57,6 @@ for (i = 0; i &lt; maxItems / 4; i++){
         itemsToSell[i,j] = item;
     }
 }
-*/
 
 interacting = false;
 global.I = 0;
@@ -112,22 +106,33 @@ if(interacting){
             }
         }
     }
-    /*
+    
+    foundItemToSell = false;
+    var soldItem = -1;
     if(mouse_check_button_pressed(mb_right)){
         for (i = 0;  i &lt; 4; i++){
             for (j = 0; j &lt; 4; j++){
-                boxCenterX = x1 + initOff + (i * initSpace);
-                boxCenterY = y1 + initOff + (j * initSpace);
-                if(scr_MouseInBox(boxCenterX, boxCenterY, boxDimension) &amp;&amp; itemsToSell[i,j] != -1){// &amp;&amp; obj_Player.numObj &lt; 16){
-                    global.I = i;
-                    global.J = j;
-                    item = itemsToSell[i,j];
-                    scr_itemPickup(item);
-                    itemsToSell[i,j] = -1;
+                if(itemsToSell[i,j] != -1){
+                    boxCenterX = x1 + initOff + (i * initSpace);
+                    boxCenterY = y1 + initOff + (j * initSpace);
+                    priceOfItem = itemsToSell[i,j].price;
+                    playerCanBuy = (obj_Player.numObj &lt; 16 &amp;&amp; rubles &gt;= priceOfItem);
+                    if(scr_MouseInBox(boxCenterX, boxCenterY, boxDimension) &amp;&amp; itemsToSell[i,j] != -1 &amp;&amp; playerCanBuy){
+                        foundItemToSell = true;
+                        global.I = i;
+                        global.J = j;
+                        soldItem = itemsToSell[i,j];
+                        rubles -= priceOfItem;
+                    }
                 }
             }
         }
-    }*/
+        
+        if(soldItem != -1){
+            scr_itemPickup(soldItem);
+            itemsToSell[global.I, global.J] = -1;
+        }
+    }
 }
 </string>
           </argument>
@@ -160,7 +165,7 @@ if(interacting){
     for (i = 0; i &lt; maxItems / 4; i++){
         for (j = 0; j &lt; maxItems / 4; j++){
             draw_sprite_ext(spr_Border,0,x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace),2,2,0,c_white,1);
-            if (itemsToSell[i] != -1){
+            if (itemsToSell[i,j] != -1){
                 draw_sprite_ext(itemsToSell[i,j].sprite_index,0,x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace),2,2,0,c_white,1);
                 draw_set_color(c_white);
             }

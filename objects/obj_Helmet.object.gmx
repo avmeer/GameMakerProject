@@ -29,6 +29,7 @@
 health_bonus = random_range(0,100);
 itemType = equipSlots.HEAD;
 displayName = "Dirty Old Helmet"
+price = 500;
 </string>
           </argument>
         </arguments>
