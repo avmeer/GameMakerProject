@@ -66,7 +66,6 @@
     <object>objects\obj_Small_Ruble_Pile</object>
     <object>objects\obj_Grenade_Explosion</object>
     <object>objects\obj_Merchant</object>
-    <object>objects\obj_Dialog</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_TestingMerchant</room>
