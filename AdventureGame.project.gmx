@@ -68,8 +68,8 @@
     <object>objects\obj_Merchant</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_TestingEnemy</room>
     <room>rooms\rm_TestingMerchant</room>
+    <room>rooms\rm_TestingEnemy</room>
     <room>rooms\rm_TestingInventory</room>
     <room>rooms\rm_TestingQuantum</room>
   </rooms>
