@@ -30,7 +30,9 @@
     <sprite>sprites\spr_BloodExplode</sprite>
     <sprite>sprites\spr_SmallRublePile</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\LabLevel</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\scr_itemPickup.gml</script>
@@ -69,6 +71,7 @@
     <object>objects\obj_Dialog</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_LabLevel</room>
     <room>rooms\rm_TestingMerchant</room>
     <room>rooms\rm_TestingEnemy</room>
     <room>rooms\rm_TestingInventory</room>
