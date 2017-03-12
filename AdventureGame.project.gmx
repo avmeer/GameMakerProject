@@ -29,9 +29,11 @@
     <sprite>sprites\spr_GiantExplode</sprite>
     <sprite>sprites\spr_BloodExplode</sprite>
     <sprite>sprites\spr_SmallRublePile</sprite>
+    <sprite>sprites\spr_SkillTreeBox</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>
+    <background>background\SkillTree</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -69,6 +71,11 @@
     <object>objects\obj_Grenade_Explosion</object>
     <object>objects\obj_Merchant</object>
     <object>objects\obj_Dialog</object>
+    <objects name="SkillTreeBoxes">
+      <object>objects\obj_GrenadeUnlock</object>
+      <object>objects\obj_GrenadeAmmoInc</object>
+      <object>objects\obj_GrenadeDmgInc</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_LabLevel</room>
@@ -76,6 +83,7 @@
     <room>rooms\rm_TestingEnemy</room>
     <room>rooms\rm_TestingInventory</room>
     <room>rooms\rm_TestingQuantum</room>
+    <room>rooms\rm_RiflemanSkillTree</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
