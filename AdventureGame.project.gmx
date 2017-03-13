@@ -29,12 +29,17 @@
     <sprite>sprites\spr_GiantExplode</sprite>
     <sprite>sprites\spr_BloodExplode</sprite>
     <sprite>sprites\spr_SmallRublePile</sprite>
+<<<<<<< HEAD
     <sprite>sprites\spr_InvisibleWallFar</sprite>
     <sprite>sprites\spr_InvisibleWallNear</sprite>
     <sprite>sprites\spr_Point</sprite>
+=======
+    <sprite>sprites\spr_SkillTreeBox</sprite>
+>>>>>>> de96756f32ac36fd9ea19fd8366674ba32e62e6f
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>
+    <background>background\SkillTree</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -75,6 +80,11 @@
     <object>objects\obj_InvisibleWallFar</object>
     <object>objects\obj_InvisibleWallNear</object>
     <object>objects\obj_Point</object>
+    <objects name="SkillTreeBoxes">
+      <object>objects\obj_GrenadeUnlock</object>
+      <object>objects\obj_GrenadeAmmoInc</object>
+      <object>objects\obj_GrenadeDmgInc</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_LabLevel</room>
@@ -82,6 +92,7 @@
     <room>rooms\rm_TestingEnemy</room>
     <room>rooms\rm_TestingInventory</room>
     <room>rooms\rm_TestingQuantum</room>
+    <room>rooms\rm_RiflemanSkillTree</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
