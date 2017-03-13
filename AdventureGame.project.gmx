@@ -29,13 +29,10 @@
     <sprite>sprites\spr_GiantExplode</sprite>
     <sprite>sprites\spr_BloodExplode</sprite>
     <sprite>sprites\spr_SmallRublePile</sprite>
-<<<<<<< HEAD
     <sprite>sprites\spr_InvisibleWallFar</sprite>
     <sprite>sprites\spr_InvisibleWallNear</sprite>
     <sprite>sprites\spr_Point</sprite>
-=======
     <sprite>sprites\spr_SkillTreeBox</sprite>
->>>>>>> de96756f32ac36fd9ea19fd8366674ba32e62e6f
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>
