@@ -82,6 +82,7 @@
       <object>objects\obj_GrenadeAmmoInc</object>
       <object>objects\obj_GrenadeDmgInc</object>
     </objects>
+    <object>objects\obj_Room_Changer</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_LabLevel</room>

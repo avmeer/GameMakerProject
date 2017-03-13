@@ -79,10 +79,12 @@ price = 100;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (point_distance(x,y, obj_Player.x, obj_Player.y) &lt; 60){
-    draw_set_color(c_white);
-    draw_text(x + 15, y - 15, "F");
-    draw_set_color(c_black);
+            <string>if (instance_exists(obj_Player)){
+    if (point_distance(x,y, obj_Player.x, obj_Player.y) &lt; 60){
+        draw_set_color(c_white);
+        draw_text(x + 15, y - 15, "F");
+        draw_set_color(c_black);
+    }
 }
 </string>
           </argument>

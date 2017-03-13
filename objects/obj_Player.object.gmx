@@ -172,14 +172,6 @@ if (hit &amp;&amp; alarm[0] &lt;= 0) {
    alarm[0] = 0.08 * room_speed; // Flashes for 0.8 seconds before turning back to normal
 }
 
-if (keyboard_check_pressed(vk_right) &amp;&amp; room != room_last){
-    room_goto_next();
-}
-
-if (keyboard_check_pressed(vk_left) &amp;&amp; room != room_first){
-    room_goto_previous();
-}
-
 
 
 

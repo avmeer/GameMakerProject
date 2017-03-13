@@ -173,28 +173,35 @@ if(interacting){
     }
     
     if(displayItemInfo){
+        var displayBoxWidth = 300;
+        var displayBoxHeight = 100;
+        var lineOffset = 20;
+    
         if(itemToDisplay.itemType == equipSlots.WEAPON){
             draw_set_color(c_black);
-            draw_rectangle(mouse_x, mouse_y, mouse_x + 200, mouse_y + 50,0);
+            draw_rectangle(mouse_x, mouse_y, mouse_x - displayBoxWidth, mouse_y + displayBoxHeight,0);
             draw_set_color(c_white);
-            draw_text(mouse_x + 10, mouse_y, "Damage: " + string(itemToDisplay.damage));
+            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 0, "Damage: " + string(itemToDisplay.damage));
             if (itemToDisplay.fireRate == 0){
-                draw_text(mouse_x + 10, mouse_y + 20, "Fire Rate: Semi Auto" );
+                draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 1, "Fire Rate: Semi Auto" );
             }else{
-                draw_text(mouse_x + 10, mouse_y + 20, "Fire Rate: " + string(itemToDisplay.fireRate) + " per second");
+                draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 1, "Fire Rate: " + string(itemToDisplay.fireRate) + " per second");
             }
+            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 2, "Buying Price: " + string(itemToDisplay.price));
             
         }
         if(itemToDisplay.itemType == equipSlots.HEAD){
             draw_set_color(c_black);
-            draw_rectangle(mouse_x, mouse_y, mouse_x + 200, mouse_y + 50,0);
+            draw_rectangle(mouse_x, mouse_y, mouse_x - displayBoxWidth, mouse_y + displayBoxHeight,0);
             draw_set_color(c_white);
-            draw_text(mouse_x + 10, mouse_y, "Health: " + string(itemToDisplay.health_bonus));
+            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 0, "Health: " + string(itemToDisplay.health_bonus));
+            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 1, "Buying Price: " + string(itemToDisplay.price));
         }
     }
     
-    draw_text(250,250,string(global.I));
-    draw_text(300,250,string(global.J));
+    // for debuggings
+    //draw_text(250,250,string(global.I));
+    //draw_text(300,250,string(global.J));
     
     
 }
