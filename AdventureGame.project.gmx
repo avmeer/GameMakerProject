@@ -29,6 +29,9 @@
     <sprite>sprites\spr_GiantExplode</sprite>
     <sprite>sprites\spr_BloodExplode</sprite>
     <sprite>sprites\spr_SmallRublePile</sprite>
+    <sprite>sprites\spr_InvisibleWallFar</sprite>
+    <sprite>sprites\spr_InvisibleWallNear</sprite>
+    <sprite>sprites\spr_Point</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>
@@ -69,6 +72,9 @@
     <object>objects\obj_Grenade_Explosion</object>
     <object>objects\obj_Merchant</object>
     <object>objects\obj_Dialog</object>
+    <object>objects\obj_InvisibleWallFar</object>
+    <object>objects\obj_InvisibleWallNear</object>
+    <object>objects\obj_Point</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_LabLevel</room>
