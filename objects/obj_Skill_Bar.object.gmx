@@ -33,8 +33,9 @@ skill_1_left = skill_1_box_center_x - halfBox;
 skill_1_top = skill_1_box_center_y - halfBox;
 skill_1_bottom = skill_1_box_center_y + halfBox;
 skill_1_right = skill_1_box_center_x + halfBox;//alarm[0] will vary
-skill_1_distance = skill_1_right - skill_1_left;
-skill_1_time = skill_1_distance / 5.0;
+skill_1_distance = sizeOfBox;
+skill_1_time_in_seconds = 10.0;
+skill_1_time =(skill_1_time_in_seconds / skill_1_distance) * room_speed;
 skill_1_cooling_down = false;
 
 
@@ -62,7 +63,7 @@ skill_1_cooling_down = false;
             <kind>1</kind>
             <string>skill_1_right -= 1;
 if (skill_1_right &gt; skill_1_left){
-    alarm[0] = 1 * skill_1_time / room_speed;
+    alarm[0] = skill_1_time;
     }
 else{
     skill_1_cooling_down = false;
@@ -92,7 +93,7 @@ else{
             <kind>1</kind>
             <string>if(skill_1_cooling_down == false){
     skill_1_cooling_down = true;
-    alarm[0] = 1 * skill_1_time / room_speed;
+    alarm[0] = skill_1_time;
 }
 </string>
           </argument>
@@ -116,14 +117,13 @@ else{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-draw_sprite_ext(spr_Border,0,view_wview[0] / 2,view_hview[0] - 64,3,3,0,c_white,1);
-draw_sprite_ext(spr_Grenade,0,view_wview[0] / 2,view_hview[0] - 64,3,3,0,c_white,1);
+            <string>draw_sprite_ext(spr_Grenade,0,view_wview[0] / 2,view_hview[0] - 64,3,3,0,c_white,1);
 draw_set_alpha(0.75);
 draw_set_color(c_red);
 if(skill_1_cooling_down){
     draw_rectangle(skill_1_left,skill_1_top,skill_1_right,skill_1_bottom,false);
 }
+draw_sprite_ext(spr_Border,0,view_wview[0] / 2,view_hview[0] - 64,3,3,0,c_white,1);
 draw_set_color(c_white);
 draw_set_alpha(1);
 </string>
