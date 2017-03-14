@@ -452,7 +452,8 @@ if (showInv){
     //draw rubles amount
     draw_set_alpha(1);
     draw_set_color(c_white);
-    draw_text(x1 + 10, (y1 + y2) / 2 - 10, "Rubles: " + string(rubles));
+    draw_sprite_ext(spr_SmallRublePile, 0,x1 + 30, (y1 + y2) / 2, 1.5, 1.5, 0,c_white,1);
+    draw_text(x1 + 10, (y1 + y2) / 2 - 10, "        " + string(rubles));
     
     //draw inventory for pickups
     for (i = 0; i &lt; 4; i++){
