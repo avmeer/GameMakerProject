@@ -33,6 +33,7 @@
     <sprite>sprites\spr_InvisibleWallNear</sprite>
     <sprite>sprites\spr_Point</sprite>
     <sprite>sprites\spr_SkillTreeBox</sprite>
+    <sprite>sprites\spr_AR15</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>

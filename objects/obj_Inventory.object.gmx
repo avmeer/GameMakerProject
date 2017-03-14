@@ -441,6 +441,9 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
 
 if (showInv){
     //draw box inventory is contained in
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+    draw_rectangle(x1,y1,x2,y2,0);
     draw_set_color(c_black);
     draw_set_alpha(0.8);
     draw_rectangle(x1,y1,x2,y2,0);
@@ -456,7 +459,12 @@ if (showInv){
         for (j = 0; j &lt; 4; j++){
             draw_sprite_ext(spr_Border,0,x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace),2,2,0,c_white,1);
             if (global.inventory[i,j] != -1){
-                draw_sprite_ext(global.inventory[i,j].sprite_index, 0, x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace),2,2,0,c_white,1);
+                var rot = 0;
+                //maybe change rotation based on size
+                var scale = 1;
+                scale = min((boxDimension - 12) / global.inventory[i,j].sprite_width, (boxDimension - 12) / global.inventory[i,j].sprite_height);
+                
+                draw_sprite_ext(global.inventory[i,j].sprite_index, 0, x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace),scale,scale,rot,c_white,1);
             }
         }
     }
@@ -469,33 +477,41 @@ if (showInv){
     draw_sprite_ext(spr_Border,0,midx - initSpace, midy + initOff + initSpace,2,2,0,c_white,1);
     for (i = 0; i &lt; 6; i++){
         if(global.equippedItems[i] != -1){
+            var scale = 1;
+            scale = min((boxDimension - 12) / global.equippedItems[i].sprite_width, (boxDimension - 12) / global.equippedItems[i].sprite_height);
+            
             if(i = equipSlots.HEAD){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (0 * initSpace),2,2,0,c_white,1);
+                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (0 * initSpace),scale,scale,0,c_white,1);
             }
             if(i = equipSlots.CHEST){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (1 * initSpace),2,2,0,c_white,1);
+                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (1 * initSpace),scale,scale,0,c_white,1);
             }
             if(i = equipSlots.LEGS){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (2 * initSpace),2,2,0,c_white,1);
+                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (2 * initSpace),scale,scale,0,c_white,1);
             }
             if(i = equipSlots.FEET){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (3 * initSpace),2,2,0,c_white,1);
+                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (3 * initSpace),scale,scale,0,c_white,1);
             }
             if(i = equipSlots.WEAPON){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx + initSpace, midy + initOff + (1 * initSpace),2,2,0,c_white,1);
+                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx + initSpace, midy + initOff + (1 * initSpace),scale,scale,0,c_white,1);
             }
             if(i = equipSlots.GLOVES){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx - initSpace, midy + initOff + (1 * initSpace),2,2,0,c_white,1);
+                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx - initSpace, midy + initOff + (1 * initSpace),scale,scale,0,c_white,1);
             } 
         }
     }
     
+    //draw in greyed out versions of equipment to show where to place items
     if(global.equippedItems[global.equipSlots.HEAD] == -1){
-        draw_sprite_ext(spr_Helmet, 0, midx, midy + initOff + (0 * initSpace),2,2,0,c_white,0.25);
+        var scale = 1;
+        scale = min((boxDimension - 12) / sprite_get_width(spr_Helmet), (boxDimension - 12) / sprite_get_height(spr_Helmet));
+        draw_sprite_ext(spr_Helmet, 0, midx, midy + initOff + (0 * initSpace),scale,scale,0,c_white,0.25);
     }
     
     if(global.equippedItems[global.equipSlots.WEAPON] == -1){
-        draw_sprite_ext(spr_Gun, 0, midx + initSpace, midy + initOff + (1 * initSpace),2,2,0,c_white,0.25);
+        var scale = 1;
+        scale = min((boxDimension - 12) / sprite_get_width(spr_AR15), (boxDimension - 12) / sprite_get_height(spr_AR15));
+        draw_sprite_ext(spr_AR15, 0, midx + initSpace, midy + initOff + (1 * initSpace),scale,scale,0,c_white,0.25);
     }
     
     if (global.objectHeld != -1){
