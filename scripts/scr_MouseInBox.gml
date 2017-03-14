@@ -9,11 +9,15 @@ xx = argument0;
 yy = argument1;
 dimension = argument2;
 
-if(abs(mouse_x - xx) < dimension / 2){
+//made these global
+//m_x = mouse_x - view_xview[0];
+//m_y = mouse_y - view_yview[0]
+
+if(abs(m_x - xx) < dimension / 2){
     inX = true;
 }
 
-if(abs(mouse_y - yy) < dimension / 2){
+if(abs(m_y - yy) < dimension / 2){
     inY = true;
 }
 

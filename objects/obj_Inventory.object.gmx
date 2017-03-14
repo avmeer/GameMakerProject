@@ -46,6 +46,10 @@ weaponX = midx + initSpace;
 weaponY = midy + initOff + (1 * initSpace);
 headX = midx;
 headY = midy + initOff + (0 * initSpace);
+globalvar m_x;
+globalvar m_y;
+m_x = mouse_x - view_xview[0];
+m_y = mouse_y - view_yview[0];
 
 globalvar rubles;
 rubles = 0;
@@ -130,6 +134,8 @@ weaponX = midx + initSpace;
 weaponY = midy + initOff + (1 * initSpace);
 headX = midx;
 headY = midy + initOff + (0 * initSpace);
+m_x = mouse_x - view_xview[0];
+m_y = mouse_y - view_yview[0];
 
 //for toggling the inventory, only available in testing room as of 2/10/17
 if (keyboard_check_pressed(ord("I"))){
@@ -431,7 +437,9 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (showInv){
+            <string>draw_text(view_xport[0], view_yport[0], "X: " + string(mouse_x - view_xview[0]) + "Y: " + string(mouse_y - view_yview[0]));
+
+if (showInv){
     //draw box inventory is contained in
     draw_set_color(c_black);
     draw_set_alpha(0.8);
@@ -491,7 +499,8 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
     }
     
     if (global.objectHeld != -1){
-        draw_sprite_ext(global.objectHeld.sprite_index, 0, mouse_x, mouse_y,2,2,0,c_white,1);
+        //draw_sprite_ext(global.objectHeld.sprite_index, 0, mouse_x, mouse_y,2,2,0,c_white,1);
+        draw_sprite_ext(global.objectHeld.sprite_index, 0, m_x, m_y,2,2,0,c_white,1);
     }
     
     //m_x = window_view_mouse_get_x(view_current);
@@ -505,27 +514,27 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
     
         if(itemToDisplay.itemType == equipSlots.WEAPON){
             draw_set_color(c_black);
-            draw_rectangle(mouse_x, mouse_y, mouse_x - displayBoxWidth, mouse_y + displayBoxHeight,0);
+            draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
             //draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
             draw_set_color(c_white);
-            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 0, "Damage: " + string(itemToDisplay.damage));
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 0, "Damage: " + string(itemToDisplay.damage));
             if (itemToDisplay.fireRate == 0){
-                draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 1, "Fire Rate: Semi Auto" );
+                draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 1, "Fire Rate: Semi Auto" );
             }else{
-                draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 1, "Fire Rate: " + string(itemToDisplay.fireRate) + " per second");
+                draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 1, "Fire Rate: " + string(itemToDisplay.fireRate) + " per second");
             }
             if(itemCanBeSold){
-                draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 2, "Selling Price: " + string(sellingPrice) + " (Right Click)");
+                draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 2, "Selling Price: " + string(sellingPrice) + " (Right Click)");
             }
             
         }
         if(itemToDisplay.itemType == equipSlots.HEAD){
             draw_set_color(c_black);
-            draw_rectangle(mouse_x, mouse_y, mouse_x - displayBoxWidth, mouse_y + displayBoxHeight,0);
+            draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
             draw_set_color(c_white);
-            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 0, "Health: " + string(itemToDisplay.health_bonus));
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 0, "Health: " + string(itemToDisplay.health_bonus));
             if (itemCanBeSold){
-                draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 1, "Selling Price: " + string(sellingPrice) + " (Right Click)");
+                draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 1, "Selling Price: " + string(sellingPrice) + " (Right Click)");
             }
         }
     }

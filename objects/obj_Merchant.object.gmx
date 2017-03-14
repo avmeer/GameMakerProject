@@ -184,23 +184,23 @@ if(interacting == true){
     
         if(itemToDisplay.itemType == equipSlots.WEAPON){
             draw_set_color(c_black);
-            draw_rectangle(mouse_x, mouse_y, mouse_x - displayBoxWidth, mouse_y + displayBoxHeight,0);
+            draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
             draw_set_color(c_white);
-            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 0, "Damage: " + string(itemToDisplay.damage));
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 0, "Damage: " + string(itemToDisplay.damage));
             if (itemToDisplay.fireRate == 0){
-                draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 1, "Fire Rate: Semi Auto" );
+                draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 1, "Fire Rate: Semi Auto" );
             }else{
-                draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 1, "Fire Rate: " + string(itemToDisplay.fireRate) + " per second");
+                draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 1, "Fire Rate: " + string(itemToDisplay.fireRate) + " per second");
             }
-            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 2, "Buying Price: " + string(itemToDisplay.price) + " (Right Click)");
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 2, "Buying Price: " + string(itemToDisplay.price) + " (Right Click)");
             
         }
         if(itemToDisplay.itemType == equipSlots.HEAD){
             draw_set_color(c_black);
-            draw_rectangle(mouse_x, mouse_y, mouse_x - displayBoxWidth, mouse_y + displayBoxHeight,0);
+            draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
             draw_set_color(c_white);
-            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 0, "Health: " + string(itemToDisplay.health_bonus));
-            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 1, "Buying Price: " + string(itemToDisplay.price) + " (Right Click)");
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 0, "Health: " + string(itemToDisplay.health_bonus));
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 1, "Buying Price: " + string(itemToDisplay.price) + " (Right Click)");
         }
     }
     
