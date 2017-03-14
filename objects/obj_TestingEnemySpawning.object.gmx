@@ -27,11 +27,11 @@
             <kind>1</kind>
             <string>//object placed in test room for enemies, which allows health and enemies to be spawned
 if keyboard_check_pressed(ord('1')){
-    tempHealth = instance_create(mouse_x,mouse_y,obj_Health);
+    tempHealth = instance_create(mouse_x,mouse_y,obj_Enemy);
 }
 
 if keyboard_check_pressed(ord('2')){
-    tempEnemy = instance_create(mouse_x,mouse_y,obj_Enemy);
+    tempEnemy = instance_create(mouse_x,mouse_y,obj_Health);
 }
 
 if keyboard_check_pressed(ord('3')){

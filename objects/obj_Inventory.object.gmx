@@ -31,8 +31,8 @@ First pass at inventory system, lots of hardcoding of numbers that need to be ch
 Used in the inventory test room
 */
 
-x1 = view_xview[0] + 650;
-y1 = view_yview[0] + 25;
+x1 = view_xport[view_current] + 650;
+y1 = view_yport[view_current] + 25;
 x2 = x1 + 166 * 2;
 y2 = y1 + 360 * 2;
 invHalfWidth = 166;//make dynamic
@@ -60,6 +60,7 @@ global.takenFromX = -1;
 global.takenFromY = -1;
 displayItemInfo = false;
 itemToDisplay = -1;
+itemCanBeSold = false;
 
 enum equipSlots{
     HEAD,
@@ -114,7 +115,23 @@ for (i = 0; i &lt; 6; i++){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//for toggling the inventory, only available in testing room as of 2/10/17
+            <string>x1 = view_xport[view_current] + 650;
+y1 = view_yport[view_current] + 25;
+x2 = x1 + 166 * 2;
+y2 = y1 + 360 * 2;
+invHalfWidth = 166;//make dynamic
+invHalfHeight = 360;//make dynamic
+initOff = 24 * 2;
+initSpace = 40 * 2;
+boxDimension = 32 * 2;
+midx = (x1 + x2) / 2;
+midy = (y1 + y2) / 2;
+weaponX = midx + initSpace;
+weaponY = midy + initOff + (1 * initSpace);
+headX = midx;
+headY = midy + initOff + (0 * initSpace);
+
+//for toggling the inventory, only available in testing room as of 2/10/17
 if (keyboard_check_pressed(ord("I"))){
     showInv = !showInv;
     if(showInv == false &amp;&amp; global.objectHeld != -1){
@@ -253,12 +270,12 @@ if(showInv){
 
     }
     
-    
+    itemCanBeSold = false; // makes it so you cant sell equipped items
     if(instance_exists(obj_Merchant) == true){
-        var itemCanBeSold = (itemToDisplay != -1 &amp;&amp; sellX != -1 &amp;&amp; sellY != -1);
+        itemCanBeSold = (itemToDisplay != -1 &amp;&amp; sellX != -1 &amp;&amp; sellY != -1);
         if(obj_Merchant.interacting == true &amp;&amp; mouse_check_button_pressed(mb_right) &amp;&amp; itemCanBeSold == true){
             displayItemInfo = false;
-            rubles+=itemToDisplay.price * 0.5;
+            rubles+= floor(itemToDisplay.price * 0.5);
             with(itemToDisplay){
                 instance_destroy();
             }
@@ -415,10 +432,16 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
           <argument>
             <kind>1</kind>
             <string>if (showInv){
+    //draw box inventory is contained in
     draw_set_color(c_black);
     draw_set_alpha(0.8);
     draw_rectangle(x1,y1,x2,y2,0);
     draw_set_alpha(1);
+    
+    //draw rubles amount
+    draw_set_alpha(1);
+    draw_set_color(c_white);
+    draw_text(x1 + 10, (y1 + y2) / 2 - 10, "Rubles: " + string(rubles));
     
     //draw inventory for pickups
     for (i = 0; i &lt; 4; i++){
@@ -459,18 +482,31 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
         }
     }
     
+    if(global.equippedItems[global.equipSlots.HEAD] == -1){
+        draw_sprite_ext(spr_Helmet, 0, midx, midy + initOff + (0 * initSpace),2,2,0,c_white,0.25);
+    }
+    
+    if(global.equippedItems[global.equipSlots.WEAPON] == -1){
+        draw_sprite_ext(spr_Gun, 0, midx + initSpace, midy + initOff + (1 * initSpace),2,2,0,c_white,0.25);
+    }
+    
     if (global.objectHeld != -1){
         draw_sprite_ext(global.objectHeld.sprite_index, 0, mouse_x, mouse_y,2,2,0,c_white,1);
     }
+    
+    //m_x = window_view_mouse_get_x(view_current);
+    //m_y = window_view_mouse_get_y(view_current);
     
     if(displayItemInfo){
         var displayBoxWidth = 300;
         var displayBoxHeight = 100;
         var lineOffset = 20;
+        var sellingPrice = floor(itemToDisplay.price * 0.5);
     
         if(itemToDisplay.itemType == equipSlots.WEAPON){
             draw_set_color(c_black);
             draw_rectangle(mouse_x, mouse_y, mouse_x - displayBoxWidth, mouse_y + displayBoxHeight,0);
+            //draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
             draw_set_color(c_white);
             draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 0, "Damage: " + string(itemToDisplay.damage));
             if (itemToDisplay.fireRate == 0){
@@ -478,7 +514,9 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
             }else{
                 draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 1, "Fire Rate: " + string(itemToDisplay.fireRate) + " per second");
             }
-            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 2, "Buying Price: " + string(itemToDisplay.price * 0.5));
+            if(itemCanBeSold){
+                draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 2, "Selling Price: " + string(sellingPrice) + " (Right Click)");
+            }
             
         }
         if(itemToDisplay.itemType == equipSlots.HEAD){
@@ -486,7 +524,9 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
             draw_rectangle(mouse_x, mouse_y, mouse_x - displayBoxWidth, mouse_y + displayBoxHeight,0);
             draw_set_color(c_white);
             draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 0, "Health: " + string(itemToDisplay.health_bonus));
-            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 1, "Buying Price: " + string(itemToDisplay.price * 0.5));
+            if (itemCanBeSold){
+                draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 1, "Selling Price: " + string(sellingPrice) + " (Right Click)");
+            }
         }
     }
     draw_set_color(c_black);

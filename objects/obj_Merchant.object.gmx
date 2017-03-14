@@ -156,7 +156,12 @@ if(interacting){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(interacting == true){
+            <string>if (point_distance(obj_Player.x, obj_Player.y, x, y) &lt; 100){
+    draw_set_colour(c_white);
+    draw_text(x - 25, y + 10, "SPACE");
+}
+
+if(interacting == true){
     draw_set_color(c_black);
     draw_set_alpha(0.8);
     draw_rectangle(x1,y1,x2,y2,0);
@@ -187,7 +192,7 @@ if(interacting){
             }else{
                 draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 1, "Fire Rate: " + string(itemToDisplay.fireRate) + " per second");
             }
-            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 2, "Buying Price: " + string(itemToDisplay.price));
+            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 2, "Buying Price: " + string(itemToDisplay.price) + " (Right Click)");
             
         }
         if(itemToDisplay.itemType == equipSlots.HEAD){
@@ -195,15 +200,13 @@ if(interacting){
             draw_rectangle(mouse_x, mouse_y, mouse_x - displayBoxWidth, mouse_y + displayBoxHeight,0);
             draw_set_color(c_white);
             draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 0, "Health: " + string(itemToDisplay.health_bonus));
-            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 1, "Buying Price: " + string(itemToDisplay.price));
+            draw_text(mouse_x - (displayBoxWidth - 10), mouse_y + lineOffset * 1, "Buying Price: " + string(itemToDisplay.price) + " (Right Click)");
         }
     }
     
     // for debuggings
     //draw_text(250,250,string(global.I));
-    //draw_text(300,250,string(global.J));
-    
-    
+    //draw_text(300,250,string(global.J)); 
 }
 </string>
           </argument>

@@ -67,8 +67,6 @@
     <object>objects\obj_Helmet</object>
     <object>objects\obj_Grenade</object>
     <object>objects\obj_GrenadeAmmo</object>
-    <object>objects\obj_Door_Next</object>
-    <object>objects\obj_Door_Previous</object>
     <object>objects\obj_Blood</object>
     <object>objects\obj_Small_Ruble_Pile</object>
     <object>objects\obj_Grenade_Explosion</object>
@@ -88,7 +86,6 @@
     <room>rooms\rm_LabLevel</room>
     <room>rooms\rm_TestingMerchant</room>
     <room>rooms\rm_TestingEnemy</room>
-    <room>rooms\rm_TestingInventory</room>
     <room>rooms\rm_TestingQuantum</room>
     <room>rooms\rm_RiflemanSkillTree</room>
   </rooms>
