@@ -32,7 +32,7 @@ halfBox = sizeOfBox / 2;
 skill_1_left = skill_1_box_center_x - halfBox;
 skill_1_top = skill_1_box_center_y - halfBox;
 skill_1_bottom = skill_1_box_center_y + halfBox;
-skill_1_right = skill_1_box_center_x + halfBox;//alarm[0] will vary
+skill_1_right = skill_1_box_center_x + halfBox - 1;//alarm[0] will vary
 skill_1_distance = sizeOfBox;
 skill_1_time_in_seconds = 10.0;
 skill_1_time =(skill_1_time_in_seconds / skill_1_distance) * room_speed;
@@ -67,7 +67,7 @@ if (skill_1_right &gt; skill_1_left){
     }
 else{
     skill_1_cooling_down = false;
-    skill_1_right = skill_1_left + sizeOfBox;
+    skill_1_right = skill_1_left + sizeOfBox - 1;
 }
 </string>
           </argument>
