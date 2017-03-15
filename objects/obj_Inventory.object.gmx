@@ -465,7 +465,7 @@ if (showInv){
                 var scale = 1;
                 scale = min((boxDimension - 12) / global.inventory[i,j].sprite_width, (boxDimension - 12) / global.inventory[i,j].sprite_height);
                 
-                draw_sprite_ext(global.inventory[i,j].sprite_index, 0, x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace),scale,scale,rot,c_white,1);
+                draw_sprite_ext(global.inventory[i,j].sprite_index, 1, x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace),scale,scale,rot,c_white,1);
             }
         }
     }
@@ -482,22 +482,22 @@ if (showInv){
             scale = min((boxDimension - 12) / global.equippedItems[i].sprite_width, (boxDimension - 12) / global.equippedItems[i].sprite_height);
             
             if(i = equipSlots.HEAD){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (0 * initSpace),scale,scale,0,c_white,1);
+                draw_sprite_ext(global.equippedItems[i].sprite_index, 1, midx, midy + initOff + (0 * initSpace),scale,scale,0,c_white,1);
             }
             if(i = equipSlots.CHEST){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (1 * initSpace),scale,scale,0,c_white,1);
+                draw_sprite_ext(global.equippedItems[i].sprite_index, 1, midx, midy + initOff + (1 * initSpace),scale,scale,0,c_white,1);
             }
             if(i = equipSlots.LEGS){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (2 * initSpace),scale,scale,0,c_white,1);
+                draw_sprite_ext(global.equippedItems[i].sprite_index, 1, midx, midy + initOff + (2 * initSpace),scale,scale,0,c_white,1);
             }
             if(i = equipSlots.FEET){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx, midy + initOff + (3 * initSpace),scale,scale,0,c_white,1);
+                draw_sprite_ext(global.equippedItems[i].sprite_index, 1, midx, midy + initOff + (3 * initSpace),scale,scale,0,c_white,1);
             }
             if(i = equipSlots.WEAPON){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx + initSpace, midy + initOff + (1 * initSpace),scale,scale,0,c_white,1);
+                draw_sprite_ext(global.equippedItems[i].sprite_index, 1, midx + initSpace, midy + initOff + (1 * initSpace),scale,scale,0,c_white,1);
             }
             if(i = equipSlots.GLOVES){
-                draw_sprite_ext(global.equippedItems[i].sprite_index, 0, midx - initSpace, midy + initOff + (1 * initSpace),scale,scale,0,c_white,1);
+                draw_sprite_ext(global.equippedItems[i].sprite_index, 1, midx - initSpace, midy + initOff + (1 * initSpace),scale,scale,0,c_white,1);
             } 
         }
     }
@@ -512,12 +512,14 @@ if (showInv){
     if(global.equippedItems[global.equipSlots.WEAPON] == -1){
         var scale = 1;
         scale = min((boxDimension - 12) / sprite_get_width(spr_AR15), (boxDimension - 12) / sprite_get_height(spr_AR15));
-        draw_sprite_ext(spr_AR15, 0, midx + initSpace, midy + initOff + (1 * initSpace),scale,scale,0,c_white,0.25);
+        draw_sprite_ext(spr_AR15, 1, midx + initSpace, midy + initOff + (1 * initSpace),scale,scale,0,c_white,0.25);
     }
     
     if (global.objectHeld != -1){
+        var scale = 1;
+        scale = min((boxDimension - 12) / global.objectHeld.sprite_width, (boxDimension - 12) / global.objectHeld.sprite_height);
         //draw_sprite_ext(global.objectHeld.sprite_index, 0, mouse_x, mouse_y,2,2,0,c_white,1);
-        draw_sprite_ext(global.objectHeld.sprite_index, 0, m_x, m_y,2,2,0,c_white,1);
+        draw_sprite_ext(global.objectHeld.sprite_index, 1, m_x, m_y,scale,scale,0,c_white,1);
     }
     
     //m_x = window_view_mouse_get_x(view_current);

@@ -162,6 +162,9 @@ if(interacting){
 }
 
 if(interacting == true){
+    draw_set_alpha(1);
+    draw_set_color(c_white);
+    draw_rectangle(x1,y1,x2,y2,0);
     draw_set_color(c_black);
     draw_set_alpha(0.8);
     draw_rectangle(x1,y1,x2,y2,0);
@@ -173,7 +176,7 @@ if(interacting == true){
             if (itemsToSell[i,j] != -1){
                 var scale = 1;
                 scale = min((boxDimension - 12) / itemsToSell[i,j].sprite_width, (boxDimension - 12) / itemsToSell[i,j].sprite_height);
-                draw_sprite_ext(itemsToSell[i,j].sprite_index,0,x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace),scale,scale,0,c_white,1);
+                draw_sprite_ext(itemsToSell[i,j].sprite_index,1,x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace),scale,scale,0,c_white,1);
                 draw_set_color(c_white);
             }
         }
