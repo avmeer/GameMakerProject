@@ -121,7 +121,7 @@ else{
 draw_set_alpha(0.75);
 draw_set_color(c_red);
 if(skill_1_cooling_down){
-    draw_rectangle(skill_1_left,skill_1_top,skill_1_right,skill_1_bottom,false);
+    draw_rectangle(skill_1_left,skill_1_top,skill_1_right,skill_1_bottom - 1,false);
 }
 draw_sprite_ext(spr_Border,0,view_wview[0] / 2,view_hview[0] - 64,3,3,0,c_white,1);
 draw_set_color(c_white);

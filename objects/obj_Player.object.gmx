@@ -483,7 +483,7 @@ if(!showInv){
         grenade.speed = 5;
         grenade.direction = angleToTarget;
         obj_Skill_Bar.skill_1_cooling_down = true;
-        obj_Skill_Bar.alarm[0] = 1 * obj_Skill_Bar.skill_1_time / room_speed;
+        obj_Skill_Bar.alarm[0] = obj_Skill_Bar.skill_1_time;
         
         
         

@@ -34,6 +34,7 @@
     <sprite>sprites\spr_Point</sprite>
     <sprite>sprites\spr_SkillTreeBox</sprite>
     <sprite>sprites\spr_AR15</sprite>
+    <sprite>sprites\spr_M9</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>
