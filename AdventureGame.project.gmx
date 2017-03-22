@@ -35,6 +35,7 @@
     <sprite>sprites\spr_SkillTreeBox</sprite>
     <sprite>sprites\spr_AR15</sprite>
     <sprite>sprites\spr_M9</sprite>
+    <sprite>sprites\spr_GrenadeLarge</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>
@@ -67,11 +68,8 @@
     <object>objects\obj_Inventory</object>
     <object>objects\inv_BACKUP</object>
     <object>objects\obj_Helmet</object>
-    <object>objects\obj_Grenade</object>
-    <object>objects\obj_GrenadeAmmo</object>
     <object>objects\obj_Blood</object>
     <object>objects\obj_Small_Ruble_Pile</object>
-    <object>objects\obj_Grenade_Explosion</object>
     <object>objects\obj_Merchant</object>
     <object>objects\obj_Dialog</object>
     <object>objects\obj_InvisibleWallFar</object>
@@ -81,9 +79,19 @@
       <object>objects\obj_GrenadeUnlock</object>
       <object>objects\obj_GrenadeAmmoInc</object>
       <object>objects\obj_GrenadeDmgInc</object>
+      <object>objects\obj_GrenadeSkillsImg</object>
+      <object>objects\obj_SkillTreeBox</object>
     </objects>
     <object>objects\obj_Room_Changer</object>
     <object>objects\obj_Skill_Bar</object>
+    <objects name="SkillTrees">
+      <object>objects\obj_RiflemanSkillTree</object>
+    </objects>
+    <objects name="Grenade">
+      <object>objects\obj_Grenade</object>
+      <object>objects\obj_GrenadeAmmo</object>
+      <object>objects\obj_Grenade_Explosion</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_LabLevel</room>

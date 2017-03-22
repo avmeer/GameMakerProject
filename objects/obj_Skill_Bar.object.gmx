@@ -117,7 +117,7 @@ else{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(spr_Grenade,0,skill_1_left + halfBox,skill_1_top + halfBox,3,3,0,c_white,1);
+            <string>draw_sprite_ext(spr_GrenadeLarge,0,skill_1_left + halfBox,skill_1_top + halfBox,1,1,0,c_white,1);
 draw_set_alpha(0.75);
 draw_set_color(c_red);
 if(skill_1_cooling_down){
@@ -127,7 +127,7 @@ draw_sprite_ext(spr_Border,0,skill_1_left + halfBox,skill_1_top + halfBox,3,3,0,
 draw_set_color(c_white);
 draw_set_alpha(1);
 
-draw_text(500,500, string(skill_1_box_center_x) + "  " + string(skill_1_box_center_y));
+//draw_text(500,500, string(skill_1_box_center_x) + "  " + string(skill_1_box_center_y));
 </string>
           </argument>
         </arguments>

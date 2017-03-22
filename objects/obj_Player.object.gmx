@@ -29,13 +29,11 @@
 maxHealth = 100;
 hit = false; //boolean to make player flash when hit by enemy
 
-//used to be B
-globalvar numBullets ; // number of bullets
+globalvar numBullets ;
 numBullets = 100;
 numGrenades = 3;
 
 firing = false; // whether the player is holding down shift to fire
-canFire = true; // whether the player can fire
 fireRateTimerDone = true;
 
 collision = true;
@@ -185,6 +183,34 @@ if (hit &amp;&amp; alarm[0] &lt;= 0) {
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_GrenadeAmmo">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(numGrenades + 1 &lt; 4) {
+    with (other) {
+        instance_destroy()
+    }
+    numGrenades++;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_InvisibleWallFar">
       <action>
         <libid>1</libid>
@@ -230,34 +256,6 @@ y = yprevious;
     instance_destroy();
 }
 rubles+=50;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_GrenadeAmmo">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(numGrenades + 1 &lt; 4) {
-    with (other) {
-        instance_destroy()
-    }
-    numGrenades++;
-}
 </string>
           </argument>
         </arguments>
@@ -448,7 +446,11 @@ if (collision == true){
           <argument>
             <kind>1</kind>
             <string>speed = 0;
-canFire = true;
+if (global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; global.equippedItems[equipSlots.WEAPON].canFirePerClick == true) {
+    // if the weapon can be fired per click, cancel the fireRateTimer
+    fireRateTimerDone = true;
+    alarm[1] = -1;
+}
 </string>
           </argument>
         </arguments>
@@ -521,20 +523,16 @@ if(!showInv){
     }
     // if able to shoot then shoot
     else if( firing &amp;&amp; instance_number(obj_Bullet) &lt; numBullets &amp;&amp; 
-        global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; canFire &amp;&amp; fireRateTimerDone) 
+        global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; fireRateTimerDone) 
     {
             bullet = instance_create( x, y - 0.5 * sprite_height, obj_Bullet );
             // alter the damage of bullet created to reflect weapon damage
             currWeapon = global.equippedItems[equipSlots.WEAPON]
             bullet.damage = currWeapon.damage;
-            canFire = false; // ensures a pistol, shotgun, etc. can't be auto-fired
             
-            if (global.equippedItems[equipSlots.WEAPON].fireRate != 0) {
-                // ensures automatic weapon can't be fired each time mouse is clicked
-                fireRateTimerDone = false;
-                canFire = true;
-                alarm[1] = 1 / currWeapon.fireRate * room_speed;
-            }
+            // ensures appropriate weapons can't be fired per click
+            fireRateTimerDone = false;
+            alarm[1] = 1 / currWeapon.fireRate * room_speed;
     }
 }else{speed = 0;}// disable player controls if in inventory
 </string>
