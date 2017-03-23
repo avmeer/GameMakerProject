@@ -447,6 +447,9 @@ if (collision == true){
     x=xprevious;
     y=yprevious;
 }
+else {
+    audio_play_sound(Tunneling, 0, false);
+}
 
 </string>
           </argument>
