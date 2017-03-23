@@ -134,6 +134,7 @@ canFirePerClick = true;
             <kind>1</kind>
             <string>if (x != -10 &amp;&amp; y != -10 &amp;&amp; point_distance(x,y, obj_Player.x, obj_Player.y) &lt; 60){
     scr_itemPickup(self);
+    audio_play_sound(ItemPickUp, 0, false);
 }
 </string>
           </argument>
