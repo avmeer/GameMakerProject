@@ -75,6 +75,12 @@ enum equipSlots{
     WEAPON
 }
 
+enum weaponType{
+    PISTOL = 0,
+    AR = 1,
+    SHOTGUN = 2
+}
+
 //initialize inventory to -1 to inidcate no items in those slots
 for (i = 0; i &lt; 4; i++){
     for (j = 0; j &lt; 4; j++){
@@ -95,7 +101,8 @@ for (i = 0; i &lt; 6; i++){
     savedEquippedItems[i] = -1;
 }
 
-
+global.savedMaxHealth = 100;
+global.savedHealth = 100;
 
 </string>
           </argument>
@@ -358,6 +365,9 @@ if (global.equippedItems[equipSlots.HEAD] != -1){
     savedHelmet[2] = global.equippedItems[equipSlots.HEAD].health_bonus;
     savedEquippedItems[equipSlots.HEAD] = savedHelmet;
 }
+
+global.savedHealth = obj_Player.health;
+global.savedMaxHealth = obj_Player.maxHealth;
 </string>
           </argument>
         </arguments>
@@ -419,6 +429,9 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
     global.equippedItems[equipSlots.HEAD] = newInstance;
     
 }
+
+obj_Player.health = global.savedHealth;
+obj_Player.maxHealth = global.savedMaxHealth;
 </string>
           </argument>
         </arguments>

@@ -29,6 +29,7 @@
 randomize();
 damage = random_range(1,10);
 itemType = equipSlots.WEAPON;
+typeOfWeapon = weaponType.PISTOL;
 fireRate = 1;
 displayName = "Dirty Old Pistol";
 price = 100 + floor(damage * 2.6);

@@ -22,6 +22,7 @@
     <sprite>sprites\spr_Merchant</sprite>
     <sprite>sprites\spr_Enemy</sprite>
     <sprite>sprites\spr_Bullet</sprite>
+    <sprite>sprites\spr_Pellet</sprite>
     <sprite>sprites\spr_Gun</sprite>
     <sprite>sprites\spr_Pistol</sprite>
     <sprite>sprites\spr_Health</sprite>
@@ -39,6 +40,7 @@
     <sprite>sprites\spr_AR15</sprite>
     <sprite>sprites\spr_M9</sprite>
     <sprite>sprites\spr_GrenadeLarge</sprite>
+    <sprite>sprites\spr_Shotgun</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>
@@ -94,6 +96,7 @@
       <object>objects\obj_GrenadeAmmo</object>
       <object>objects\obj_Grenade_Explosion</object>
     </objects>
+    <object>objects\obj_Shotgun</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_LabLevel</room>

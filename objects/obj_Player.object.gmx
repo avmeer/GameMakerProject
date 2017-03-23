@@ -578,18 +578,51 @@ if(!showInv){
         direction = point_direction(x, y, mouse_x, mouse_y);
     }
     // if able to shoot then shoot
-    else if( firing &amp;&amp; global.equippedItems[equipSlots.WEAPON].currentAmmo &gt; 0 &amp;&amp; 
-        global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; fireRateTimerDone) 
+    else if( firing &amp;&amp; global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; fireRateTimerDone) 
     {
-            bullet = instance_create( x, y - 0.5 * sprite_height, obj_Bullet );
+        if(global.equippedItems[equipSlots.WEAPON].currentAmmo &gt; 0){
+        
             global.equippedItems[equipSlots.WEAPON].currentAmmo--;
             // alter the damage of bullet created to reflect weapon damage
-            currWeapon = global.equippedItems[equipSlots.WEAPON]
-            bullet.damage = currWeapon.damage;
+            currWeapon = global.equippedItems[equipSlots.WEAPON];
+            
+            if(global.equippedItems[equipSlots.WEAPON].typeOfWeapon  == weaponType.PISTOL
+                || global.equippedItems[equipSlots.WEAPON].typeOfWeapon  == weaponType.AR)
+            {
+                bullet = instance_create( x, y - 0.5 * sprite_height, obj_Bullet );
+                bullet.damage = currWeapon.damage;
+            }
+            else if(global.equippedItems[equipSlots.WEAPON].typeOfWeapon  == weaponType.SHOTGUN)
+            {
+                bullet1 = instance_create( x, y - 0.5 * sprite_height, obj_Bullet );
+                bullet2 = instance_create( x, y - 0.5 * sprite_height, obj_Bullet );
+                bullet3 = instance_create( x, y - 0.5 * sprite_height, obj_Bullet );
+                bullet4 = instance_create( x, y - 0.5 * sprite_height, obj_Bullet );
+                bullet5 = instance_create( x, y - 0.5 * sprite_height, obj_Bullet );
+                bullet2.direction += 7;
+                bullet3.direction += 14;
+                bullet4.direction -= 7;
+                bullet5.direction -= 14;
+                bullet2.image_angle = bullet2.direction;
+                bullet3.image_angle = bullet3.direction;
+                bullet4.image_angle = bullet5.direction;
+                bullet5.image_angle = bullet5.direction;
+                bullet1.damage = currWeapon.damage;
+                bullet2.damage = currWeapon.damage;
+                bullet3.damage = currWeapon.damage;
+                bullet4.damage = currWeapon.damage;
+                bullet5.damage = currWeapon.damage;
+                bullet1.sprite_index = spr_Pellet;
+                bullet2.sprite_index = spr_Pellet;
+                bullet3.sprite_index = spr_Pellet;
+                bullet4.sprite_index = spr_Pellet;
+                bullet5.sprite_index = spr_Pellet;
+            }
             
             // ensures appropriate weapons can't be fired per click
             fireRateTimerDone = false;
             alarm[1] = 1 / currWeapon.fireRate * room_speed;
+        }
     }
 }else{speed = 0;}// disable player controls if in inventory
 </string>
