@@ -366,8 +366,10 @@ if (global.equippedItems[equipSlots.HEAD] != -1){
     savedEquippedItems[equipSlots.HEAD] = savedHelmet;
 }
 
-global.savedHealth = obj_Player.health;
-global.savedMaxHealth = obj_Player.maxHealth;
+if(instance_exists(obj_Player)){
+    global.savedHealth = obj_Player.health;
+    global.savedMaxHealth = obj_Player.maxHealth;
+}
 </string>
           </argument>
         </arguments>
@@ -430,8 +432,10 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
     
 }
 
-obj_Player.health = global.savedHealth;
-obj_Player.maxHealth = global.savedMaxHealth;
+if(instance_exists(obj_Player)){
+    obj_Player.health = global.savedHealth;
+    obj_Player.maxHealth = global.savedMaxHealth;
+}
 </string>
           </argument>
         </arguments>

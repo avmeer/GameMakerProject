@@ -62,6 +62,10 @@ if keyboard_check_pressed(ord('3')){
 }
 
 if keyboard_check_pressed(ord('4')){
+    tempWeapon = instance_create(mouse_x, mouse_y, obj_Shotgun);
+}
+
+if keyboard_check_pressed(ord('5')){
     tempWeapon = instance_create(mouse_x, mouse_y, obj_Helmet);
 }
 </string>

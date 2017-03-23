@@ -41,10 +41,13 @@
     <sprite>sprites\spr_M9</sprite>
     <sprite>sprites\spr_GrenadeLarge</sprite>
     <sprite>sprites\spr_Shotgun</sprite>
+    <sprite>sprites\spr_Tree</sprite>
+    <sprite>sprites\spr_House</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>
     <background>background\SkillTree</background>
+    <background>background\GrassTestLevel</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -97,6 +100,8 @@
       <object>objects\obj_Grenade_Explosion</object>
     </objects>
     <object>objects\obj_Shotgun</object>
+    <object>objects\obj_Tree</object>
+    <object>objects\obj_House</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_LabLevel</room>
@@ -104,6 +109,7 @@
     <room>rooms\rm_TestingEnemy</room>
     <room>rooms\rm_TestingQuantum</room>
     <room>rooms\rm_RiflemanSkillTree</room>
+    <room>rooms\rm_GrassTestLevel</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
