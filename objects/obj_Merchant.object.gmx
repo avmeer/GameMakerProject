@@ -123,6 +123,7 @@ if(interacting){
                         global.J = j;
                         soldItem = itemsToSell[i,j];
                         rubles -= priceOfItem;
+                        audio_play_sound(Purchase, 0, false);
                     }
                 }
             }
