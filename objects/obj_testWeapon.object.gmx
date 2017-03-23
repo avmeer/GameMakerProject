@@ -31,6 +31,8 @@ fireRate = 4;
 displayName = "Dirty Old Assault Rifle";
 price = 200 + floor(2.6 * damage);
 canFirePerClick = false;
+magazineSize = 30;
+currentAmmo = 30;
 </string>
           </argument>
         </arguments>

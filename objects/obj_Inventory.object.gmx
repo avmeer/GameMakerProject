@@ -322,6 +322,7 @@ if(showInv){
                 savedItem[1] = equipSlots.WEAPON;
                 savedItem[2] = global.inventory[i,j].damage;
                 savedItem[3] = global.inventory[i,j].fireRate;
+                savedItem[4] = global.inventory[i,j].currentAmmo;
             }
             
             if(global.inventory[i,j].itemType == equipSlots.HEAD){
@@ -347,6 +348,7 @@ if (global.equippedItems[equipSlots.WEAPON] != -1){
     savedWeapon[1] = equipSlots.WEAPON;
     savedWeapon[2] = global.equippedItems[equipSlots.WEAPON].damage;
     savedWeapon[3] = global.equippedItems[equipSlots.WEAPON].fireRate;
+    savedWeapon[4] = global.equippedItems[equipSlots.WEAPON].currentAmmo;
     savedEquippedItems[equipSlots.WEAPON] = savedWeapon;
 }
 
@@ -388,6 +390,7 @@ if (global.equippedItems[equipSlots.HEAD] != -1){
                 newInstance = instance_create(-10,-10,savedItem[0]);
                 newInstance.damage = savedItem[2];
                 newInstance.fireRate = savedItem[3];
+                newInstance.currentAmmo = savedItem[4];
                 global.inventory[i,j] = newInstance;
             }
             
@@ -405,6 +408,7 @@ if (savedEquippedItems[equipSlots.WEAPON] != -1){
     newInstance = instance_create(-10,-10,savedItem[0]);
     newInstance.damage = savedItem[2];
     newInstance.fireRate = savedItem[3];
+    newInstance.currentAmmo = savedItem[4];
     global.equippedItems[equipSlots.WEAPON] = newInstance;
 }
 
