@@ -67,6 +67,31 @@ numObj = 0;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(global.equippedItems[equipSlots.WEAPON] != -1){
+    global.equippedItems[equipSlots.WEAPON].currentAmmo = global.equippedItems[equipSlots.WEAPON].magazineSize;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="3">
       <action>
         <libid>1</libid>
@@ -550,10 +575,11 @@ if(!showInv){
         direction = point_direction(x, y, mouse_x, mouse_y);
     }
     // if able to shoot then shoot
-    else if( firing &amp;&amp; instance_number(obj_Bullet) &lt; numBullets &amp;&amp; 
+    else if( firing &amp;&amp; global.equippedItems[equipSlots.WEAPON].currentAmmo &gt; 0 &amp;&amp; 
         global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; fireRateTimerDone) 
     {
             bullet = instance_create( x, y - 0.5 * sprite_height, obj_Bullet );
+            global.equippedItems[equipSlots.WEAPON].currentAmmo--;
             // alter the damage of bullet created to reflect weapon damage
             currWeapon = global.equippedItems[equipSlots.WEAPON]
             bullet.damage = currWeapon.damage;
@@ -594,7 +620,12 @@ draw_set_color(c_black);
 draw_rectangle(150 - xOff ,64 + yOff ,350 - xOff ,108 + yOff ,false);
 draw_set_alpha(1);
 draw_set_color(c_white);
-draw_text(150 - xOff ,64+ yOff ,"Bullets: "+string(numBullets - instance_number(obj_Bullet)));
+if(global.equippedItems[equipSlots.WEAPON] != -1){
+    draw_text(150 - xOff ,64+ yOff ,"Ammo: "+string(global.equippedItems[equipSlots.WEAPON].currentAmmo));
+}else{
+    draw_text(150 - xOff ,64+ yOff ,"No Weapon");
+}
+
 draw_text(150 - xOff ,79+ yOff ,"Grenades: "+string(numGrenades));
 draw_text(150 - xOff ,93+ yOff ,"Health: "+string(obj_Player.health) + " / " + string(maxHealth));
 
@@ -637,6 +668,34 @@ if (hit) {
 else {
     draw_self();
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="82">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(global.equippedItems[equipSlots.WEAPON] != -1){
+    alarm[4] = room_speed * 2;
+    //Play a reload sound
+}
+
+
 </string>
           </argument>
         </arguments>
