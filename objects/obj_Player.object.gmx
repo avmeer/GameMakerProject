@@ -39,6 +39,8 @@ fireRateTimerDone = true;
 collision = true;
 
 numObj = 0;
+
+reloading = false;
 </string>
           </argument>
         </arguments>
@@ -86,6 +88,7 @@ numObj = 0;
             <kind>1</kind>
             <string>if(global.equippedItems[equipSlots.WEAPON] != -1){
     global.equippedItems[equipSlots.WEAPON].currentAmmo = global.equippedItems[equipSlots.WEAPON].magazineSize;
+    reloading = false;
 }
 </string>
           </argument>
@@ -621,7 +624,11 @@ draw_rectangle(150 - xOff ,64 + yOff ,350 - xOff ,108 + yOff ,false);
 draw_set_alpha(1);
 draw_set_color(c_white);
 if(global.equippedItems[equipSlots.WEAPON] != -1){
-    draw_text(150 - xOff ,64+ yOff ,"Ammo: "+string(global.equippedItems[equipSlots.WEAPON].currentAmmo));
+    if(reloading){
+        draw_text(150 - xOff ,64+ yOff ,"Reloading");
+    }else{
+        draw_text(150 - xOff ,64+ yOff ,"Ammo: "+string(global.equippedItems[equipSlots.WEAPON].currentAmmo));
+    }
 }else{
     draw_text(150 - xOff ,64+ yOff ,"No Weapon");
 }
@@ -691,7 +698,11 @@ else {
           <argument>
             <kind>1</kind>
             <string>if(global.equippedItems[equipSlots.WEAPON] != -1){
+    reloading = true;
+    global.equippedItems[equipSlots.WEAPON].currentAmmo = 0;
     alarm[4] = room_speed * 2;
+    
+    
     //Play a reload sound
 }
 
