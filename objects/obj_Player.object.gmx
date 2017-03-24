@@ -628,7 +628,8 @@ if(!showInv){
     // if able to shoot then shoot
     else if( firing &amp;&amp; global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; fireRateTimerDone) 
     {
-        if(global.equippedItems[equipSlots.WEAPON].currentAmmo &gt; 0){
+        if(global.equippedItems[equipSlots.WEAPON].currentAmmo &gt; 0)
+        {
         
             global.equippedItems[equipSlots.WEAPON].currentAmmo--;
             // alter the damage of bullet created to reflect weapon damage
@@ -670,6 +671,11 @@ if(!showInv){
             // ensures appropriate weapons can't be fired per click
             fireRateTimerDone = false;
             alarm[1] = 1 / currWeapon.fireRate * room_speed;
+        }//end check for ammo &gt; 0
+        else if(global.equippedItems[equipSlots.WEAPON].currentAmmo == 0 &amp;&amp; !reloading)
+        {
+            reloading = true;
+            alarm[4] = room_speed * 2;
         }
     }
 }else{speed = 0;}// disable player controls if in inventory
@@ -778,7 +784,7 @@ else {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.equippedItems[equipSlots.WEAPON] != -1){
+            <string>if(global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; !reloading){
     reloading = true;
     global.equippedItems[equipSlots.WEAPON].currentAmmo = 0;
     alarm[4] = room_speed * 2;
