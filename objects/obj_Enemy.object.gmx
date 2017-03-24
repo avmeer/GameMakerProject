@@ -38,6 +38,7 @@ aggro = false;
 speed = 0;
 patrolling = false;
 randomize();
+aggroForFirstTime = true;
 </string>
           </argument>
         </arguments>
@@ -63,6 +64,11 @@ randomize();
             <string>obj_RiflemanSkills.experience += 50;
 
 inst = instance_create(x, y, obj_Blood);
+
+drop_money = random_range(0,10);
+if (drop_money &lt; 5){
+    instance_create(x,y,obj_Small_Ruble_Pile);
+}
 </string>
           </argument>
         </arguments>
@@ -201,13 +207,30 @@ speed = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (point_distance(x,y,obj_Player.x, obj_Player.y) &lt;= 500){
+            <string>if (point_distance(x,y,obj_Player.x, obj_Player.y) &lt;= 500 || hit){
     aggro = true;
-}else{
+}
+
+//stop following after a certain time
+if(aggro &amp;&amp; point_distance(x,y,obj_Player.x, obj_Player.y) &gt;= 1280){
     aggro = false;
+    aggroForFirstTime = true;
 }
 
 if(aggro){
+    
+    //also aggro nearby enemies
+    if(aggroForFirstTime == true){
+        var i;
+        for (i = 0; i &lt; instance_number(obj_Enemy); i += 1){
+            enemy[i] = instance_find(obj_Enemy,i);
+            if(distance_to_object(enemy[i]) &lt;=500){
+                enemy[i].aggro = true;
+                enemy[i].aggroForFirstTime = false;
+            }
+       }
+       aggroForFirstTime = false;
+    }
     
     //bumping into another enemy causes this enemy to reposition itself
     //move towards the player if a certain distance away
@@ -267,8 +290,6 @@ if (hit &amp;&amp; alarm[1] &lt;= 0) {
 x = xprevious;
 y = yprevious;
 patrolling = false;
-//queue alarm for restarting patrol
-//alarm[4] = room_speed;
 </string>
           </argument>
         </arguments>
@@ -295,8 +316,6 @@ patrolling = false;
 x = xprevious;
 y = yprevious;
 patrolling = false;
-//queue alarm for restarting patrol
-//alarm[4] = room_speed;
 </string>
           </argument>
         </arguments>
@@ -398,10 +417,12 @@ with(other){
           <argument>
             <kind>1</kind>
             <string>//reposition if bump into another enemy
-bumped = true;
-speed = 7;
-direction = -point_direction(x, y, other.x, other.y);
-alarm[2] = 15;
+if (!bumped){
+    bumped = true;
+    speed = 3;
+    direction = -point_direction(x, y, other.x, other.y);
+    alarm[2] = 15;
+}
 </string>
           </argument>
         </arguments>
@@ -428,8 +449,6 @@ alarm[2] = 15;
 x = xprevious;
 y = yprevious;
 patrolling = false;
-//queue alarm for restarting patrol
-//alarm[4] = room_speed;
 </string>
           </argument>
         </arguments>
