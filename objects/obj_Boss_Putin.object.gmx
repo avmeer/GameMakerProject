@@ -41,6 +41,34 @@ specialBulletAngle = 0;
 canShoot = true;
 grenadesHitBy = ds_list_create();
 
+positionIndex = 0;
+firstPosition[0] = room_width / 2;//x
+firstPosition[1] = room_height / 2;//y
+
+//upper right
+secondPosition[0] = room_width / 2 + 250;
+secondPosition[1] = room_height / 2 - 250;
+
+//bottom left
+thirdPosition[0] = room_width / 2 - 250;
+thirdPosition[1] = room_height / 2 + 250;
+
+//bottom right
+fourthPosition[0] = room_width / 2 + 250;
+fourthPosition[1] = room_height / 2 + 250;
+
+//top left
+fifthPosition[0] = room_width / 2 - 250;
+fifthPosition[1] = room_height / 2 - 250;
+
+positionRotations[0] = firstPosition;
+positionRotations[1] = secondPosition;
+positionRotations[2] = thirdPosition;
+positionRotations[3] = fourthPosition;
+positionRotations[4] = fifthPosition;
+numPositions = 5;
+
+
 randomize();
 </string>
           </argument>
@@ -130,6 +158,11 @@ if (drop_item &lt; 33){
             <kind>1</kind>
             <string>followingPlayer = true;
 usingSpecial = false;
+//change spot where special occurs
+positionIndex++;
+if(positionIndex == numPositions){
+    positionIndex = 0;
+}
 
 //timer until special mode
 alarm[2] = room_speed * 15;
@@ -255,9 +288,10 @@ if (followingPlayer){
         alarm[0] = 15;
     }
 }else if(usingSpecial){
+    currentPos = positionRotations[positionIndex];
     speed = 14;
-    direction = point_direction(x, y, room_width / 2, room_height / 2);
-    if(point_distance(x,y,room_width / 2, room_height / 2) &lt; 10){
+    direction = point_direction(x, y, currentPos[0], currentPos[1]);
+    if(point_distance(x,y,currentPos[0], currentPos[1]) &lt; 10){
         speed = 0;
     }
     if (canShoot){
