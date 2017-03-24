@@ -136,9 +136,14 @@ zoomout = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (health + 5 &lt;= maxHealth) {
+            <string>/*if (health + 5 &lt;= maxHealth) {
     health += 5;
+}*/
+health+=5;
+if (health &gt; maxHealth){
+    health = maxHealth;
 }
+
 numHeals--;
 if (numHeals &gt; 0) {
     alarm[2] = room_speed;

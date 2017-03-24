@@ -111,11 +111,11 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_LabLevel</room>
+    <room>rooms\rm_GrassTestLevel</room>
     <room>rooms\rm_TestingMerchant</room>
     <room>rooms\rm_TestingEnemy</room>
     <room>rooms\rm_TestingQuantum</room>
     <room>rooms\rm_RiflemanSkillTree</room>
-    <room>rooms\rm_GrassTestLevel</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

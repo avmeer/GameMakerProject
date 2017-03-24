@@ -135,7 +135,6 @@
     <instance objName="obj_Tree" x="3296" y="544" name="inst_F365E767" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Helmet" x="256" y="96" name="inst_486FDD09" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Weapon" x="256" y="160" name="inst_F2266CC9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_TestingInventorySpawning" x="160" y="768" name="inst_B015CA58" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
