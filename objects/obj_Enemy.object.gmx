@@ -451,7 +451,7 @@ patrolling = false;
           <argument>
             <kind>1</kind>
             <string>//display enemy health above them
-draw_text(x-15,y-60,string(hp));
+//draw_text(x-15,y-60,string(hp));
 </string>
           </argument>
         </arguments>
@@ -474,7 +474,10 @@ draw_text(x-15,y-60,string(hp));
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//same draw event as player, use hit shader to flash if enemy is shot
+            <string>//display enemy health above them
+draw_text(x-15,y-60,string(hp));
+
+//same draw event as player, use hit shader to flash if enemy is shot
 if (hit) { 
     shader_set(shd_hit);
     draw_self();  

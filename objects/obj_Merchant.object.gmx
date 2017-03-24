@@ -157,10 +157,10 @@ if(interacting){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (point_distance(obj_Player.x, obj_Player.y, x, y) &lt; 100){
+            <string>/*if (point_distance(obj_Player.x, obj_Player.y, x, y) &lt; 100){
     draw_set_colour(c_white);
-    draw_text(x - 25, y + 10, "SPACE");
-}
+    draw_text(x - 25 - view_xport[view_current], y + 10 - view_yport[view_current], "SPACE");
+}*/
 
 if(interacting == true){
     draw_set_alpha(1);
@@ -214,6 +214,34 @@ if(interacting == true){
     //draw_text(250,250,string(global.I));
     //draw_text(300,250,string(global.J)); 
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (point_distance(obj_Player.x, obj_Player.y, x, y) &lt; 100){
+    draw_set_colour(c_white);
+    draw_text(x - 25 - view_xport[view_current], y + 10 - view_yport[view_current], "SPACE");
+}
+
+draw_self();
 </string>
           </argument>
         </arguments>
