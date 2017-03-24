@@ -60,7 +60,9 @@ randomize();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>inst = instance_create(x, y, obj_Blood);
+            <string>obj_RiflemanSkills.experience += 100;
+
+inst = instance_create(x, y, obj_Blood);
 </string>
           </argument>
         </arguments>

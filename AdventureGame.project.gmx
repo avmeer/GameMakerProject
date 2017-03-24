@@ -46,7 +46,6 @@
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>
-    <background>background\SkillTree</background>
     <background>background\GrassTestLevel</background>
   </backgrounds>
   <paths name="paths"/>
@@ -57,6 +56,7 @@
     <script>scripts\scr_showWeaponDescription.gml</script>
     <script>scripts\scr_checkIfGrenadeHit.gml</script>
     <script>scripts\scr_CalcDistance.gml</script>
+    <script>scripts\scr_updateXpNeeded.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_hit.shader</shader>
@@ -84,10 +84,15 @@
     <object>objects\obj_InvisibleWallNear</object>
     <object>objects\obj_Point</object>
     <objects name="SkillTreeBoxes">
-      <object>objects\obj_GrenadeUnlock</object>
-      <object>objects\obj_GrenadeAmmoInc</object>
-      <object>objects\obj_GrenadeDmgInc</object>
       <object>objects\obj_SkillTreeBox</object>
+      <objects name="GrenadeSkillBoxes">
+        <object>objects\obj_GrenadeUnlock</object>
+        <object>objects\obj_GrenadeAmmoInc</object>
+        <object>objects\obj_GrenadeDmgInc</object>
+      </objects>
+      <objects name="HealthRegenSkillBoxes">
+        <object>objects\obj_HealthRegenUnlock</object>
+      </objects>
     </objects>
     <object>objects\obj_Room_Changer</object>
     <object>objects\obj_Skill_Bar</object>
@@ -102,6 +107,7 @@
     <object>objects\obj_Shotgun</object>
     <object>objects\obj_Tree</object>
     <object>objects\obj_House</object>
+    <object>objects\obj_RiflemanSkills</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_LabLevel</room>

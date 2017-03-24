@@ -31,7 +31,6 @@ hit = false; //boolean to make player flash when hit by enemy
 
 globalvar numBullets ;
 numBullets = 100;
-numGrenades = 3;
 
 firing = false; // whether the player is holding down shift to fire
 fireRateTimerDone = true;
@@ -113,6 +112,35 @@ reloading = false;
           <argument>
             <kind>1</kind>
             <string>collision = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (health + 5 &lt;= maxHealth) {
+    health += 5;
+}
+numHeals--;
+if (numHeals &gt; 0) {
+    alarm[2] = room_speed;
+}
 </string>
           </argument>
         </arguments>
@@ -276,11 +304,11 @@ y = yprevious;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(numGrenades + 1 &lt; 4) {
+            <string>if(obj_RiflemanSkills.numGrenades + 1 &lt; obj_RiflemanSkills.grenadeMaxAmmo) {
     with (other) {
         instance_destroy()
     }
-    numGrenades++;
+    obj_RiflemanSkills.numGrenades++;
     audio_play_sound(ItemPickUp, 0, false);
 }
 </string>
@@ -577,23 +605,20 @@ if (global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; global.equippedItem
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-if(!showInv){
-    //if(numGrenades &gt; 0) {
-    if(obj_Skill_Bar.skill_1_cooling_down == false) {
-        //instance_create(mouse_x, mouse_y, obj_Grenade);
-        grenade = instance_create(x, y - 0.5 * sprite_height, obj_Grenade);
-        grenade.targetX = mouse_x;
-        grenade.targetY = mouse_y;
-        angleToTarget = point_direction(x,y - 0.5 * sprite_height, mouse_x, mouse_y);
-        grenade.speed = 5;
-        grenade.direction = angleToTarget;
-        obj_Skill_Bar.skill_1_cooling_down = true;
-        obj_Skill_Bar.alarm[0] = obj_Skill_Bar.skill_1_time;
-        
-        
-        
-        //numGrenades--;
+            <string>if(!showInv){
+    if(obj_RiflemanSkills.skills[0,0] != 0) {
+        if(obj_Skill_Bar.skill_1_cooling_down == false) {
+            grenade = instance_create(x, y - 0.5 * sprite_height, obj_Grenade);
+            grenade.targetX = mouse_x;
+            grenade.targetY = mouse_y;
+            angleToTarget = point_direction(x,y - 0.5 * sprite_height, mouse_x, mouse_y);
+            grenade.speed = 5;
+            grenade.direction = angleToTarget;
+            obj_Skill_Bar.skill_1_cooling_down = true;
+            obj_Skill_Bar.alarm[0] = obj_Skill_Bar.skill_1_time;
+            
+            obj_RiflemanSkills.numGrenades--;
+        }
     }
 }
 </string>
@@ -707,7 +732,11 @@ var xOff = 100;
 
 draw_set_alpha(0.8);
 draw_set_color(c_black);
-draw_rectangle(150 - xOff ,64 + yOff ,350 - xOff ,108 + yOff ,false);
+if (obj_RiflemanSkills.canUpgradeSkill == false) {
+    draw_rectangle(150 - xOff ,64 + yOff ,350 - xOff ,124 + yOff ,false);
+} else {
+    draw_rectangle(150 - xOff ,64 + yOff ,350 - xOff ,139 + yOff ,false);
+}
 draw_set_alpha(1);
 draw_set_color(c_white);
 if(global.equippedItems[equipSlots.WEAPON] != -1){
@@ -720,8 +749,12 @@ if(global.equippedItems[equipSlots.WEAPON] != -1){
     draw_text(150 - xOff ,64+ yOff ,"No Weapon");
 }
 
-draw_text(150 - xOff ,79+ yOff ,"Grenades: "+string(numGrenades));
+draw_text(150 - xOff ,79+ yOff ,"Grenades: "+string(obj_RiflemanSkills.numGrenades));
 draw_text(150 - xOff ,93+ yOff ,"Health: "+string(obj_Player.health) + " / " + string(maxHealth));
+draw_text(150 - xOff, 109 + yOff, "Exp: " + string(obj_RiflemanSkills.experience));
+if (obj_RiflemanSkills.canUpgradeSkill == true) {
+    draw_text(160 - xOff, 124 + yOff, "Skill Available!");
+}
 
 numObj = 0;
 for (i = 0; i &lt; 4; i++){
@@ -767,6 +800,30 @@ else {
         </arguments>
       </action>
     </event>
+    <event eventtype="9" enumb="83">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.previousRoom = room;
+room_goto(rm_RiflemanSkillTree);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="9" enumb="82">
       <action>
         <libid>1</libid>
@@ -794,6 +851,39 @@ else {
 }
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="72">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(!showInv) {
+    if(obj_RiflemanSkills.skills[1,0] != 0) {
+        if(obj_Skill_Bar.skill_2_cooling_down == false) {
+            healing = true;
+            numHeals = obj_RiflemanSkills.healDuration;
+            alarm[2] = room_speed;
+            obj_Skill_Bar.skill_2_cooling_down = true;
+            obj_Skill_Bar.alarm[1] = obj_Skill_Bar.skill_2_time;
+        }
+    }
+}
 </string>
           </argument>
         </arguments>

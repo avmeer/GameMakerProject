@@ -31,6 +31,63 @@
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>showWarning = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (obj_RiflemanSkills.canUpgradeGrenade == true) {
+    obj_RiflemanSkills.skills[0,1] = 1;
+    obj_RiflemanSkills.numGrenades = 3;
+    obj_RiflemanSkills.grenadeDamage = 150;
+    obj_RiflemanSkills.experience -= obj_RiflemanSkills.xpNeeded[0];
+    obj_RiflemanSkills.xpNeeded[0] = 300;
+    scr_updateXpNeeded();
+    room_goto(global.previousRoom);
+} else {
+    showWarning = true;
+    alarm[0] = 3 * room_speed;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -53,6 +110,11 @@
     var explanation = "Increase base damage from 100 to 150";
     draw_text(room_width/2 - string_width(description) / 2, 10, description);
     draw_text(room_width/2 - string_width(explanation) / 2, 25, explanation);
+}
+if (showWarning) {
+    var warning = "Cannot afford that upgrade! Need " + 
+        string(obj_RiflemanSkills.xpNeeded[0]) + " exp!";
+    draw_text(room_width/2 - string_width(warning) / 2, 60, warning);
 }
 </string>
           </argument>

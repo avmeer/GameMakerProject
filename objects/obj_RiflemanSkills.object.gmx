@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,14 +25,51 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>mouse_hover = false;
-showWarning = false;
+            <string>experience = 0;
+canUpgradeSkill = false;
+nextXpRequirement = 100;
+
+// grenade skill var's
+grenadeCooldown = 3; // eventually store cooldowns in a 4 element array for easy access in Skill_Bar
+grenadeMaxAmmo = 3;
+numGrenades = 0;
+grenadeDamage = 100;
+canUpgradeGrenade = false;
+
+// health regen skill var's
+healRate = 5;
+healDuration = 5;
+healCooldown = 15;
+canUpgradeHealthRegen = false;
+
+/*  index 0,j -&gt; grenade
+    index 1,j -&gt; health regen
+    index 2,j -&gt; ?
+    index 3,j -&gt; ?
+    i,0 -&gt; 0 or 1 based on whether or not the skill has been unlocked
+    i,1 -&gt; 1 or 2 if first or second skill picked, 0 if neither picked
+    i,2 -&gt; 1 or 2, 0 if neither
+    i,3 -&gt; 1 or 2, 0 if neither
+*/
+for (i = 0; i &lt; 2; i++) {
+    for (j = 0; j &lt; 4; j++) {
+        skills[i,j] = 0;
+    }
+}
+/* index 0 -&gt; xp needed before next grenade upgrade can be unlocked
+    index 1 -&gt; xp before health regen upgrade
+    index 2 -&gt; xp before ? upgrade
+    index 3 -&gt; xp before ? upgrade
+*/
+for (i = 0; i &lt; 2; i++) {
+    xpNeeded[i] = 100;
+}
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="11">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -49,30 +86,21 @@ showWarning = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>mouse_hover = false;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="10">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>mouse_hover = true;
+            <string>if (experience &gt;= nextXpRequirement) {
+    canUpgradeSkill = true;
+} else {
+    canUpgradeSkill = false;
+}
+if (experience &gt;= xpNeeded[0]) {
+    canUpgradeGrenade = true;
+} else {
+    canUpgradeGrenade = false;
+}
+if (experience &gt;= xpNeeded[1]) {
+    canUpgradeHealthRegen = true;
+} else {
+    canUpgradeHealthRegen = false;
+}
 </string>
           </argument>
         </arguments>
