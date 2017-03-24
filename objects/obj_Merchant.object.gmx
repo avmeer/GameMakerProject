@@ -39,10 +39,11 @@ maxItems = 16;
 
 randomize();
 
-
+itemsArraySize = 4;
 potentialItemsArray[0] = obj_Weapon;
 potentialItemsArray[1] = obj_testWeapon;
 potentialItemsArray[2] = obj_Helmet;
+potentialItemsArray[3] = obj_Shotgun;
 
 for (i = 0; i &lt; maxItems / 4; i++){
     for (j = 0; j &lt; maxItems / 4; j++){
@@ -52,7 +53,7 @@ for (i = 0; i &lt; maxItems / 4; i++){
 
 for (i = 0; i &lt; maxItems / 4; i++){
     for (j = 0; j &lt; maxItems / 4; j++){
-        itemIndex = random_range(0,3);
+        itemIndex = random_range(0,itemsArraySize);
         item = instance_create(-10,-10, potentialItemsArray[itemIndex]);
         itemsToSell[i,j] = item;
     }
