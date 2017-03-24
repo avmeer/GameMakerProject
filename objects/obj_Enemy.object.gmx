@@ -39,6 +39,8 @@ speed = 0;
 patrolling = false;
 randomize();
 aggroForFirstTime = true;
+
+//may want stuff for checking if stuck but still aggro
 </string>
           </argument>
         </arguments>
@@ -207,7 +209,7 @@ speed = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (point_distance(x,y,obj_Player.x, obj_Player.y) &lt;= 500 || hit){
+            <string>if (point_distance(x,y,obj_Player.x, obj_Player.y) &lt;= 384 || hit){
     aggro = true;
 }
 
@@ -215,6 +217,7 @@ speed = 0;
 if(aggro &amp;&amp; point_distance(x,y,obj_Player.x, obj_Player.y) &gt;= 1280){
     aggro = false;
     aggroForFirstTime = true;
+    patrolling = false;
 }
 
 if(aggro){
@@ -249,7 +252,7 @@ if(aggro){
         instance_create(x,y,obj_EnemyBullet);
         canShoot = false;
         alarm[0] = 15;
-    }
+    } 
 }
 else if(!patrolling){
     patrolling = true;

@@ -40,6 +40,8 @@ collision = true;
 numObj = 0;
 
 reloading = false;
+
+zoomout = false;
 </string>
           </argument>
         </arguments>
@@ -490,7 +492,7 @@ health = clamp(health,0,maxHealth);//never go above max health
 with(other){
     instance_destroy();
 }
-health -= 5;
+health -= 0;//5
 hit = true;
 </string>
           </argument>
@@ -851,6 +853,37 @@ room_goto(rm_RiflemanSkillTree);
 }
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="77">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(!zoomout){
+    view_wview[0] = room_width;
+    view_hview[0] = room_height;
+    zoomout = true;
+}else{
+    view_wview[0] = 1024;
+    view_hview[0] = 768;
+    zoomout = false;
+}
 </string>
           </argument>
         </arguments>
