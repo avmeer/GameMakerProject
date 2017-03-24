@@ -43,6 +43,7 @@
     <sprite>sprites\spr_Shotgun</sprite>
     <sprite>sprites\spr_Tree</sprite>
     <sprite>sprites\spr_House</sprite>
+    <sprite>sprites\spr_Putin</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>
@@ -108,12 +109,14 @@
     <object>objects\obj_Tree</object>
     <object>objects\obj_House</object>
     <object>objects\obj_RiflemanSkills</object>
+    <object>objects\obj_Boss_Putin</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_LabLevel</room>
     <room>rooms\rm_GrassTestLevel</room>
     <room>rooms\rm_TestingMerchant</room>
     <room>rooms\rm_TestingEnemy</room>
+    <room>rooms\rm_TestingPutin</room>
     <room>rooms\rm_TestingQuantum</room>
     <room>rooms\rm_RiflemanSkillTree</room>
   </rooms>

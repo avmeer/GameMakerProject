@@ -494,11 +494,14 @@ health = clamp(health,0,maxHealth);//never go above max health
           <argument>
             <kind>1</kind>
             <string>//take damage from the enemy bullet, destroy the enemy bullet
+health -= other.damage;
+hit = true;
 with(other){
+
     instance_destroy();
 }
-health -= 0;//5
-hit = true;
+
+
 </string>
           </argument>
         </arguments>

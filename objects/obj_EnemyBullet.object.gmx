@@ -30,6 +30,7 @@ direction = point_direction(x, y, obj_Player.x, obj_Player.y);
 image_angle = point_direction(x, y, obj_Player.x, obj_Player.y);
 audio_play_sound(Gunshot, 1, false);
 alarm[0] = room_speed * 4;
+damage = 5;
 </string>
           </argument>
         </arguments>
