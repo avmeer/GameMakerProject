@@ -490,7 +490,7 @@ health = clamp(health,0,maxHealth);//never go above max health
 with(other){
     instance_destroy();
 }
-health -= 1;
+health -= 5;
 hit = true;
 </string>
           </argument>
@@ -607,7 +607,7 @@ if (global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; global.equippedItem
             <kind>1</kind>
             <string>if(!showInv){
     if(obj_RiflemanSkills.skills[0,0] != 0) {
-        if(obj_Skill_Bar.skill_1_cooling_down == false) {
+        if(obj_RiflemanSkills.numGrenades &gt; 0 &amp;&amp; obj_Skill_Bar.skill_1_cooling_down == false) {
             grenade = instance_create(x, y - 0.5 * sprite_height, obj_Grenade);
             grenade.targetX = mouse_x;
             grenade.targetY = mouse_y;
