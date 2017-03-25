@@ -26,6 +26,7 @@
     <sprite>sprites\spr_Gun</sprite>
     <sprite>sprites\spr_Pistol</sprite>
     <sprite>sprites\spr_Health</sprite>
+    <sprite>sprites\spr_BigHealth</sprite>
     <sprite>sprites\spr_Border</sprite>
     <sprite>sprites\spr_Helmet</sprite>
     <sprite>sprites\spr_Grenade</sprite>
@@ -76,6 +77,7 @@
     <object>objects\obj_testWeapon</object>
     <object>objects\obj_Weapon</object>
     <object>objects\obj_Health</object>
+    <object>objects\obj_BigHealth</object>
     <object>objects\obj_TestingInventorySpawning</object>
     <object>objects\obj_TestingEnemySpawning</object>
     <object>objects\obj_Inventory</object>

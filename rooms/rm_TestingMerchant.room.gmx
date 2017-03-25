@@ -260,6 +260,14 @@ randomize();</code>
     <instance objName="obj_Gloves" x="864" y="384" name="inst_99B4A923" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Gloves" x="864" y="416" name="inst_E47752B3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Gloves" x="864" y="448" name="inst_A9BBCDA1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_BigHealth" x="960" y="224" name="inst_147B2A7A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_BigHealth" x="960" y="256" name="inst_4F41EA24" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_BigHealth" x="960" y="288" name="inst_8E2AF51B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_BigHealth" x="960" y="352" name="inst_726707B6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_BigHealth" x="960" y="320" name="inst_17EBFADE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_BigHealth" x="960" y="384" name="inst_6EC5D2B9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_BigHealth" x="960" y="416" name="inst_A6118A1D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_BigHealth" x="960" y="448" name="inst_BA3676A8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

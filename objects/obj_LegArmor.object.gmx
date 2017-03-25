@@ -106,7 +106,7 @@ price = 250 + floor(health_bonus * 2.6);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>draw_sprite(sprite_index,0,x,y);
 if (instance_exists(obj_Player)){
     if (point_distance(x,y, obj_Player.x, obj_Player.y) &lt; 60){
         draw_set_color(c_white);
