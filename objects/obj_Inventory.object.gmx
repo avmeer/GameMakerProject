@@ -769,7 +769,7 @@ if (showInv){
     if(global.equippedItems[global.equipSlots.HEAD] == -1){
         var scale = 1;
         scale = min((boxDimension - 12) / sprite_get_width(spr_Helmet), (boxDimension - 12) / sprite_get_height(spr_Helmet));
-        draw_sprite_ext(spr_Helmet, 0, midx, midy + initOff + (0 * initSpace),scale,scale,0,c_white,0.25);
+        draw_sprite_ext(spr_Helmet, 1, midx, midy + initOff + (0 * initSpace),scale,scale,0,c_white,0.25);
     }
     
     if(global.equippedItems[global.equipSlots.WEAPON] == -1){
@@ -780,8 +780,26 @@ if (showInv){
     
     if(global.equippedItems[global.equipSlots.CHEST] == -1){
         var scale = 1;
-        scale = min((boxDimension - 12) / sprite_get_width(spr_AR15), (boxDimension - 12) / sprite_get_height(spr_AR15));
-        draw_sprite_ext(spr_ChestArmor, 1, midx + initSpace, midy + initOff + (1 * initSpace),scale,scale,0,c_white,0.25);
+        scale = min((boxDimension - 12) / sprite_get_width(spr_ChestArmor), (boxDimension - 12) / sprite_get_height(spr_ChestArmor));
+        draw_sprite_ext(spr_ChestArmor, 1, midx, midy + initOff + (1 * initSpace),scale,scale,0,c_white,0.25);
+    }
+    
+    if(global.equippedItems[global.equipSlots.LEGS] == -1){
+        var scale = 1;
+        scale = min((boxDimension - 12) / sprite_get_width(spr_LegArmor), (boxDimension - 12) / sprite_get_height(spr_LegArmor));
+        draw_sprite_ext(spr_LegArmor, 1, midx, midy + initOff + (2 * initSpace),scale,scale,0,c_white,0.25);
+    }
+    
+    if(global.equippedItems[global.equipSlots.FEET] == -1){
+        var scale = 1;
+        scale = min((boxDimension - 12) / sprite_get_width(spr_Boots), (boxDimension - 12) / sprite_get_height(spr_Boots));
+        draw_sprite_ext(spr_Boots, 1, midx, midy + initOff + (3 * initSpace),scale,scale,0,c_white,0.25);
+    }
+    
+    if(global.equippedItems[global.equipSlots.GLOVES] == -1){
+        var scale = 1;
+        scale = min((boxDimension - 12) / sprite_get_width(spr_Gloves), (boxDimension - 12) / sprite_get_height(spr_Gloves));
+        draw_sprite_ext(spr_Gloves, 1, midx - initSpace, midy + initOff + (1 * initSpace),scale,scale,0,c_white,0.25);
     }
     
     //draw item if we are holding one

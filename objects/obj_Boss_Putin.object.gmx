@@ -101,14 +101,18 @@ if (drop_money &lt; 5){
     instance_create(x,y,obj_Small_Ruble_Pile);
 }
 
-itemsArraySize = 4;
+itemsArraySize = 8;
 potentialItemsArray[0] = obj_Weapon;
 potentialItemsArray[1] = obj_testWeapon;
 potentialItemsArray[2] = obj_Helmet;
 potentialItemsArray[3] = obj_Shotgun;
+potentialItemsArray[4] = obj_ChestArmor;
+potentialItemsArray[5] = obj_LegArmor;
+potentialItemsArray[6] = obj_Boots;
+potentialItemsArray[7] = obj_Gloves;
 itemIndex = random_range(0,itemsArraySize);
 drop_item = random_range(0,100);
-if (drop_item &lt; 33){
+if (drop_item &lt; 99){
     instance_create(x,y, potentialItemsArray[itemIndex]);
 }
 </string>
