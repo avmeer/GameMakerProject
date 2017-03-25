@@ -141,6 +141,8 @@ weaponX = midx + initSpace;
 weaponY = midy + initOff + (1 * initSpace);
 headX = midx;
 headY = midy + initOff + (0 * initSpace);
+chestX = midx;
+chestY = midy + initOff + (1 * initSpace);
 m_x = mouse_x - view_xview[0];
 m_y = mouse_y - view_yview[0];
 
@@ -159,6 +161,7 @@ if(showInv){
     sellX = -1;
     sellY = -1;
     foundOne = false;
+    //check if we are hovering over any regular inventory slots with the mouse
     for (i = 0; i &lt; 4; i++){
         for (j = 0; j &lt; 4; j++){
             boxCenterX = x1 + initOff + (i * initSpace);
@@ -179,6 +182,8 @@ if(showInv){
         }
     }
     
+    //CHECK IF WE ARE HOVERING OVER ANY EQUIPPED ITEM SLOTS WITH THE MOUSE
+    
     if(scr_MouseInBox(weaponX, weaponY, boxDimension) &amp;&amp; global.equippedItems[equipSlots.WEAPON] != -1){
         foundOne = true;
         displayItemInfo = true;
@@ -190,7 +195,16 @@ if(showInv){
         displayItemInfo = true;
         itemToDisplay = global.equippedItems[equipSlots.HEAD];
     }
+    
+    if(scr_MouseInBox(chestX, chestY, boxDimension) &amp;&amp; global.equippedItems[equipSlots.CHEST] != -1){
+        foundOne = true;
+        displayItemInfo = true;
+        itemToDisplay = global.equippedItems[equipSlots.CHEST];
+    }
+    //
 
+    //IF WE JUST CLICKED AND WERE NOT HOLDING ANYTHING, GRAB WHAT WAS IN THE SLOT IF IT WAS REGULAR INVENTORY
+    //OR UNEQUIP AN EQUIPPED ITEM IF IT WAS CLICKED
     if(mouse_check_button_pressed(mb_left) &amp;&amp; global.objectHeld == -1){
         //this does checking for normal inventory slots
         for (i = 0; i &lt; 4; i++){
@@ -205,25 +219,36 @@ if(showInv){
                 }
             }
         }
-        //now check equippable slots
-        if(scr_MouseInBox(weaponX, weaponY, boxDimension)){
-            scr_itemPickup(global.equippedItems[equipSlots.WEAPON]);
-            global.equippedItems[equipSlots.WEAPON] = -1;
+        //PROPERLY UNEQUIP THE RESPECTIVE EQUIPPED SLOT
+        if(obj_Player.numObj &lt; 16){
+            if(scr_MouseInBox(weaponX, weaponY, boxDimension) &amp;&amp; global.equippedItems[equipSlots.WEAPON] != -1){
+                scr_itemPickup(global.equippedItems[equipSlots.WEAPON]);
+                global.equippedItems[equipSlots.WEAPON] = -1;
+            }
+            
+            if(scr_MouseInBox(headX, headY, boxDimension) &amp;&amp; global.equippedItems[equipSlots.HEAD] != -1){
+                scr_itemPickup(global.equippedItems[equipSlots.HEAD]);
+                obj_Player.maxHealth -= global.equippedItems[equipSlots.HEAD].health_bonus;
+                obj_Player.health = clamp(health, 0,obj_Player.maxHealth);
+                global.equippedItems[equipSlots.HEAD] = -1;
+            }
+            
+            if(scr_MouseInBox(chestX, chestY, boxDimension) &amp;&amp; global.equippedItems[equipSlots.CHEST] != -1){
+                scr_itemPickup(global.equippedItems[equipSlots.CHEST]);
+                obj_Player.maxHealth -= global.equippedItems[equipSlots.CHEST].health_bonus;
+                obj_Player.health = clamp(health, 0,obj_Player.maxHealth);
+                global.equippedItems[equipSlots.CHEST] = -1;
+            }
+        }else{
+            //LET THE USER KNOW THEIR INVENTORY IS FULL
         }
-        
-        if(scr_MouseInBox(headX, headY, boxDimension)){
-            scr_itemPickup(global.equippedItems[equipSlots.HEAD]);
-            obj_Player.maxHealth -= global.equippedItems[equipSlots.HEAD].health_bonus;
-            obj_Player.health = clamp(health, 0,obj_Player.maxHealth);
-            global.equippedItems[equipSlots.HEAD] = -1;
-        }
-        
+        //
     }
     
+    //IF WE JUST CLICKED AND WE WERE HOLDING AN OBJECT
     else if(mouse_check_button_pressed(mb_left) &amp;&amp; global.objectHeld != -1){
         
-        //now check equippable slots 
-        //check for weapon slot
+        //CHECK IF WERE IN EQUIPPABLE SLOTS, EQUIP/UNEQUIP AS NECESSARY
         if(scr_MouseInBox(weaponX, weaponY, boxDimension) &amp;&amp; global.objectHeld.itemType == equipSlots.WEAPON){
             global.inventory[global.takenFromX,global.takenFromY] = global.equippedItems[equipSlots.WEAPON];
             global.equippedItems[equipSlots.WEAPON] = global.objectHeld;
@@ -244,6 +269,20 @@ if(showInv){
             global.takenFromX = -1;
             global.takenFromY = -1;
         }
+        
+        if(scr_MouseInBox(chestX, chestY, boxDimension)&amp;&amp; global.objectHeld.itemType == equipSlots.CHEST){
+            global.inventory[global.takenFromX,global.takenFromY] = global.equippedItems[equipSlots.CHEST];
+            if(global.equippedItems[equipSlots.CHEST] != -1){
+                obj_Player.maxHealth -= global.equippedItems[equipSlots.CHEST].health_bonus;
+            }
+            global.equippedItems[equipSlots.CHEST] = global.objectHeld;
+            obj_Player.maxHealth += global.equippedItems[equipSlots.CHEST].health_bonus;
+            obj_Player.health = clamp(health, 0,obj_Player.maxHealth);
+            global.objectHeld = -1;
+            global.takenFromX = -1;
+            global.takenFromY = -1;
+        }
+        //
     
         //this does checking for normal inventory slots
         for (i = 0; i &lt; 4; i++){
@@ -281,7 +320,7 @@ if(showInv){
             global.takenFromY = -1;
         }
 
-    }
+    }//END CLICKED WHILE HOLDING AN OBJECT
     
     itemCanBeSold = false; // makes it so you cant sell equipped items
     if(instance_exists(obj_Merchant) == true){
@@ -319,7 +358,8 @@ if(showInv){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>for (i = 0; i &lt; 4; i++){
+            <string>//SAVING REGULAR INVENTORY SLOTS
+for (i = 0; i &lt; 4; i++){
     for (j = 0; j &lt; 4; j++){
         savedItem = -1;
         if (global.inventory[i,j] != -1){
@@ -337,18 +377,26 @@ if(showInv){
                 savedItem[1] = equipSlots.HEAD;
                 savedItem[2] = global.inventory[i,j].health_bonus;
             }
+            
+            if(global.inventory[i,j].itemType == equipSlots.CHEST){
+                savedItem[0] = global.inventory[i,j].object_index;
+                savedItem[1] = equipSlots.CHEST;
+                savedItem[2] = global.inventory[i,j].health_bonus;
+            }
         }
         //save properties
         savedInventory[i,j] = savedItem;
     }
 }
 
+//SAVING EQUIPPED ITEMS
 for (i = 0; i &lt; 6; i++){
     savedEquippedItems[i] = -1;
 }
 
 savedWeapon = -1;
 savedHelmet = -1;
+savedChest = -1;
 
 if (global.equippedItems[equipSlots.WEAPON] != -1){
     savedWeapon[0] = global.equippedItems[equipSlots.WEAPON].object_index;
@@ -364,6 +412,13 @@ if (global.equippedItems[equipSlots.HEAD] != -1){
     savedHelmet[1] = equipSlots.HEAD;
     savedHelmet[2] = global.equippedItems[equipSlots.HEAD].health_bonus;
     savedEquippedItems[equipSlots.HEAD] = savedHelmet;
+}
+
+if (global.equippedItems[equipSlots.CHEST] != -1){
+    savedChest[0] = global.equippedItems[equipSlots.CHEST].object_index;
+    savedChest[1] = equipSlots.CHEST;
+    savedChest[2] = global.equippedItems[equipSlots.CHEST].health_bonus;
+    savedEquippedItems[equipSlots.CHEST] = savedChest;
 }
 
 if(instance_exists(obj_Player)){
@@ -392,7 +447,8 @@ if(instance_exists(obj_Player)){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>for (i = 0; i &lt; 4; i++){
+            <string>//LOADING REGULAR INVENTORY SLOTS
+for (i = 0; i &lt; 4; i++){
     for (j = 0; j &lt; 4; j++){
         if (savedInventory[i,j] != -1){
             savedItem = savedInventory[i,j];
@@ -411,10 +467,17 @@ if(instance_exists(obj_Player)){
                 newInstance.health_bonus = savedItem[2];
                 global.inventory[i,j] = newInstance;
             }
+            
+            if(savedItem[1] == equipSlots.CHEST){
+                newInstance = instance_create(-10,-10,savedItem[0]);
+                newInstance.health_bonus = savedItem[2];
+                global.inventory[i,j] = newInstance;
+            }
         }
     }
 }
 
+//LOADING EQUIPPED ITEMS
 if (savedEquippedItems[equipSlots.WEAPON] != -1){
     savedItem = savedEquippedItems[equipSlots.WEAPON];
     newInstance = instance_create(-10,-10,savedItem[0]);
@@ -429,6 +492,14 @@ if (savedEquippedItems[equipSlots.HEAD] != -1){
     newInstance = instance_create(-10,-10,savedItem[0]);
     newInstance.health_bonus = savedItem[2];
     global.equippedItems[equipSlots.HEAD] = newInstance;
+    
+}
+
+if (savedEquippedItems[equipSlots.CHEST] != -1){
+    savedItem = savedEquippedItems[equipSlots.CHEST];
+    newInstance = instance_create(-10,-10,savedItem[0]);
+    newInstance.health_bonus = savedItem[2];
+    global.equippedItems[equipSlots.CHEST] = newInstance;
     
 }
 
@@ -479,24 +550,27 @@ if (showInv){
     //draw inventory for pickups
     for (i = 0; i &lt; 4; i++){
         for (j = 0; j &lt; 4; j++){
+            //draw box
             draw_sprite_ext(spr_Border,0,x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace),2,2,0,c_white,1);
             if (global.inventory[i,j] != -1){
                 var rot = 0;
                 //maybe change rotation based on size
                 var scale = 1;
                 scale = min((boxDimension - 12) / global.inventory[i,j].sprite_width, (boxDimension - 12) / global.inventory[i,j].sprite_height);
-                
+                //draw sprite of item in the slot
                 draw_sprite_ext(global.inventory[i,j].sprite_index, 1, x1 + initOff + (i * initSpace), y1 + initOff + (j * initSpace),scale,scale,rot,c_white,1);
             }
         }
     }
     
-    //draw inventory for equippable items
+    //draw boxes for equippable items
     for (i = 0; i &lt; 4; i++){
-        draw_sprite_ext(spr_Border,0,midx, midy + initOff + (i * initSpace),2,2,0,c_white,1);
+        draw_sprite_ext(spr_Border,0,midx, midy + initOff + (i * initSpace),2,2,0,c_white,1);//HEAD CHEST LEGS FEET
     }
-    draw_sprite_ext(spr_Border,0,midx + initSpace, midy + initOff + initSpace,2,2,0,c_white,1);
-    draw_sprite_ext(spr_Border,0,midx - initSpace, midy + initOff + initSpace,2,2,0,c_white,1);
+    draw_sprite_ext(spr_Border,0,midx + initSpace, midy + initOff + initSpace,2,2,0,c_white,1);//WEAPON
+    draw_sprite_ext(spr_Border,0,midx - initSpace, midy + initOff + initSpace,2,2,0,c_white,1);//GLOVES
+    
+    //draw actual sprite for equippable items
     for (i = 0; i &lt; 6; i++){
         if(global.equippedItems[i] != -1){
             var scale = 1;
@@ -536,6 +610,13 @@ if (showInv){
         draw_sprite_ext(spr_AR15, 1, midx + initSpace, midy + initOff + (1 * initSpace),scale,scale,0,c_white,0.25);
     }
     
+    if(global.equippedItems[global.equipSlots.CHEST] == -1){
+        var scale = 1;
+        scale = min((boxDimension - 12) / sprite_get_width(spr_AR15), (boxDimension - 12) / sprite_get_height(spr_AR15));
+        draw_sprite_ext(spr_ChestArmor, 1, midx + initSpace, midy + initOff + (1 * initSpace),scale,scale,0,c_white,0.25);
+    }
+    
+    //draw item if we are holding one
     if (global.objectHeld != -1){
         var scale = 1;
         scale = min((boxDimension - 12) / global.objectHeld.sprite_width, (boxDimension - 12) / global.objectHeld.sprite_height);
@@ -546,6 +627,7 @@ if (showInv){
     //m_x = window_view_mouse_get_x(view_current);
     //m_y = window_view_mouse_get_y(view_current);
     
+    //for displaying box with item info inside of it
     if(displayItemInfo){
         var displayBoxWidth = 300;
         var displayBoxHeight = 100;
@@ -569,6 +651,16 @@ if (showInv){
             
         }
         if(itemToDisplay.itemType == equipSlots.HEAD){
+            draw_set_color(c_black);
+            draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
+            draw_set_color(c_white);
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 0, "Health: " + string(itemToDisplay.health_bonus));
+            if (itemCanBeSold){
+                draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 1, "Selling Price: " + string(sellingPrice) + " (Right Click)");
+            }
+        }
+        
+        if(itemToDisplay.itemType == equipSlots.CHEST){
             draw_set_color(c_black);
             draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
             draw_set_color(c_white);
