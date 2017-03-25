@@ -39,11 +39,15 @@ maxItems = 16;
 
 randomize();
 
-itemsArraySize = 4;
+itemsArraySize = 8;
 potentialItemsArray[0] = obj_Weapon;
 potentialItemsArray[1] = obj_testWeapon;
 potentialItemsArray[2] = obj_Helmet;
 potentialItemsArray[3] = obj_Shotgun;
+potentialItemsArray[4] = obj_ChestArmor;
+potentialItemsArray[5] = obj_LegArmor;
+potentialItemsArray[6] = obj_Boots;
+potentialItemsArray[7] = obj_Gloves;
 
 for (i = 0; i &lt; maxItems / 4; i++){
     for (j = 0; j &lt; maxItems / 4; j++){
@@ -203,6 +207,38 @@ if(interacting == true){
             
         }
         if(itemToDisplay.itemType == equipSlots.HEAD){
+            draw_set_color(c_black);
+            draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
+            draw_set_color(c_white);
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 0, "Health: " + string(itemToDisplay.health_bonus));
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 1, "Buying Price: " + string(itemToDisplay.price) + " (Right Click)");
+        }
+        
+        if(itemToDisplay.itemType == equipSlots.CHEST){
+            draw_set_color(c_black);
+            draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
+            draw_set_color(c_white);
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 0, "Health: " + string(itemToDisplay.health_bonus));
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 1, "Buying Price: " + string(itemToDisplay.price) + " (Right Click)");
+        }
+        
+        if(itemToDisplay.itemType == equipSlots.LEGS){
+            draw_set_color(c_black);
+            draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
+            draw_set_color(c_white);
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 0, "Health: " + string(itemToDisplay.health_bonus));
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 1, "Buying Price: " + string(itemToDisplay.price) + " (Right Click)");
+        }
+        
+        if(itemToDisplay.itemType == equipSlots.FEET){
+            draw_set_color(c_black);
+            draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
+            draw_set_color(c_white);
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 0, "Health: " + string(itemToDisplay.health_bonus));
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 1, "Buying Price: " + string(itemToDisplay.price) + " (Right Click)");
+        }
+        
+        if(itemToDisplay.itemType == equipSlots.GLOVES){
             draw_set_color(c_black);
             draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
             draw_set_color(c_white);
