@@ -45,6 +45,9 @@
     <sprite>sprites\spr_House</sprite>
     <sprite>sprites\spr_Putin</sprite>
     <sprite>sprites\spr_ChestArmor</sprite>
+    <sprite>sprites\spr_LegArmor</sprite>
+    <sprite>sprites\spr_Boots</sprite>
+    <sprite>sprites\spr_Gloves</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>
@@ -79,6 +82,9 @@
     <object>objects\inv_BACKUP</object>
     <object>objects\obj_Helmet</object>
     <object>objects\obj_ChestArmor</object>
+    <object>objects\obj_LegArmor</object>
+    <object>objects\obj_Boots</object>
+    <object>objects\obj_Gloves</object>
     <object>objects\obj_Blood</object>
     <object>objects\obj_Small_Ruble_Pile</object>
     <object>objects\obj_Merchant</object>

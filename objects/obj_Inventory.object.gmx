@@ -143,6 +143,12 @@ headX = midx;
 headY = midy + initOff + (0 * initSpace);
 chestX = midx;
 chestY = midy + initOff + (1 * initSpace);
+legsX = midx;
+legsY = midy +initOff + (2 * initSpace);
+feetX = midx;
+feetY = midy +initOff + (3 * initSpace);
+glovesX = midx - initSpace;
+glovesY = midy + initOff + (1 * initSpace);
 m_x = mouse_x - view_xview[0];
 m_y = mouse_y - view_yview[0];
 
@@ -201,6 +207,24 @@ if(showInv){
         displayItemInfo = true;
         itemToDisplay = global.equippedItems[equipSlots.CHEST];
     }
+    
+    if(scr_MouseInBox(legsX, legsY, boxDimension) &amp;&amp; global.equippedItems[equipSlots.LEGS] != -1){
+        foundOne = true;
+        displayItemInfo = true;
+        itemToDisplay = global.equippedItems[equipSlots.LEGS];
+    }
+    
+    if(scr_MouseInBox(feetX, feetY, boxDimension) &amp;&amp; global.equippedItems[equipSlots.FEET] != -1){
+        foundOne = true;
+        displayItemInfo = true;
+        itemToDisplay = global.equippedItems[equipSlots.FEET];
+    }
+    
+    if(scr_MouseInBox(glovesX, glovesY, boxDimension) &amp;&amp; global.equippedItems[equipSlots.GLOVES] != -1){
+        foundOne = true;
+        displayItemInfo = true;
+        itemToDisplay = global.equippedItems[equipSlots.GLOVES];
+    }
     //
 
     //IF WE JUST CLICKED AND WERE NOT HOLDING ANYTHING, GRAB WHAT WAS IN THE SLOT IF IT WAS REGULAR INVENTORY
@@ -238,6 +262,27 @@ if(showInv){
                 obj_Player.maxHealth -= global.equippedItems[equipSlots.CHEST].health_bonus;
                 obj_Player.health = clamp(health, 0,obj_Player.maxHealth);
                 global.equippedItems[equipSlots.CHEST] = -1;
+            }
+            
+            if(scr_MouseInBox(legsX, legsY, boxDimension) &amp;&amp; global.equippedItems[equipSlots.LEGS] != -1){
+                scr_itemPickup(global.equippedItems[equipSlots.LEGS]);
+                obj_Player.maxHealth -= global.equippedItems[equipSlots.LEGS].health_bonus;
+                obj_Player.health = clamp(health, 0,obj_Player.maxHealth);
+                global.equippedItems[equipSlots.LEGS] = -1;
+            }
+            
+            if(scr_MouseInBox(feetX, feetY, boxDimension) &amp;&amp; global.equippedItems[equipSlots.FEET] != -1){
+                scr_itemPickup(global.equippedItems[equipSlots.FEET]);
+                obj_Player.maxHealth -= global.equippedItems[equipSlots.FEET].health_bonus;
+                obj_Player.health = clamp(health, 0,obj_Player.maxHealth);
+                global.equippedItems[equipSlots.FEET] = -1;
+            }
+            
+            if(scr_MouseInBox(glovesX, glovesY, boxDimension) &amp;&amp; global.equippedItems[equipSlots.GLOVES] != -1){
+                scr_itemPickup(global.equippedItems[equipSlots.GLOVES]);
+                obj_Player.maxHealth -= global.equippedItems[equipSlots.GLOVES].health_bonus;
+                obj_Player.health = clamp(health, 0,obj_Player.maxHealth);
+                global.equippedItems[equipSlots.GLOVES] = -1;
             }
         }else{
             //LET THE USER KNOW THEIR INVENTORY IS FULL
@@ -277,6 +322,45 @@ if(showInv){
             }
             global.equippedItems[equipSlots.CHEST] = global.objectHeld;
             obj_Player.maxHealth += global.equippedItems[equipSlots.CHEST].health_bonus;
+            obj_Player.health = clamp(health, 0,obj_Player.maxHealth);
+            global.objectHeld = -1;
+            global.takenFromX = -1;
+            global.takenFromY = -1;
+        }
+        
+        if(scr_MouseInBox(legsX, legsY, boxDimension)&amp;&amp; global.objectHeld.itemType == equipSlots.LEGS){
+            global.inventory[global.takenFromX,global.takenFromY] = global.equippedItems[equipSlots.LEGS];
+            if(global.equippedItems[equipSlots.LEGS] != -1){
+                obj_Player.maxHealth -= global.equippedItems[equipSlots.LEGS].health_bonus;
+            }
+            global.equippedItems[equipSlots.LEGS] = global.objectHeld;
+            obj_Player.maxHealth += global.equippedItems[equipSlots.LEGS].health_bonus;
+            obj_Player.health = clamp(health, 0,obj_Player.maxHealth);
+            global.objectHeld = -1;
+            global.takenFromX = -1;
+            global.takenFromY = -1;
+        }
+        
+        if(scr_MouseInBox(feetX, feetY, boxDimension)&amp;&amp; global.objectHeld.itemType == equipSlots.FEET){
+            global.inventory[global.takenFromX,global.takenFromY] = global.equippedItems[equipSlots.FEET];
+            if(global.equippedItems[equipSlots.FEET] != -1){
+                obj_Player.maxHealth -= global.equippedItems[equipSlots.FEET].health_bonus;
+            }
+            global.equippedItems[equipSlots.FEET] = global.objectHeld;
+            obj_Player.maxHealth += global.equippedItems[equipSlots.FEET].health_bonus;
+            obj_Player.health = clamp(health, 0,obj_Player.maxHealth);
+            global.objectHeld = -1;
+            global.takenFromX = -1;
+            global.takenFromY = -1;
+        }
+        
+        if(scr_MouseInBox(glovesX, glovesY, boxDimension)&amp;&amp; global.objectHeld.itemType == equipSlots.GLOVES){
+            global.inventory[global.takenFromX,global.takenFromY] = global.equippedItems[equipSlots.GLOVES];
+            if(global.equippedItems[equipSlots.GLOVES] != -1){
+                obj_Player.maxHealth -= global.equippedItems[equipSlots.GLOVES].health_bonus;
+            }
+            global.equippedItems[equipSlots.GLOVES] = global.objectHeld;
+            obj_Player.maxHealth += global.equippedItems[equipSlots.GLOVES].health_bonus;
             obj_Player.health = clamp(health, 0,obj_Player.maxHealth);
             global.objectHeld = -1;
             global.takenFromX = -1;
@@ -383,6 +467,24 @@ for (i = 0; i &lt; 4; i++){
                 savedItem[1] = equipSlots.CHEST;
                 savedItem[2] = global.inventory[i,j].health_bonus;
             }
+            
+            if(global.inventory[i,j].itemType == equipSlots.LEGS){
+                savedItem[0] = global.inventory[i,j].object_index;
+                savedItem[1] = equipSlots.LEGS;
+                savedItem[2] = global.inventory[i,j].health_bonus;
+            }
+            
+            if(global.inventory[i,j].itemType == equipSlots.FEET){
+                savedItem[0] = global.inventory[i,j].object_index;
+                savedItem[1] = equipSlots.FEET;
+                savedItem[2] = global.inventory[i,j].health_bonus;
+            }
+            
+            if(global.inventory[i,j].itemType == equipSlots.GLOVES){
+                savedItem[0] = global.inventory[i,j].object_index;
+                savedItem[1] = equipSlots.GLOVES;
+                savedItem[2] = global.inventory[i,j].health_bonus;
+            }
         }
         //save properties
         savedInventory[i,j] = savedItem;
@@ -397,6 +499,9 @@ for (i = 0; i &lt; 6; i++){
 savedWeapon = -1;
 savedHelmet = -1;
 savedChest = -1;
+savedLegs = -1;
+savedFeet = -1;
+savedGloves = -1;
 
 if (global.equippedItems[equipSlots.WEAPON] != -1){
     savedWeapon[0] = global.equippedItems[equipSlots.WEAPON].object_index;
@@ -419,6 +524,27 @@ if (global.equippedItems[equipSlots.CHEST] != -1){
     savedChest[1] = equipSlots.CHEST;
     savedChest[2] = global.equippedItems[equipSlots.CHEST].health_bonus;
     savedEquippedItems[equipSlots.CHEST] = savedChest;
+}
+
+if (global.equippedItems[equipSlots.LEGS] != -1){
+    savedLegs[0] = global.equippedItems[equipSlots.LEGS].object_index;
+    savedLegs[1] = equipSlots.LEGS;
+    savedLegs[2] = global.equippedItems[equipSlots.LEGS].health_bonus;
+    savedEquippedItems[equipSlots.LEGS] = savedLegs;
+}
+
+if (global.equippedItems[equipSlots.FEET] != -1){
+    savedFeet[0] = global.equippedItems[equipSlots.FEET].object_index;
+    savedFeet[1] = equipSlots.FEET;
+    savedFeet[2] = global.equippedItems[equipSlots.FEET].health_bonus;
+    savedEquippedItems[equipSlots.FEET] = savedFeet;
+}
+
+if (global.equippedItems[equipSlots.GLOVES] != -1){
+    savedGloves[0] = global.equippedItems[equipSlots.GLOVES].object_index;
+    savedGloves[1] = equipSlots.GLOVES;
+    savedGloves[2] = global.equippedItems[equipSlots.GLOVES].health_bonus;
+    savedEquippedItems[equipSlots.GLOVES] = savedGloves;
 }
 
 if(instance_exists(obj_Player)){
@@ -473,6 +599,24 @@ for (i = 0; i &lt; 4; i++){
                 newInstance.health_bonus = savedItem[2];
                 global.inventory[i,j] = newInstance;
             }
+            
+            if(savedItem[1] == equipSlots.LEGS){
+                newInstance = instance_create(-10,-10,savedItem[0]);
+                newInstance.health_bonus = savedItem[2];
+                global.inventory[i,j] = newInstance;
+            }
+            
+            if(savedItem[1] == equipSlots.FEET){
+                newInstance = instance_create(-10,-10,savedItem[0]);
+                newInstance.health_bonus = savedItem[2];
+                global.inventory[i,j] = newInstance;
+            }
+            
+            if(savedItem[1] == equipSlots.GLOVES){
+                newInstance = instance_create(-10,-10,savedItem[0]);
+                newInstance.health_bonus = savedItem[2];
+                global.inventory[i,j] = newInstance;
+            }
         }
     }
 }
@@ -500,6 +644,30 @@ if (savedEquippedItems[equipSlots.CHEST] != -1){
     newInstance = instance_create(-10,-10,savedItem[0]);
     newInstance.health_bonus = savedItem[2];
     global.equippedItems[equipSlots.CHEST] = newInstance;
+    
+}
+
+if (savedEquippedItems[equipSlots.LEGS] != -1){
+    savedItem = savedEquippedItems[equipSlots.LEGS];
+    newInstance = instance_create(-10,-10,savedItem[0]);
+    newInstance.health_bonus = savedItem[2];
+    global.equippedItems[equipSlots.LEGS] = newInstance;
+    
+}
+
+if (savedEquippedItems[equipSlots.FEET] != -1){
+    savedItem = savedEquippedItems[equipSlots.FEET];
+    newInstance = instance_create(-10,-10,savedItem[0]);
+    newInstance.health_bonus = savedItem[2];
+    global.equippedItems[equipSlots.FEET] = newInstance;
+    
+}
+
+if (savedEquippedItems[equipSlots.GLOVES] != -1){
+    savedItem = savedEquippedItems[equipSlots.GLOVES];
+    newInstance = instance_create(-10,-10,savedItem[0]);
+    newInstance.health_bonus = savedItem[2];
+    global.equippedItems[equipSlots.GLOVES] = newInstance;
     
 }
 
@@ -576,22 +744,22 @@ if (showInv){
             var scale = 1;
             scale = min((boxDimension - 12) / global.equippedItems[i].sprite_width, (boxDimension - 12) / global.equippedItems[i].sprite_height);
             
-            if(i = equipSlots.HEAD){
+            if(i == equipSlots.HEAD){
                 draw_sprite_ext(global.equippedItems[i].sprite_index, 1, midx, midy + initOff + (0 * initSpace),scale,scale,0,c_white,1);
             }
-            if(i = equipSlots.CHEST){
+            if(i == equipSlots.CHEST){
                 draw_sprite_ext(global.equippedItems[i].sprite_index, 1, midx, midy + initOff + (1 * initSpace),scale,scale,0,c_white,1);
             }
-            if(i = equipSlots.LEGS){
+            if(i == equipSlots.LEGS){
                 draw_sprite_ext(global.equippedItems[i].sprite_index, 1, midx, midy + initOff + (2 * initSpace),scale,scale,0,c_white,1);
             }
-            if(i = equipSlots.FEET){
+            if(i == equipSlots.FEET){
                 draw_sprite_ext(global.equippedItems[i].sprite_index, 1, midx, midy + initOff + (3 * initSpace),scale,scale,0,c_white,1);
             }
-            if(i = equipSlots.WEAPON){
+            if(i == equipSlots.WEAPON){
                 draw_sprite_ext(global.equippedItems[i].sprite_index, 1, midx + initSpace, midy + initOff + (1 * initSpace),scale,scale,0,c_white,1);
             }
-            if(i = equipSlots.GLOVES){
+            if(i == equipSlots.GLOVES){
                 draw_sprite_ext(global.equippedItems[i].sprite_index, 1, midx - initSpace, midy + initOff + (1 * initSpace),scale,scale,0,c_white,1);
             } 
         }
@@ -661,6 +829,36 @@ if (showInv){
         }
         
         if(itemToDisplay.itemType == equipSlots.CHEST){
+            draw_set_color(c_black);
+            draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
+            draw_set_color(c_white);
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 0, "Health: " + string(itemToDisplay.health_bonus));
+            if (itemCanBeSold){
+                draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 1, "Selling Price: " + string(sellingPrice) + " (Right Click)");
+            }
+        }
+        
+        if(itemToDisplay.itemType == equipSlots.LEGS){
+            draw_set_color(c_black);
+            draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
+            draw_set_color(c_white);
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 0, "Health: " + string(itemToDisplay.health_bonus));
+            if (itemCanBeSold){
+                draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 1, "Selling Price: " + string(sellingPrice) + " (Right Click)");
+            }
+        }
+        
+        if(itemToDisplay.itemType == equipSlots.FEET){
+            draw_set_color(c_black);
+            draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
+            draw_set_color(c_white);
+            draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 0, "Health: " + string(itemToDisplay.health_bonus));
+            if (itemCanBeSold){
+                draw_text(m_x - (displayBoxWidth - 10), m_y + lineOffset * 1, "Selling Price: " + string(sellingPrice) + " (Right Click)");
+            }
+        }
+        
+        if(itemToDisplay.itemType == equipSlots.GLOVES){
             draw_set_color(c_black);
             draw_rectangle(m_x, m_y, m_x - displayBoxWidth, m_y + displayBoxHeight,0);
             draw_set_color(c_white);

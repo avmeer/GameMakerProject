@@ -156,8 +156,12 @@ if (drop_item &lt; 33){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>followingPlayer = true;
+            <string>currentInsult = "You aren't dead yet!?"
+currentlyInsulting = true;
+alarm[11] = room_speed * 3;
+followingPlayer = true;
 usingSpecial = false;
+image_angle = 0;
 //change spot where special occurs
 positionIndex++;
 if(positionIndex == numPositions){
@@ -288,6 +292,7 @@ if (followingPlayer){
         alarm[0] = 15;
     }
 }else if(usingSpecial){
+    image_angle++;
     currentPos = positionRotations[positionIndex];
     speed = 14;
     direction = point_direction(x, y, currentPos[0], currentPos[1]);
