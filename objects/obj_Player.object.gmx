@@ -136,10 +136,7 @@ zoomout = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*if (health + 5 &lt;= maxHealth) {
-    health += 5;
-}*/
-health+=5;
+            <string>health += obj_RiflemanSkills.healRate;
 if (health &gt; maxHealth){
     health = maxHealth;
 }
@@ -775,9 +772,9 @@ var xOff = 100;
 draw_set_alpha(0.8);
 draw_set_color(c_black);
 if (obj_RiflemanSkills.canUpgradeSkill == false) {
-    draw_rectangle(150 - xOff ,64 + yOff ,350 - xOff ,124 + yOff ,false);
+    draw_rectangle(150 - xOff ,64 + yOff ,375 - xOff ,124 + yOff ,false);
 } else {
-    draw_rectangle(150 - xOff ,64 + yOff ,350 - xOff ,139 + yOff ,false);
+    draw_rectangle(150 - xOff ,64 + yOff ,375 - xOff ,139 + yOff ,false);
 }
 draw_set_alpha(1);
 draw_set_color(c_white);

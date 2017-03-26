@@ -107,7 +107,7 @@
             <string>draw_set_color(c_white);
 if (mouse_hover) {
     var description = "Unlocks health regeneration"
-    var explanation = "Allows you to heal 5 health / second for 5 seconds; 10 second cooldown"
+    var explanation = "Allows you to heal 5 health / second for 5 seconds; 15 second cooldown"
     draw_text(room_width/2 - string_width(description) / 2, 10, description);
     draw_text(room_width/2 - string_width(explanation) / 2, 25, explanation);
 }

@@ -51,6 +51,13 @@ healthRegenUnlocked = obj_RiflemanSkills.skills[1,0];
 // if health regen skill is locked
 if (healthRegenUnlocked == 0) {
     instance_create(healthX, initialY, obj_HealthRegenUnlock);
+} else {
+    healthRegenTier2 = obj_RiflemanSkills.skills[1,1];
+    // if no tier 2 skill has been chosen
+    if (healthRegenTier2 == 0) {
+        instance_create(healthX, initialY, obj_HRCooldownDec);
+        instance_create(healthX, initialY + yOffset, obj_HRHeal_Inc);
+    }
 }
 </string>
           </argument>
@@ -103,12 +110,17 @@ if (grenadeSkillUnlocked == 0) {
 if (healthRegenUnlocked == 0) {
     draw_sprite(spr_Health, 0, healthX, initialY);
 } else {
-    no = "No";
-    upgrades = "upgrades";
-    remaining = "remaining!";
-    draw_text(healthX - string_width(no) / 2, initialY, no);
-    draw_text(healthX - string_width(upgrades) / 2, initialY + 15, upgrades);
-    draw_text(healthX - string_width(remaining) / 2, initialY + 30, remaining);
+    if (healthRegenTier2 == 0) {
+        draw_sprite_ext(spr_Health, 0, healthX, initialY, 3, 3, 0, c_white, 1);
+        draw_sprite_ext(spr_Health, 0, healthX, initialY + yOffset, 3, 3, 0, c_white, 1);
+    } else {
+        no = "No";
+        upgrades = "upgrades";
+        remaining = "remaining!";
+        draw_text(healthX - string_width(no) / 2, initialY, no);
+        draw_text(healthX - string_width(upgrades) / 2, initialY + 15, upgrades);
+        draw_text(healthX - string_width(remaining) / 2, initialY + 30, remaining);
+    }
 }
 </string>
           </argument>
