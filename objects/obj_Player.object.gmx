@@ -70,6 +70,29 @@ zoomout = false;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>obj_RiflemanSkills.applyWeaponMultipliers = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="4">
       <action>
         <libid>1</libid>
@@ -692,10 +715,12 @@ if (global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; global.equippedItem
     // if able to shoot then shoot
     else if( firing &amp;&amp; global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; fireRateTimerDone) 
     {
-        if(global.equippedItems[equipSlots.WEAPON].currentAmmo &gt; 0)
+        if(global.equippedItems[equipSlots.WEAPON].currentAmmo &gt; 0 || 
+            obj_RiflemanSkills.applyWeaponMultipliers == true)
         {
-        
-            global.equippedItems[equipSlots.WEAPON].currentAmmo--;
+            if (obj_RiflemanSkills.applyWeaponMultipliers != true) {
+                global.equippedItems[equipSlots.WEAPON].currentAmmo--;
+            }
             // alter the damage of bullet created to reflect weapon damage
             currWeapon = global.equippedItems[equipSlots.WEAPON];
             
@@ -703,7 +728,11 @@ if (global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; global.equippedItem
                 || global.equippedItems[equipSlots.WEAPON].typeOfWeapon  == weaponType.AR)
             {
                 bullet = instance_create( x, y - 0.5 * sprite_height, obj_Bullet );
-                bullet.damage = currWeapon.damage;
+                if (obj_RiflemanSkills.applyWeaponMultipliers == true) {
+                    bullet.damage = currWeapon.damage * obj_RiflemanSkills.bulletDamageMultiplier;
+                } else {
+                    bullet.damage = currWeapon.damage;
+                }
             }
             else if(global.equippedItems[equipSlots.WEAPON].typeOfWeapon  == weaponType.SHOTGUN)
             {
@@ -720,11 +749,19 @@ if (global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; global.equippedItem
                 bullet3.image_angle = bullet3.direction;
                 bullet4.image_angle = bullet5.direction;
                 bullet5.image_angle = bullet5.direction;
-                bullet1.damage = currWeapon.damage;
-                bullet2.damage = currWeapon.damage;
-                bullet3.damage = currWeapon.damage;
-                bullet4.damage = currWeapon.damage;
-                bullet5.damage = currWeapon.damage;
+                if (obj_RiflemanSkills.applyWeaponMultipliers == true) {
+                    bullet1.damage = currWeapon.damage * obj_RiflemanSkills.bulletDamageMultiplier;
+                    bullet2.damage = currWeapon.damage * obj_RiflemanSkills.bulletDamageMultiplier;
+                    bullet3.damage = currWeapon.damage * obj_RiflemanSkills.bulletDamageMultiplier;
+                    bullet4.damage = currWeapon.damage * obj_RiflemanSkills.bulletDamageMultiplier;
+                    bullet5.damage = currWeapon.damage * obj_RiflemanSkills.bulletDamageMultiplier;
+                } else {
+                    bullet1.damage = currWeapon.damage;
+                    bullet2.damage = currWeapon.damage;
+                    bullet3.damage = currWeapon.damage;
+                    bullet4.damage = currWeapon.damage;
+                    bullet5.damage = currWeapon.damage;
+                }
                 bullet1.sprite_index = spr_Pellet;
                 bullet2.sprite_index = spr_Pellet;
                 bullet3.sprite_index = spr_Pellet;
@@ -734,7 +771,12 @@ if (global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; global.equippedItem
             
             // ensures appropriate weapons can't be fired per click
             fireRateTimerDone = false;
-            alarm[1] = 1 / currWeapon.fireRate * room_speed;
+            if (obj_RiflemanSkills.applyWeaponMultipliers == true) {
+                alarm[1] = 1 / (currWeapon.fireRate * obj_RiflemanSkills.fireRateMultiplier) *
+                    room_speed;
+            } else {
+                alarm[1] = 1 / currWeapon.fireRate * room_speed;
+            }
         }//end check for ammo &gt; 0
         else if(global.equippedItems[equipSlots.WEAPON].currentAmmo == 0 &amp;&amp; !reloading)
         {
@@ -833,6 +875,38 @@ if (hit) {
 }
 else {
     draw_self();
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="87">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(!showInv) {
+    if(obj_RiflemanSkills.skills[2,0] != 0) {
+        if(obj_Skill_Bar.skill_3_cooling_down == false) {
+            obj_RiflemanSkills.applyWeaponMultipliers = true;
+            alarm[5] = obj_RiflemanSkills.weaponMultiplierDuration * room_speed;
+            obj_Skill_Bar.skill_3_cooling_down = true;
+            obj_Skill_Bar.alarm[2] = obj_Skill_Bar.skill_3_time;
+        }
+    }
 }
 </string>
           </argument>

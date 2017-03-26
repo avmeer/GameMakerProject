@@ -32,6 +32,8 @@ yOffset = 256;
 
 healthX = grenadeX + xOffset;
 
+weaponMultiplierX = healthX + xOffset;
+
 grenadeSkillUnlocked = obj_RiflemanSkills.skills[0,0];
 
 // if grenade skill is locked
@@ -58,6 +60,13 @@ if (healthRegenUnlocked == 0) {
         instance_create(healthX, initialY, obj_HRCooldownDec);
         instance_create(healthX, initialY + yOffset, obj_HRHeal_Inc);
     }
+}
+
+weaponMultiplierUnlocked = obj_RiflemanSkills.skills[2,0];
+
+// if weapon multiplier skill is locked
+if (weaponMultiplierUnlocked == 0) {
+    instance_create(weaponMultiplierX, initialY, obj_WeaponMultiplierUnlock);
 }
 </string>
           </argument>
@@ -108,7 +117,7 @@ if (grenadeSkillUnlocked == 0) {
 
 // if health regen is locked
 if (healthRegenUnlocked == 0) {
-    draw_sprite(spr_Health, 0, healthX, initialY);
+    draw_sprite_ext(spr_Health, 0, healthX, initialY, 3, 3, 0, c_white, 1);
 } else {
     if (healthRegenTier2 == 0) {
         draw_sprite_ext(spr_Health, 0, healthX, initialY, 3, 3, 0, c_white, 1);
@@ -121,6 +130,17 @@ if (healthRegenUnlocked == 0) {
         draw_text(healthX - string_width(upgrades) / 2, initialY + 15, upgrades);
         draw_text(healthX - string_width(remaining) / 2, initialY + 30, remaining);
     }
+}
+
+if (weaponMultiplierUnlocked == 0) {
+    draw_sprite(spr_AR15, 0, weaponMultiplierX, initialY);
+} else {
+    no = "No";
+    upgrades = "upgrades";
+    remaining = "remaining!";
+    draw_text(weaponMultiplierX - string_width(no) / 2, initialY, no);
+    draw_text(weaponMultiplierX - string_width(upgrades) / 2, initialY + 15, upgrades);
+    draw_text(weaponMultiplierX - string_width(remaining) / 2, initialY + 30, remaining);
 }
 </string>
           </argument>

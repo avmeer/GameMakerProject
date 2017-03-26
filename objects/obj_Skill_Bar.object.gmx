@@ -45,11 +45,51 @@ skill_2_box_center_x = view_wview[0] / 2 - halfBox;
 skill_2_left = skill_2_box_center_x - halfBox;
 skill_2_top = boxCenterY - halfBox;
 skill_2_bottom = boxCenterY + halfBox;
-skill_2_right = skill_2_box_center_x + halfBox - 1;//alarm[0] will vary
+skill_2_right = skill_2_box_center_x + halfBox - 1;//alarm[1] will vary
 skill_2_distance = sizeOfBox;
 skill_2_time_in_seconds = obj_RiflemanSkills.healCooldown;
 skill_2_time =(skill_2_time_in_seconds / skill_2_distance) * room_speed;
 skill_2_cooling_down = false;
+
+// box for skill 3
+skill_3_box_center_x = view_wview[0] / 2 + halfBox;
+skill_3_left = skill_3_box_center_x - halfBox;
+skill_3_top = boxCenterY - halfBox;
+skill_3_bottom = boxCenterY + halfBox;
+skill_3_right = skill_3_box_center_x + halfBox - 1;//alarm[2] will vary
+skill_3_distance = sizeOfBox;
+skill_3_time_in_seconds = obj_RiflemanSkills.weaponMultiplierCooldown;
+skill_3_time =(skill_3_time_in_seconds / skill_3_distance) * room_speed;
+skill_3_cooling_down = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>skill_3_right -= 1;
+if (skill_3_right &gt; skill_3_left) {
+    alarm[2] = skill_3_time;
+} else {
+    skill_3_cooling_down = false;
+    skill_3_right = skill_3_left + sizeOfBox - 1;
+}
 </string>
           </argument>
         </arguments>
@@ -184,6 +224,21 @@ if(skill_2_cooling_down) {
     draw_rectangle(skill_2_left, skill_2_top, skill_2_right, skill_2_bottom - 1, false);
 }
 draw_sprite_ext(spr_Border, 0, skill_2_left + halfBox, skill_2_top + halfBox, 3, 3, 0, c_white, 1);
+draw_set_color(c_white);
+draw_set_alpha(1);
+
+// draw third skill box
+draw_sprite_ext(spr_AR15, 0, skill_3_left + halfBox, skill_3_top + halfBox, 1, 1, 0, c_white, 1);
+draw_set_alpha(0.75);
+if (obj_RiflemanSkills.skills[2,0] == 0) {
+    draw_set_color(c_gray);
+    draw_rectangle(skill_3_left, skill_3_top, skill_3_right, skill_3_bottom - 1, false);
+}
+draw_set_color(c_red);
+if(skill_3_cooling_down) {
+    draw_rectangle(skill_3_left, skill_3_top, skill_3_right, skill_3_bottom - 1, false);
+}
+draw_sprite_ext(spr_Border, 0, skill_3_left + halfBox, skill_3_top + halfBox, 3, 3, 0, c_white, 1);
 draw_set_color(c_white);
 draw_set_alpha(1);
 </string>

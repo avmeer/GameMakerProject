@@ -106,6 +106,9 @@
         <object>objects\obj_HRCooldownDec</object>
         <object>objects\obj_HRHeal_Inc</object>
       </objects>
+      <objects name="WeaponMultiplierSkill">
+        <object>objects\obj_WeaponMultiplierUnlock</object>
+      </objects>
     </objects>
     <object>objects\obj_Room_Changer</object>
     <object>objects\obj_Skill_Bar</object>
