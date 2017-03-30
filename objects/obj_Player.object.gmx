@@ -955,9 +955,11 @@ room_goto(rm_RiflemanSkillTree);
           <argument>
             <kind>1</kind>
             <string>if(global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; !reloading){
-    reloading = true;
-    global.equippedItems[equipSlots.WEAPON].currentAmmo = 0;
-    alarm[4] = room_speed * 2;
+    if(global.equippedItems[equipSlots.WEAPON].currentAmmo != global.equippedItems[equipSlots.WEAPON].magazineSize){
+        reloading = true;
+        global.equippedItems[equipSlots.WEAPON].currentAmmo = 0;
+        alarm[4] = room_speed * 2;
+    }
     
     
     //Play a reload sound
