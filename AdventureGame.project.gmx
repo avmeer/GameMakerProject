@@ -102,6 +102,8 @@
         <object>objects\obj_GrenadeUnlock</object>
         <object>objects\obj_GrenadeAmmoInc</object>
         <object>objects\obj_GrenadeDmgInc</object>
+        <object>objects\obj_GrenadeRadiusInc</object>
+        <object>objects\obj_GrenadeDmgInc2</object>
       </objects>
       <objects name="HealthRegenSkillBoxes">
         <object>objects\obj_HealthRegenUnlock</object>
@@ -110,6 +112,8 @@
       </objects>
       <objects name="WeaponMultiplierSkill">
         <object>objects\obj_WeaponMultiplierUnlock</object>
+        <object>objects\obj_WMFireRateInc</object>
+        <object>objects\obj_WMDamageInc</object>
       </objects>
     </objects>
     <object>objects\obj_Room_Changer</object>
