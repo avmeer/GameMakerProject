@@ -34,6 +34,78 @@ alarm[0] = room_speed * 2;
         </arguments>
       </action>
     </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>inst = instance_create(x, y, obj_Blood);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>instance_create(339,136, obj_Grenade_Explosion);
+instance_create(339,136, obj_HoleInWall);
+obj_IntroManager.alarm[0] = room_speed * 1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>direction = point_direction(x,y,397,188);
+speed = 5;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="1">
       <action>
         <libid>1</libid>
@@ -101,16 +173,68 @@ speed = 5;
             <kind>1</kind>
             <string>if(state == 0 &amp;&amp; point_distance(x,y,230,785) &lt; 5){
     speed = 0;
-    currentText = "We are under attack! I hid a pistol over here.";
-    alarm[1] = room_speed * 2;
-    state = 1;
+    if(point_distance(x,y,obj_Player.x, obj_Player.y) &lt; 100){
+        currentText = "We are under attack! I hid a pistol over here.";
+        alarm[1] = room_speed * 1;
+        state = 1;
+    }
 }
 
 if(state == 1 &amp;&amp; point_distance(x,y,776,455) &lt; 5){
     speed = 0;
     currentText = "I can't shoot for shit. It's under the table you grab it! (Pick up with F)";
-    //alarm[1] = room_speed * 2;
+    if(obj_Player.numObj &gt; 0){
+        state = 2;
+        currentText = "Quick, equip the pistol! (I toggles inventory, click weapon then weapon equip slot)";
+    }
 }
+
+
+
+if(state == 2 &amp;&amp; global.equippedItems[equipSlots.WEAPON] != -1){
+    currentText = "Try shooting that bad boy. (Shift + Left Click)";
+    if(instance_exists(obj_Bullet)){
+        state = 3;
+        currentText = "Okay, time to talk about quantum travel.";
+        alarm[2] = room_speed * 1;
+    }
+}
+
+if(state == 3 &amp;&amp; point_distance(x,y,397,188) &lt; 5){
+    speed = 0;
+    state = 4;
+}
+
+if(state == 4){
+    state = 5;
+    currentText = "Do you hear that?";
+    alarm[3] = room_speed * 1;
+}
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_Grenade_Explosion">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>instance_destroy();
 </string>
           </argument>
         </arguments>
@@ -133,13 +257,14 @@ if(state == 1 &amp;&amp; point_distance(x,y,776,455) &lt; 5){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
-text_start_x = x + 15;
-text_start_y = y - 90;
+            <string>draw_sprite(spr_Scientist,0,x,y);
+text_start_x = view_xview[0] + 150;
+text_start_y =view_yview[0] + 100;
 text_end_x = text_start_x + string_width(currentText);
 text_end_y = text_start_y + 15;
 
 if(currentlyTalking){
+    draw_sprite(spr_ScientistFace,0, view_xview[0] + 100, view_yview[0] + 100);
     draw_set_colour(c_black);
     draw_rectangle(text_start_x, text_start_y, text_end_x, text_end_y, 0)
     draw_set_colour(c_white);
