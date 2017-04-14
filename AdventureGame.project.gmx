@@ -55,6 +55,7 @@
     <sprite>sprites\spr_HoleInWall</sprite>
     <sprite>sprites\spr_WallHole</sprite>
     <sprite>sprites\spr_MerchantFace</sprite>
+    <sprite>sprites\spr_Flag</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>
@@ -143,6 +144,7 @@
     <object>objects\obj_IntroManager</object>
     <object>objects\obj_WallHole</object>
     <object>objects\obj_GrassLevelManager</object>
+    <object>objects\obj_Flag</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_LabLevel</room>
