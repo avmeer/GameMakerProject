@@ -697,8 +697,8 @@ if(instance_exists(obj_Player)){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(view_xport[0], view_yport[0], "X: " + string(mouse_x - view_xview[0]) + "Y: " + string(mouse_y - view_yview[0]));
-draw_text(view_xport[0], view_yport[0] + 15, "X: " + string(mouse_x) + "Y: " + string(mouse_y));
+            <string>//draw_text(view_xport[0], view_yport[0], "X: " + string(mouse_x - view_xview[0]) + "Y: " + string(mouse_y - view_yview[0]));
+//draw_text(view_xport[0], view_yport[0] + 15, "X: " + string(mouse_x) + "Y: " + string(mouse_y));
 
 if (showInv){
     //draw box inventory is contained in
