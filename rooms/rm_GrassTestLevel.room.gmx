@@ -133,8 +133,9 @@
     <instance objName="obj_House" x="160" y="3008" name="inst_21E7BBB0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Tree" x="2976" y="1376" name="inst_7C6341C2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Tree" x="3296" y="544" name="inst_F365E767" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_Helmet" x="256" y="96" name="inst_486FDD09" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_Weapon" x="256" y="160" name="inst_F2266CC9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_WallHole" x="-48" y="-45" name="inst_C03737B1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_Wall" x="-23" y="173" name="inst_E6C24FAA" locked="0" code="" scaleX="10" scaleY="1" colour="4294967295" rotation="45"/>
+    <instance objName="obj_GrassLevelManager" x="256" y="160" name="inst_C0AD544E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
