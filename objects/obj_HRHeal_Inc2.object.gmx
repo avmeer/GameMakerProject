@@ -72,9 +72,10 @@
           <argument>
             <kind>1</kind>
             <string>if (obj_RiflemanSkills.canUpgradeHealthRegen == true) {
-    obj_RiflemanSkills.skills[1,0] = 1;
+    obj_RiflemanSkills.skills[1,2] = 2;
+    obj_RiflemanSkills.healRate += 10;
     obj_RiflemanSkills.experience -= obj_RiflemanSkills.xpNeeded[1];
-    obj_RiflemanSkills.xpNeeded[1] = 200;
+    obj_RiflemanSkills.xpNeeded[1] = 400;
     scr_updateXpNeeded();
     room_goto(global.previousRoom);
 } else {
@@ -105,8 +106,10 @@
             <kind>1</kind>
             <string>draw_set_color(c_white);
 if (mouse_hover) {
-    var description = "Unlocks health regeneration"
-    var explanation = "Allows you to heal 5 health / second for 5 seconds; 15 second cooldown"
+    var description = "Increases heal rate"
+    var explanation = "Heal rate increases from " +
+        string(obj_RiflemanSkills.healRate) + "/second to " +
+        string(obj_RiflemanSkills.healRate + 10) + "/second"
     draw_text(room_width/2 - string_width(description) / 2, 10, description);
     draw_text(room_width/2 - string_width(explanation) / 2, 25, explanation);
 }
