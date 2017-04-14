@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>image_index = 0
 damage = obj_RiflemanSkills.grenadeDamage;
+radius = obj_RiflemanSkills.grenadeRadius;
 image_speed = 1;
 audio_play_sound(LargeExplosion, 10, false);
 </string>

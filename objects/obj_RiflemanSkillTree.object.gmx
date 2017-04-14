@@ -45,6 +45,12 @@ if (grenadeSkillUnlocked == 0) {
     if (grenadeTier2Skill == 0) {
         instance_create(grenadeX, initialY, obj_GrenadeAmmoInc);
         instance_create(grenadeX, initialY + yOffset, obj_GrenadeDmgInc);
+    } else {
+        grenadeTier3Skill = obj_RiflemanSkills.skills[0,2];
+        if (grenadeTier3Skill == 0) {
+            instance_create(grenadeX, initialY, obj_GrenadeRadiusInc);
+            instance_create(grenadeX, initialY + yOffset, obj_GrenadeDmgInc2);
+        }
     }
 }
 
@@ -104,6 +110,9 @@ if (grenadeSkillUnlocked == 0) {
     if (grenadeTier2Skill = 0) {
         draw_sprite(spr_GrenadeLarge, 0, grenadeX - 8, initialY - 4);
         draw_sprite(spr_GrenadeLarge, 0, grenadeX + 8, initialY + 4);
+        draw_sprite(spr_GrenadeLarge, 0, grenadeX, initialY + yOffset);
+    } else if (grenadeTier3Skill = 0) {
+        draw_sprite(spr_GrenadeLarge, 0, grenadeX, initialY);
         draw_sprite(spr_GrenadeLarge, 0, grenadeX, initialY + yOffset);
     } else {
         no = "No";

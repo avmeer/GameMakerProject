@@ -358,7 +358,7 @@ patrolling = false;
             <kind>1</kind>
             <string>var inRange = false;
 var distance = scr_CalcDistance(x, y, other.x, other.y);
-if(other.image_index == 1 &amp;&amp; distance &lt;= 75){
+if(other.image_index == 1 &amp;&amp; distance &lt;= other.radius){
     inRange = true;
 }
 
@@ -366,7 +366,7 @@ if(inRange) {
     if(ds_list_find_index(grenadesHitBy, other.id) == -1) {
         ds_list_add(grenadesHitBy, other.id);
         alarm[3] = 2 * room_speed;
-        hp -= (other.damage - other.damage * distance/75);
+        hp -= (other.damage - other.damage * distance/other.radius);
         if (hp &lt;= 0){
             audio_play_sound(DeathScream, 10, false);
             instance_destroy();
