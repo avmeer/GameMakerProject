@@ -35,6 +35,9 @@ grenadeMaxAmmo = 3;
 numGrenades = 0;
 grenadeDamage = 100;
 grenadeRadius = 75;
+grenadeBurnDmg = 10;
+grenadeBurnDuration = 3;
+grenadeBurnApplied = false;
 canUpgradeGrenade = false;
 
 // health regen skill var's

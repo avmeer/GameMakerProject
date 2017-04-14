@@ -104,12 +104,14 @@
         <object>objects\obj_GrenadeAmmoInc</object>
         <object>objects\obj_GrenadeDmgInc</object>
         <object>objects\obj_GrenadeRadiusInc</object>
-        <object>objects\obj_GrenadeDmgInc2</object>
+        <object>objects\obj_GrenadeBurnDmg</object>
       </objects>
       <objects name="HealthRegenSkillBoxes">
         <object>objects\obj_HealthRegenUnlock</object>
         <object>objects\obj_HRCooldownDec</object>
         <object>objects\obj_HRHeal_Inc</object>
+        <object>objects\obj_HRDurationInc</object>
+        <object>objects\obj_HRHeal_Inc2</object>
       </objects>
       <objects name="WeaponMultiplierSkill">
         <object>objects\obj_WeaponMultiplierUnlock</object>

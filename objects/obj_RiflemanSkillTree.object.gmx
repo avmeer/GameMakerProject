@@ -49,7 +49,7 @@ if (grenadeSkillUnlocked == 0) {
         grenadeTier3Skill = obj_RiflemanSkills.skills[0,2];
         if (grenadeTier3Skill == 0) {
             instance_create(grenadeX, initialY, obj_GrenadeRadiusInc);
-            instance_create(grenadeX, initialY + yOffset, obj_GrenadeDmgInc2);
+            instance_create(grenadeX, initialY + yOffset, obj_GrenadeBurnDmg);
         }
     }
 }
@@ -65,6 +65,12 @@ if (healthRegenUnlocked == 0) {
     if (healthRegenTier2 == 0) {
         instance_create(healthX, initialY, obj_HRCooldownDec);
         instance_create(healthX, initialY + yOffset, obj_HRHeal_Inc);
+    } else {
+        healthTier3Skill = obj_RiflemanSkills.skills[1,2];
+        if (healthTier3Skill == 0) {
+            instance_create(healthX, initialY, obj_HRDurationInc);
+            instance_create(healthX, initialY + yOffset, obj_HRHeal_Inc2);
+        }
     }
 }
 
@@ -118,7 +124,7 @@ if (grenadeSkillUnlocked == 0) {
         draw_sprite(spr_GrenadeLarge, 0, grenadeX - 8, initialY - 4);
         draw_sprite(spr_GrenadeLarge, 0, grenadeX + 8, initialY + 4);
         draw_sprite(spr_GrenadeLarge, 0, grenadeX, initialY + yOffset);
-    } else if (grenadeTier3Skill = 0) {
+    } else if (grenadeTier3Skill == 0) {
         draw_sprite(spr_GrenadeLarge, 0, grenadeX, initialY);
         draw_sprite(spr_GrenadeLarge, 0, grenadeX, initialY + yOffset);
     } else {
@@ -136,6 +142,9 @@ if (healthRegenUnlocked == 0) {
     draw_sprite_ext(spr_Health, 0, healthX, initialY, 3, 3, 0, c_white, 1);
 } else {
     if (healthRegenTier2 == 0) {
+        draw_sprite_ext(spr_Health, 0, healthX, initialY, 3, 3, 0, c_white, 1);
+        draw_sprite_ext(spr_Health, 0, healthX, initialY + yOffset, 3, 3, 0, c_white, 1);
+    } else if (healthTier3Skill == 0) {
         draw_sprite_ext(spr_Health, 0, healthX, initialY, 3, 3, 0, c_white, 1);
         draw_sprite_ext(spr_Health, 0, healthX, initialY + yOffset, 3, 3, 0, c_white, 1);
     } else {
