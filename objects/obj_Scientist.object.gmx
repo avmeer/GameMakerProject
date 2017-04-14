@@ -185,13 +185,17 @@ if(state == 1 &amp;&amp; point_distance(x,y,776,455) &lt; 5){
     currentText = "I can't shoot for shit. It's under the table you grab it! (Pick up with F)";
     if(obj_Player.numObj &gt; 0){
         state = 2;
-        currentText = "Quick, equip the pistol! (I toggles inventory, click weapon then weapon equip slot)";
+        currentText = "Quick, equip the pistol! (I toggles inventory. Click item then item equip slot)";
+    }
+    if(global.equippedItems[equipSlots.WEAPON] != -1){
+        state = 2;
     }
 }
 
 
 
 if(state == 2 &amp;&amp; global.equippedItems[equipSlots.WEAPON] != -1){
+    state = 2;
     currentText = "Try shooting that bad boy. (Shift + Left Click)";
     if(instance_exists(obj_Bullet)){
         state = 3;
