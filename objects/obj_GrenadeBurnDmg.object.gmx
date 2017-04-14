@@ -73,7 +73,7 @@
             <kind>1</kind>
             <string>if (obj_RiflemanSkills.canUpgradeGrenade == true) {
     obj_RiflemanSkills.skills[0,2] = 2;
-    obj_RiflemanSkills.grenadeDamage += 50;
+    obj_RiflemanSkills.grenadeBurnApplied = true;
     obj_RiflemanSkills.experience -= obj_RiflemanSkills.xpNeeded[0];
     obj_RiflemanSkills.xpNeeded[0] = 400;
     scr_updateXpNeeded();
@@ -105,10 +105,10 @@
           <argument>
             <kind>1</kind>
             <string>if (mouse_hover) {
-    var description = "Increase Grenade damage";
-    var explanation = "Increase base damage from " +
-        string(obj_RiflemanSkills.grenadeDamage) + " to " +
-        string(obj_RiflemanSkills.grenadeDamage + 50);
+    var description = "Unlock burn damage for the grenade";
+    var explanation = "Any enemy hit by the grenade will take " +
+        string(obj_RiflemanSkills.grenadeBurnDmg) + " damage per second over " +
+        string(obj_RiflemanSkills.grenadeBurnDuration) + " seconds";
     draw_text(room_width/2 - string_width(description) / 2, 10, description);
     draw_text(room_width/2 - string_width(explanation) / 2, 25, explanation);
 }
