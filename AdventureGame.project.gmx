@@ -49,6 +49,8 @@
     <sprite>sprites\spr_LegArmor</sprite>
     <sprite>sprites\spr_Boots</sprite>
     <sprite>sprites\spr_Gloves</sprite>
+    <sprite>sprites\spr_Scientist</sprite>
+    <sprite>sprites\spr_ScientistFace</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>
@@ -125,6 +127,7 @@
     <object>objects\obj_House</object>
     <object>objects\obj_RiflemanSkills</object>
     <object>objects\obj_Boss_Putin</object>
+    <object>objects\obj_Scientist</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_LabLevel</room>
