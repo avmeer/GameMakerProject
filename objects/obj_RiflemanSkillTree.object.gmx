@@ -73,6 +73,13 @@ weaponMultiplierUnlocked = obj_RiflemanSkills.skills[2,0];
 // if weapon multiplier skill is locked
 if (weaponMultiplierUnlocked == 0) {
     instance_create(weaponMultiplierX, initialY, obj_WeaponMultiplierUnlock);
+} else {
+    weaponMultiplierTier2 = obj_RiflemanSkills.skills[2,1];
+    // if no tier 2 skill has been chosen
+    if (weaponMultiplierTier2 == 0) {
+        instance_create(weaponMultiplierX, initialY, obj_WMFireRateInc);
+        instance_create(weaponMultiplierX, initialY + yOffset, obj_WMDamageInc);
+    }
 }
 </string>
           </argument>
@@ -144,12 +151,17 @@ if (healthRegenUnlocked == 0) {
 if (weaponMultiplierUnlocked == 0) {
     draw_sprite(spr_AR15, 0, weaponMultiplierX, initialY);
 } else {
-    no = "No";
-    upgrades = "upgrades";
-    remaining = "remaining!";
-    draw_text(weaponMultiplierX - string_width(no) / 2, initialY, no);
-    draw_text(weaponMultiplierX - string_width(upgrades) / 2, initialY + 15, upgrades);
-    draw_text(weaponMultiplierX - string_width(remaining) / 2, initialY + 30, remaining);
+    if (weaponMultiplierTier2 == 0) {
+        draw_sprite(spr_AR15, 0, weaponMultiplierX, initialY);
+        draw_sprite(spr_AR15, 0, weaponMultiplierX, initialY + yOffset);
+    } else {
+        no = "No";
+        upgrades = "upgrades";
+        remaining = "remaining!";
+        draw_text(weaponMultiplierX - string_width(no) / 2, initialY, no);
+        draw_text(weaponMultiplierX - string_width(upgrades) / 2, initialY + 15, upgrades);
+        draw_text(weaponMultiplierX - string_width(remaining) / 2, initialY + 30, remaining);
+    }
 }
 </string>
           </argument>

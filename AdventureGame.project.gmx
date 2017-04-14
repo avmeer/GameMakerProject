@@ -110,6 +110,8 @@
       </objects>
       <objects name="WeaponMultiplierSkill">
         <object>objects\obj_WeaponMultiplierUnlock</object>
+        <object>objects\obj_WMFireRateInc</object>
+        <object>objects\obj_WMDamageInc</object>
       </objects>
     </objects>
     <object>objects\obj_Room_Changer</object>
