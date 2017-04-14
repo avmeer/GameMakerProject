@@ -44,6 +44,7 @@
     <sprite>sprites\spr_Shotgun</sprite>
     <sprite>sprites\spr_Tree</sprite>
     <sprite>sprites\spr_House</sprite>
+    <sprite>sprites\spr_PutinHouse</sprite>
     <sprite>sprites\spr_Putin</sprite>
     <sprite>sprites\spr_ChestArmor</sprite>
     <sprite>sprites\spr_LegArmor</sprite>
