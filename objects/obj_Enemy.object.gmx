@@ -400,8 +400,8 @@ if (inRange) {
         ds_list_add(grenadesHitBy, other.id);
         alarm[3] = 2 * room_speed;
         hp -= (other.damage - other.damage * distance/other.radius);
-        if (obj_RiflemanSkills.grenadeBurnApplied) {
-            numBurnsRemaining = obj_RiflemanSkills.grenadeBurnDuration;
+        if (other.burnApplied) {
+            numBurnsRemaining = other.burnDuration;
             alarm[5] = room_speed;
         }
         if (hp &lt;= 0){
