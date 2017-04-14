@@ -145,6 +145,7 @@
     <object>objects\obj_WallHole</object>
     <object>objects\obj_GrassLevelManager</object>
     <object>objects\obj_Flag</object>
+    <object>objects\obj_PutinManager</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_LabLevel</room>
