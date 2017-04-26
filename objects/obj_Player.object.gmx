@@ -42,6 +42,8 @@ numObj = 0;
 reloading = false;
 
 zoomout = false;
+
+moving = false;
 </string>
           </argument>
         </arguments>
@@ -640,6 +642,7 @@ else {
           <argument>
             <kind>1</kind>
             <string>speed = 0;
+moving = false;
 if (global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; global.equippedItems[equipSlots.WEAPON].canFirePerClick == true) {
     // if the weapon can be fired per click, cancel the fireRateTimer
     fireRateTimerDone = true;
@@ -710,11 +713,15 @@ if (global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; global.equippedItem
     // always move towards mouse cursor when right mouse button is held down
     if (!firing &amp;&amp; point_distance(x,y,mouse_x,mouse_y) &gt; 5){
         speed = 10;
+        moving = true;
         direction = point_direction(x, y, mouse_x, mouse_y);
     }
     // if able to shoot then shoot
     else if( firing &amp;&amp; global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; fireRateTimerDone) 
     {
+        
+        moving = false;    
+    
         if(global.equippedItems[equipSlots.WEAPON].currentAmmo &gt; 0 || 
             obj_RiflemanSkills.applyWeaponMultipliers == true)
         {
@@ -784,7 +791,10 @@ if (global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; global.equippedItem
             alarm[4] = room_speed * 2;
         }
     }
-}else{speed = 0;}// disable player controls if in inventory
+}else{
+    speed = 0;
+    moving = false;
+}// disable player controls if in inventory
 </string>
           </argument>
         </arguments>
@@ -869,12 +879,21 @@ for (i = 0; i &lt; 4; i++){
             <kind>1</kind>
             <string>//drawing player depends on whether or not hit, if hit use the hit shader
 if (hit) { 
-    shader_set(shd_hit);   
-    draw_self();  
+    shader_set(shd_hit);
+    if(moving == true){
+        draw_self();
+    }else{
+        draw_sprite(spr_Player,0,x,y);
+    }
+      
     shader_reset();
 }
 else {
-    draw_self();
+    if(moving == true){
+        draw_self();
+    }else{
+        draw_sprite(spr_Player,0,x,y);
+    }
 }
 </string>
           </argument>
@@ -1053,6 +1072,7 @@ room_goto(rm_RiflemanSkillTree);
           <argument>
             <kind>1</kind>
             <string>firing = true;
+moving = false;
 </string>
           </argument>
         </arguments>
