@@ -61,6 +61,46 @@ skill_3_distance = sizeOfBox;
 skill_3_time_in_seconds = obj_RiflemanSkills.weaponMultiplierCooldown;
 skill_3_time =(skill_3_time_in_seconds / skill_3_distance) * room_speed;
 skill_3_cooling_down = false;
+
+// box for skill 4
+skill_4_box_center_x = view_wview[0] / 2 + sizeOfBox + halfBox;
+skill_4_left = skill_4_box_center_x - halfBox;
+skill_4_top = boxCenterY - halfBox;
+skill_4_bottom = boxCenterY + halfBox;
+skill_4_right = skill_4_box_center_x + halfBox - 1;//alarm[3] will vary
+skill_4_distance = sizeOfBox;
+skill_4_time_in_seconds = obj_RiflemanSkills.fortificationCooldown;
+skill_4_time =(skill_4_time_in_seconds / skill_4_distance) * room_speed;
+skill_4_cooling_down = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>skill_4_right -= 1;
+if (skill_4_right &gt; skill_4_left) {
+    alarm[3] = skill_4_time;
+} else {
+    skill_4_cooling_down = false;
+    skill_4_right = skill_4_left + sizeOfBox - 1;
+}
 </string>
           </argument>
         </arguments>
@@ -239,6 +279,21 @@ if(skill_3_cooling_down) {
     draw_rectangle(skill_3_left, skill_3_top, skill_3_right, skill_3_bottom - 1, false);
 }
 draw_sprite_ext(spr_Border, 0, skill_3_left + halfBox, skill_3_top + halfBox, 3, 3, 0, c_white, 1);
+draw_set_color(c_white);
+draw_set_alpha(1);
+
+// draw fourth skill box
+draw_sprite_ext(spr_Shield, 0, skill_4_left + halfBox, skill_4_top + halfBox, 1, 1, 0, c_white, 1);
+draw_set_alpha(0.75);
+if (obj_RiflemanSkills.skills[3,0] == 0) {
+    draw_set_color(c_gray);
+    draw_rectangle(skill_4_left, skill_4_top, skill_4_right, skill_4_bottom - 1, false);
+}
+draw_set_color(c_red);
+if(skill_4_cooling_down) {
+    draw_rectangle(skill_4_left, skill_4_top, skill_4_right, skill_4_bottom - 1, false);
+}
+draw_sprite_ext(spr_Border, 0, skill_4_left + halfBox, skill_4_top + halfBox, 3, 3, 0, c_white, 1);
 draw_set_color(c_white);
 draw_set_alpha(1);
 </string>

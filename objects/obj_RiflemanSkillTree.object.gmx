@@ -92,7 +92,9 @@ if (weaponMultiplierUnlocked == 0) {
 
 fortificationUnlocked = obj_RiflemanSkills.skills[3,0];
 
-// if stuff yay
+if (fortificationUnlocked == 0) {
+    instance_create(fortificationX, initialY, obj_FortificationUnlock);
+}
 </string>
           </argument>
         </arguments>
@@ -163,6 +165,7 @@ if (healthRegenUnlocked == 0) {
     }
 }
 
+// if weapon multiplier is locked
 if (weaponMultiplierUnlocked == 0) {
     draw_sprite(spr_AR15, 0, weaponMultiplierX, initialY);
 } else {
@@ -178,6 +181,19 @@ if (weaponMultiplierUnlocked == 0) {
         draw_text(weaponMultiplierX - string_width(remaining) / 2, initialY + 30, remaining);
     }
 }
+
+// if fortification is locked
+if (fortificationUnlocked == 0) {
+    draw_sprite(spr_Shield, 0, fortificationX, initialY);
+} else {
+    no = "No";
+    upgrades = "upgrades";
+    remaining = "remaining!";
+    draw_text(fortificationX - string_width(no) / 2, initialY, no);
+    draw_text(fortificationX - string_width(upgrades) / 2, initialY + 15, upgrades);
+    draw_text(fortificationX - string_width(remaining) / 2, initialY + 30, remaining);
+}
+
 </string>
           </argument>
         </arguments>

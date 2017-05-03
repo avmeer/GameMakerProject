@@ -72,6 +72,29 @@ moving = false;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="6">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>obj_RiflemanSkills.applyFortification = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="5">
       <action>
         <libid>1</libid>
@@ -548,10 +571,13 @@ health = clamp(health,0,maxHealth);//never go above max health
           <argument>
             <kind>1</kind>
             <string>//take damage from the enemy bullet, destroy the enemy bullet
-health -= other.damage;
+if (obj_RiflemanSkills.applyFortification) {
+    health -= obj_RiflemanSkills.fortificationModifier * other.damage;
+} else {
+    health -= other.damage;
+}
 hit = true;
 with(other){
-
     instance_destroy();
 }
 
@@ -985,6 +1011,38 @@ room_goto(rm_RiflemanSkillTree);
 }
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="79">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!showInv) {
+    if (obj_RiflemanSkills.skills[3,0] != 0) {
+        if (obj_Skill_Bar.skill_4_cooling_down == false) {
+            obj_RiflemanSkills.applyFortification = true;
+            alarm[6] = obj_RiflemanSkills.fortificationDuration * room_speed;
+            obj_Skill_Bar.skill_4_cooling_down = true;
+            obj_Skill_Bar.alarm[3] = obj_Skill_Bar.skill_4_time;
+        }
+    }
+}
 </string>
           </argument>
         </arguments>

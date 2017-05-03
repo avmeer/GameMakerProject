@@ -55,6 +55,11 @@ weaponMultiplierCooldown = 15;
 canUpgradeWeaponMultiplier = false;
 
 // fortification multiplier skill var's
+fortificationModifier = 0.8;
+applyFortification = false;
+fortificationDuration = 15;
+fortificationCooldown = 30;
+canUpgradeFortification = false;
 
 /*  index 0,j -&gt; grenade
     index 1,j -&gt; health regen
@@ -72,8 +77,8 @@ for (i = 0; i &lt; 4; i++) {
 }
 /* index 0 -&gt; xp needed before next grenade upgrade can be unlocked
     index 1 -&gt; xp before health regen upgrade
-    index 2 -&gt; xp before ? upgrade
-    index 3 -&gt; xp before ? upgrade
+    index 2 -&gt; xp before weapon multiplier upgrade
+    index 3 -&gt; xp before fortification upgrade
 */
 for (i = 0; i &lt; 4; i++) {
     xpNeeded[i] = 100;
@@ -119,6 +124,11 @@ if (experience &gt;= xpNeeded[2]) {
     canUpgradeWeaponMultiplier = true;
 } else {
     canUpgradeWeaponMultiplier = false;
+}
+if (experience &gt;= xpNeeded[3]) {
+    canUpgradeFortification = true;
+} else {
+    canUpgradeFortification = false;
 }
 </string>
           </argument>

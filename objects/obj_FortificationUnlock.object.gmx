@@ -71,7 +71,17 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>if (obj_RiflemanSkills.canUpgradeFortification == true) {
+    obj_RiflemanSkills.skills[3,0] = 1;
+    obj_RiflemanSkills.experience -= obj_RiflemanSkills.xpNeeded[3];
+    obj_RiflemanSkills.xpNeeded[3] = 200;
+    scr_updateXpNeeded();
+    room_goto(global.previousRoom);
+} else {
+    showWarning = true;
+    alarm[0] = 3 * room_speed;
+}
+</string>
           </argument>
         </arguments>
       </action>
@@ -96,7 +106,8 @@
             <string>draw_set_color(c_white);
 if (mouse_hover) {
     var description = "Unlock the Fortification ability";
-    var explanation = "Temporarily reduce damage taken by x% for y seconds."
+    var explanation = "Temporarily reduce damage taken by 20% for 15 seconds. " +
+        "Cooldown is 30 seconds.";
     draw_text(room_width/2 - string_width(description) / 2, 10, description);
     draw_text(room_width / 2 - string_width(explanation) / 2, 25, explanation);
 }
