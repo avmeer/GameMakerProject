@@ -921,6 +921,10 @@ else {
         draw_sprite(spr_Player,0,x,y);
     }
 }
+
+if (obj_RiflemanSkills.applyFortification) {
+    draw_sprite(spr_PlayerShield, 0, x, y);
+}
 </string>
           </argument>
         </arguments>

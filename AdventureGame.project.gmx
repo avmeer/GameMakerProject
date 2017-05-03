@@ -58,6 +58,7 @@
     <sprite>sprites\spr_MerchantFace</sprite>
     <sprite>sprites\spr_Flag</sprite>
     <sprite>sprites\spr_Shield</sprite>
+    <sprite>sprites\spr_PlayerShield</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>
