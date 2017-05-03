@@ -34,6 +34,8 @@ healthX = grenadeX + xOffset;
 
 weaponMultiplierX = healthX + xOffset;
 
+fortificationX = weaponMultiplierX + xOffset;
+
 grenadeSkillUnlocked = obj_RiflemanSkills.skills[0,0];
 
 // if grenade skill is locked
@@ -87,6 +89,10 @@ if (weaponMultiplierUnlocked == 0) {
         instance_create(weaponMultiplierX, initialY + yOffset, obj_WMDamageInc);
     }
 }
+
+fortificationUnlocked = obj_RiflemanSkills.skills[3,0];
+
+// if stuff yay
 </string>
           </argument>
         </arguments>

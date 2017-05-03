@@ -125,6 +125,9 @@
         <object>objects\obj_WMFireRateInc</object>
         <object>objects\obj_WMDamageInc</object>
       </objects>
+      <objects name="FortificationSkill">
+        <object>objects\obj_FortificationUnlock</object>
+      </objects>
     </objects>
     <object>objects\obj_Room_Changer</object>
     <object>objects\obj_Skill_Bar</object>
