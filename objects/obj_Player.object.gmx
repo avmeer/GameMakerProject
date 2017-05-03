@@ -679,44 +679,6 @@ if (global.equippedItems[equipSlots.WEAPON] != -1 &amp;&amp; global.equippedItem
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="54">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(!showInv){
-    if(obj_RiflemanSkills.skills[0,0] != 0) {
-        if(obj_RiflemanSkills.numGrenades &gt; 0 &amp;&amp; obj_Skill_Bar.skill_1_cooling_down == false) {
-            grenade = instance_create(x, y - 0.5 * sprite_height, obj_Grenade);
-            grenade.targetX = mouse_x;
-            grenade.targetY = mouse_y;
-            angleToTarget = point_direction(x,y - 0.5 * sprite_height, mouse_x, mouse_y);
-            grenade.speed = 5;
-            grenade.direction = angleToTarget;
-            obj_Skill_Bar.skill_1_cooling_down = true;
-            obj_Skill_Bar.alarm[0] = obj_Skill_Bar.skill_1_time;
-            
-            obj_RiflemanSkills.numGrenades--;
-        }
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="6" enumb="50">
       <action>
         <libid>1</libid>
@@ -930,38 +892,6 @@ if (obj_RiflemanSkills.applyFortification) {
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="87">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(!showInv) {
-    if(obj_RiflemanSkills.skills[2,0] != 0) {
-        if(obj_Skill_Bar.skill_3_cooling_down == false) {
-            obj_RiflemanSkills.applyWeaponMultipliers = true;
-            alarm[5] = obj_RiflemanSkills.weaponMultiplierDuration * room_speed;
-            obj_Skill_Bar.skill_3_cooling_down = true;
-            obj_Skill_Bar.alarm[2] = obj_Skill_Bar.skill_3_time;
-        }
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="9" enumb="83">
       <action>
         <libid>1</libid>
@@ -1020,7 +950,7 @@ room_goto(rm_RiflemanSkillTree);
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="79">
+    <event eventtype="9" enumb="52">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -1052,7 +982,7 @@ room_goto(rm_RiflemanSkillTree);
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="77">
+    <event eventtype="9" enumb="51">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -1069,21 +999,22 @@ room_goto(rm_RiflemanSkillTree);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(!zoomout){
-    view_wview[0] = room_width;
-    view_hview[0] = room_height;
-    zoomout = true;
-}else{
-    view_wview[0] = 1024;
-    view_hview[0] = 768;
-    zoomout = false;
+            <string>if(!showInv) {
+    if(obj_RiflemanSkills.skills[2,0] != 0) {
+        if(obj_Skill_Bar.skill_3_cooling_down == false) {
+            obj_RiflemanSkills.applyWeaponMultipliers = true;
+            alarm[5] = obj_RiflemanSkills.weaponMultiplierDuration * room_speed;
+            obj_Skill_Bar.skill_3_cooling_down = true;
+            obj_Skill_Bar.alarm[2] = obj_Skill_Bar.skill_3_time;
+        }
+    }
 }
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="72">
+    <event eventtype="9" enumb="50">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -1108,6 +1039,44 @@ room_goto(rm_RiflemanSkillTree);
             alarm[2] = room_speed;
             obj_Skill_Bar.skill_2_cooling_down = true;
             obj_Skill_Bar.alarm[1] = obj_Skill_Bar.skill_2_time;
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="49">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(!showInv){
+    if(obj_RiflemanSkills.skills[0,0] != 0) {
+        if(obj_RiflemanSkills.numGrenades &gt; 0 &amp;&amp; obj_Skill_Bar.skill_1_cooling_down == false) {
+            grenade = instance_create(x, y - 0.5 * sprite_height, obj_Grenade);
+            grenade.targetX = mouse_x;
+            grenade.targetY = mouse_y;
+            angleToTarget = point_direction(x,y - 0.5 * sprite_height, mouse_x, mouse_y);
+            grenade.speed = 5;
+            grenade.direction = angleToTarget;
+            obj_Skill_Bar.skill_1_cooling_down = true;
+            obj_Skill_Bar.alarm[0] = obj_Skill_Bar.skill_1_time;
+            
+            obj_RiflemanSkills.numGrenades--;
         }
     }
 }

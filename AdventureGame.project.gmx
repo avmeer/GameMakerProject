@@ -89,10 +89,7 @@
     <object>objects\obj_Weapon</object>
     <object>objects\obj_Health</object>
     <object>objects\obj_BigHealth</object>
-    <object>objects\obj_TestingInventorySpawning</object>
-    <object>objects\obj_TestingEnemySpawning</object>
     <object>objects\obj_Inventory</object>
-    <object>objects\inv_BACKUP</object>
     <object>objects\obj_Helmet</object>
     <object>objects\obj_ChestArmor</object>
     <object>objects\obj_LegArmor</object>
@@ -101,7 +98,6 @@
     <object>objects\obj_Blood</object>
     <object>objects\obj_Small_Ruble_Pile</object>
     <object>objects\obj_Merchant</object>
-    <object>objects\obj_Dialog</object>
     <object>objects\obj_InvisibleWallFar</object>
     <object>objects\obj_InvisibleWallNear</object>
     <object>objects\obj_Point</object>
