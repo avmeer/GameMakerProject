@@ -47,8 +47,8 @@ healCooldown = 15;
 canUpgradeHealthRegen = false;
 
 // weapon multiplier skill var's
-fireRateMultiplier = 1;
-bulletDamageMultiplier = 1;
+fireRateMultiplier = 1.2;
+bulletDamageMultiplier = 1.2;
 applyWeaponMultipliers = false;
 weaponMultiplierDuration = 5;
 weaponMultiplierCooldown = 15;
