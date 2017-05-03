@@ -61,6 +61,7 @@
   <backgrounds name="background">
     <background>background\LabLevel</background>
     <background>background\GrassTestLevel</background>
+    <background>background\WoodFloor</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
