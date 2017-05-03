@@ -12,6 +12,7 @@
     <sound>sound\ItemPickUp</sound>
     <sound>sound\Tunneling</sound>
     <sound>sound\Purchase</sound>
+    <sound>sound\BackgroundMusic</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_Wall</sprite>
