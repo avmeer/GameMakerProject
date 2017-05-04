@@ -131,7 +131,6 @@
         <object>objects\obj_FortificationUnlock</object>
       </objects>
     </objects>
-    <object>objects\obj_Room_Changer</object>
     <object>objects\obj_Skill_Bar</object>
     <objects name="SkillTrees">
       <object>objects\obj_RiflemanSkillTree</object>

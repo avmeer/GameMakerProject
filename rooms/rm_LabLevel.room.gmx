@@ -69,7 +69,6 @@
     <instance objName="obj_Wall" x="-16" y="1243" name="inst_CC4AC7CB" locked="0" code="" scaleX="6.5" scaleY="1" colour="4294967295" rotation="30"/>
     <instance objName="obj_Wall" x="150" y="1152" name="inst_FCFA2143" locked="0" code="" scaleX="6.69999980926514" scaleY="1" colour="4294967295" rotation="60"/>
     <instance objName="obj_Wall" x="178" y="799" name="inst_75626737" locked="0" code="" scaleX="6.69999980926514" scaleY="1" colour="4294967295" rotation="-60"/>
-    <instance objName="obj_Room_Changer" x="512" y="288" name="inst_BD0A0EAF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Skill_Bar" x="448" y="224" name="inst_2353227E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Scientist" x="480" y="1120" name="inst_4D3E5A00" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Weapon" x="818" y="295" name="inst_E60E8541" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
