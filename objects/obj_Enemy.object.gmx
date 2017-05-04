@@ -72,6 +72,15 @@ if (drop_money &lt; 5){
     instance_create(x,y,obj_Small_Ruble_Pile);
 }
 
+drop_health = random_range(0,100);
+
+if(drop_health &lt; 25){
+    instance_create(x,y,obj_BigHealth);
+}
+else if(drop_health &lt; 75){
+    instance_create(x,y,obj_Health);
+}
+
 itemsArraySize = 8;
 potentialItemsArray[0] = obj_Weapon;
 potentialItemsArray[1] = obj_testWeapon;

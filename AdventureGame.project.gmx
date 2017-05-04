@@ -159,6 +159,7 @@
     <object>objects\obj_DoorToFirst</object>
     <object>objects\obj_BrownWall</object>
     <object>objects\obj_GoToBigGrass</object>
+    <object>objects\obj_Cabin_Manager</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_LabLevel</room>

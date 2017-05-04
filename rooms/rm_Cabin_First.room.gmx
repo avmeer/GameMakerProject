@@ -7,7 +7,7 @@
   <hsnap>32</hsnap>
   <isometric>0</isometric>
   <speed>30</speed>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
   <code>/*
@@ -16,7 +16,6 @@ In this room there is basic character movement and basic combat with an enemy
 To spawn an enemy where the mouse cursor is, press 2
 To spawn a health globe where the mouse cursor is, press 1 (must have &lt;100 hp to pickup)
 */
-
 randomize();
 
 itemsArraySize = 8;

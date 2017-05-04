@@ -30,7 +30,7 @@ Created 2/10/17
 First pass at inventory system, lots of hardcoding of numbers that need to be changed
 Used in the inventory test room
 */
-audio_play_sound(BackgroundMusic, 10, false);
+audio_play_sound(BackgroundMusic, 10, true);
 x1 = view_xport[view_current] + 650;
 y1 = view_yport[view_current] + 25;
 x2 = x1 + 166 * 2;
@@ -103,6 +103,9 @@ for (i = 0; i &lt; 6; i++){
 
 global.savedMaxHealth = 100;
 global.savedHealth = 100;
+
+globalvar newCabin;
+newCabin = true;
 
 </string>
           </argument>
