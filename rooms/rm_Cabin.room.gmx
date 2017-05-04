@@ -7,7 +7,7 @@
   <hsnap>32</hsnap>
   <isometric>0</isometric>
   <speed>30</speed>
-  <persistent>-1</persistent>
+  <persistent>0</persistent>
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
   <code>/*
@@ -15,7 +15,38 @@ This room was created as a part of the deliverable discussed for 2/10/17
 In this room there is basic character movement and basic combat with an enemy
 To spawn an enemy where the mouse cursor is, press 2
 To spawn a health globe where the mouse cursor is, press 1 (must have &lt;100 hp to pickup)
-*/</code>
+*/
+
+randomize();
+
+itemsArraySize = 8;
+potentialItemsArray[0] = obj_Weapon;
+potentialItemsArray[1] = obj_testWeapon;
+potentialItemsArray[2] = obj_Helmet;
+potentialItemsArray[3] = obj_Shotgun;
+potentialItemsArray[4] = obj_ChestArmor;
+potentialItemsArray[5] = obj_LegArmor;
+potentialItemsArray[6] = obj_Boots;
+potentialItemsArray[7] = obj_Gloves;
+itemIndex = random_range(0,itemsArraySize);
+ySpawnHeight = random_range(250,500);
+instance_create(500,ySpawnHeight, potentialItemsArray[itemIndex]);
+
+spawnOthersRandom = random_range(0,100);
+if(spawnOthersRandom &lt; 33){
+    instance_create(random_range(400,800),random_range(100,640), obj_Enemy);
+}
+
+if(spawnOthersRandom &gt; 33 &amp;&amp; spawnOthersRandom &lt; 80){
+    instance_create(random_range(400,800),random_range(100,640), obj_Enemy);
+    instance_create(random_range(400,800),random_range(100,640), obj_Enemy);
+}
+
+if(spawnOthersRandom &gt; 80){
+    instance_create(random_range(400,800),random_range(100,640), obj_Enemy);
+    instance_create(random_range(400,800),random_range(100,640), obj_Enemy);
+    instance_create(random_range(400,800),random_range(100,640), obj_Enemy);
+}</code>
   <enableViews>0</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
@@ -56,15 +87,13 @@ To spawn a health globe where the mouse cursor is, press 1 (must have &lt;100 hp
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
   </views>
   <instances>
-    <instance objName="obj_Player" x="96" y="160" name="inst_8DE6F3D9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_Boss_Putin" x="544" y="448" name="inst_29F174D7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_PutinManager" x="320" y="64" name="inst_5416C6A0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_BrownWall" x="32" y="32" name="inst_F33FB8BF" locked="0" code="" scaleX="1" scaleY="9" colour="4294967295" rotation="0"/>
-    <instance objName="obj_BrownWall" x="960" y="32" name="inst_0FF30BCD" locked="0" code="" scaleX="1" scaleY="22" colour="4294967295" rotation="0"/>
-    <instance objName="obj_BrownWall" x="64" y="704" name="inst_B596534F" locked="0" code="" scaleX="29" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_BrownWall" x="64" y="32" name="inst_E02383C4" locked="0" code="" scaleX="29" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_BrownWall" x="32" y="448" name="inst_D3934667" locked="0" code="" scaleX="1" scaleY="9" colour="4294967295" rotation="0"/>
-    <instance objName="obj_DoorToGrassLvl" x="32" y="320" name="inst_71C283A3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_Player" x="128" y="416" name="inst_8DE6F3D9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_BrownWall" x="32" y="32" name="inst_D6211BFB" locked="0" code="" scaleX="1" scaleY="8" colour="4294967295" rotation="0"/>
+    <instance objName="obj_BrownWall" x="960" y="32" name="inst_A9B54DE8" locked="0" code="" scaleX="1" scaleY="22" colour="4294967295" rotation="0"/>
+    <instance objName="obj_BrownWall" x="33" y="704" name="inst_BFBE16F7" locked="0" code="" scaleX="29" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_BrownWall" x="32" y="32" name="inst_63F78FF2" locked="0" code="" scaleX="29" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_DoorToGrassLvl" x="32" y="289" name="inst_DF822662" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_BrownWall" x="32" y="416" name="inst_5AC45930" locked="0" code="" scaleX="1" scaleY="9" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

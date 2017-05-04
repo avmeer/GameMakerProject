@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>//base weapon that player starts out with (used in inventory testing and enemy test room)
 randomize();
-damage = random_range(1,10);
+damage = random_range(5,10);
 itemType = equipSlots.WEAPON;
 typeOfWeapon = weaponType.PISTOL;
 fireRate = 1;

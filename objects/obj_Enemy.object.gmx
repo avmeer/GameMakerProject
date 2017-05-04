@@ -320,6 +320,32 @@ if (hit &amp;&amp; alarm[1] &lt;= 0) {
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_BrownWall">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//enemies cant go through walls
+x = xprevious;
+y = yprevious;
+patrolling = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_House">
       <action>
         <libid>1</libid>
