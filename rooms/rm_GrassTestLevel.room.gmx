@@ -128,8 +128,6 @@
     <instance objName="obj_House" x="160" y="3008" name="inst_21E7BBB0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Tree" x="2976" y="1376" name="inst_7C6341C2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Tree" x="3296" y="544" name="inst_F365E767" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_WallHole" x="-48" y="-45" name="inst_C03737B1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_Wall" x="-23" y="173" name="inst_E6C24FAA" locked="0" code="" scaleX="10" scaleY="1" colour="4294967295" rotation="45"/>
     <instance objName="obj_GrassLevelManager" x="256" y="160" name="inst_C0AD544E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_PutinHouse" x="2815" y="2998" name="inst_04B02EAA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Wall" x="2613" y="2767" name="inst_601B84A3" locked="0" code="" scaleX="8" scaleY="1" colour="4294967295" rotation="-30"/>

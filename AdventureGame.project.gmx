@@ -62,6 +62,7 @@
     <sprite>sprites\spr_BrownWall</sprite>
     <sprite>sprites\spr_PlayerShield</sprite>
     <sprite>sprites\spr_DoorToGrassLvl</sprite>
+    <sprite>sprites\spr_GoToBigGrass</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\LabLevel</background>
@@ -153,15 +154,20 @@
     <object>objects\obj_Flag</object>
     <object>objects\obj_PutinManager</object>
     <object>objects\obj_DoorToCabin</object>
+    <object>objects\obj_DoorToFirstCabin</object>
     <object>objects\obj_DoorToGrassLvl</object>
+    <object>objects\obj_DoorToFirst</object>
     <object>objects\obj_BrownWall</object>
+    <object>objects\obj_GoToBigGrass</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_LabLevel</room>
+    <room>rooms\rm_SegwayLevel</room>
     <room>rooms\rm_GrassTestLevel</room>
     <room>rooms\rm_TestingPutin</room>
     <room>rooms\rm_RiflemanSkillTree</room>
     <room>rooms\rm_Cabin</room>
+    <room>rooms\rm_Cabin_First</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

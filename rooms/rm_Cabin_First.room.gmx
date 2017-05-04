@@ -92,8 +92,8 @@ if(spawnOthersRandom &gt; 80){
     <instance objName="obj_BrownWall" x="960" y="32" name="inst_A9B54DE8" locked="0" code="" scaleX="1" scaleY="22" colour="4294967295" rotation="0"/>
     <instance objName="obj_BrownWall" x="33" y="704" name="inst_BFBE16F7" locked="0" code="" scaleX="30" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_BrownWall" x="32" y="32" name="inst_63F78FF2" locked="0" code="" scaleX="30" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_DoorToGrassLvl" x="32" y="288" name="inst_DF822662" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_BrownWall" x="32" y="416" name="inst_5AC45930" locked="0" code="" scaleX="1" scaleY="9" colour="4294967295" rotation="0"/>
+    <instance objName="obj_DoorToFirst" x="32" y="288" name="inst_97B1C910" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
