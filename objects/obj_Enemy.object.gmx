@@ -39,6 +39,7 @@ speed = 0;
 patrolling = false;
 randomize();
 aggroForFirstTime = true;
+destroyClean = false;
 
 //may want stuff for checking if stuck but still aggro
 </string>
@@ -63,37 +64,39 @@ aggroForFirstTime = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>obj_RiflemanSkills.experience += 50;
-
-inst = instance_create(x, y, obj_Blood);
-
-drop_money = random_range(0,10);
-if (drop_money &lt; 5){
-    instance_create(x,y,obj_Small_Ruble_Pile);
-}
-
-drop_health = random_range(0,100);
-
-if(drop_health &lt; 25){
-    instance_create(x,y,obj_BigHealth);
-}
-else if(drop_health &lt; 75){
-    instance_create(x,y,obj_Health);
-}
-
-itemsArraySize = 8;
-potentialItemsArray[0] = obj_Weapon;
-potentialItemsArray[1] = obj_testWeapon;
-potentialItemsArray[2] = obj_Helmet;
-potentialItemsArray[3] = obj_Shotgun;
-potentialItemsArray[4] = obj_ChestArmor;
-potentialItemsArray[5] = obj_LegArmor;
-potentialItemsArray[6] = obj_Boots;
-potentialItemsArray[7] = obj_Gloves;
-itemIndex = random_range(0,itemsArraySize);
-drop_item = random_range(0,100);
-if (drop_item &lt; 33){
-    instance_create(x,y, potentialItemsArray[itemIndex]);
+            <string>if(destroyClean == false){
+    obj_RiflemanSkills.experience += 50;
+    
+    inst = instance_create(x, y, obj_Blood);
+    
+    drop_money = random_range(0,10);
+    if (drop_money &lt; 5){
+        instance_create(x,y,obj_Small_Ruble_Pile);
+    }
+    
+    drop_health = random_range(0,100);
+    
+    if(drop_health &lt; 25){
+        instance_create(x,y,obj_BigHealth);
+    }
+    else if(drop_health &lt; 75){
+        instance_create(x,y,obj_Health);
+    }
+    
+    itemsArraySize = 8;
+    potentialItemsArray[0] = obj_Weapon;
+    potentialItemsArray[1] = obj_testWeapon;
+    potentialItemsArray[2] = obj_Helmet;
+    potentialItemsArray[3] = obj_Shotgun;
+    potentialItemsArray[4] = obj_ChestArmor;
+    potentialItemsArray[5] = obj_LegArmor;
+    potentialItemsArray[6] = obj_Boots;
+    potentialItemsArray[7] = obj_Gloves;
+    itemIndex = random_range(0,itemsArraySize);
+    drop_item = random_range(0,100);
+    if (drop_item &lt; 33){
+        instance_create(x,y, potentialItemsArray[itemIndex]);
+    }
 }
 </string>
           </argument>

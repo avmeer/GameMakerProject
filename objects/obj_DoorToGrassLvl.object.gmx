@@ -25,7 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>room_goto(rm_GrassTestLevel);
+            <string>with (obj_Enemy) {
+    destroyClean = true;
+    instance_destroy();
+}
+room_goto(rm_GrassTestLevel);
 newCabin = true;
 </string>
           </argument>
