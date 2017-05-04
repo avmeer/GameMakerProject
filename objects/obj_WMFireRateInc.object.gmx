@@ -75,7 +75,7 @@
     obj_RiflemanSkills.skills[2,1] = 1;
     obj_RiflemanSkills.fireRateMultiplier = 1.5;
     obj_RiflemanSkills.experience -= obj_RiflemanSkills.xpNeeded[2];
-    obj_RiflemanSkills.xpNeeded[2] = 300;
+    obj_RiflemanSkills.xpNeeded[2] = -1;
     scr_updateXpNeeded();
     room_goto(global.previousRoom);
 } else {

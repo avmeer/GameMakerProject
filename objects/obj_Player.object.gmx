@@ -380,7 +380,7 @@ y = yprevious;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(obj_RiflemanSkills.numGrenades + 1 &lt; obj_RiflemanSkills.grenadeMaxAmmo) {
+            <string>if(obj_RiflemanSkills.numGrenades + 1 &lt;= obj_RiflemanSkills.grenadeMaxAmmo) {
     with (other) {
         instance_destroy()
     }
@@ -835,7 +835,7 @@ var xOff = 100;
 
 draw_set_alpha(0.8);
 draw_set_color(c_black);
-if (obj_RiflemanSkills.canUpgradeSkill == false) {
+if (obj_RiflemanSkills.canUpgradeSkill == false || !scr_CanUpgrade()) {
     draw_rectangle(150 - xOff ,64 + yOff ,375 - xOff ,124 + yOff ,false);
 } else {
     draw_rectangle(150 - xOff ,64 + yOff ,375 - xOff ,139 + yOff ,false);
@@ -855,7 +855,7 @@ if(global.equippedItems[equipSlots.WEAPON] != -1){
 draw_text(150 - xOff ,79+ yOff ,"Grenades: "+string(obj_RiflemanSkills.numGrenades));
 draw_text(150 - xOff ,93+ yOff ,"Health: "+string(obj_Player.health) + " / " + string(maxHealth));
 draw_text(150 - xOff, 109 + yOff, "Exp: " + string(obj_RiflemanSkills.experience));
-if (obj_RiflemanSkills.canUpgradeSkill == true) {
+if (obj_RiflemanSkills.canUpgradeSkill == true &amp;&amp; scr_CanUpgrade()) {
     draw_text(160 - xOff, 124 + yOff, "Skill Available!");
 }
 

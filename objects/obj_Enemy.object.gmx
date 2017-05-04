@@ -83,6 +83,14 @@ destroyClean = false;
         instance_create(x,y,obj_Health);
     }
     
+    // if grenade skill is unlocked
+    if(obj_RiflemanSkills.skills[0,0] == 1) {
+        drop_grenade = random_range(0,100);
+        if (drop_grenade &lt; 10) {
+            instance_create(x, y, obj_GrenadeAmmo);
+        }
+    }
+    
     itemsArraySize = 8;
     potentialItemsArray[0] = obj_Weapon;
     potentialItemsArray[1] = obj_testWeapon;

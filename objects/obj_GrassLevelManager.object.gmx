@@ -79,12 +79,14 @@
             <string>currentText = "You can buy items from me! You'll need some money though.
 I recommend killing some more of those attackers.
 I did hear a rumor that they've got some leader holed up in a house somewhere around here.
-I'm sure his house has something special about it to identify it.";
+I'm sure his house has something special about it to identify it.
+You're bound to get more experienced as you fight.
+You can press S to further hone your skills!";
 
 text_start_x = view_xview[0] + 150;
 text_start_y =view_yview[0] + 100;
 text_end_x = text_start_x + string_width(currentText);
-text_end_y = text_start_y + 60;
+text_end_y = text_start_y + 90;
 
 
 if(merchantTalking == true){

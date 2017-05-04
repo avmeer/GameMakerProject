@@ -74,7 +74,7 @@
             <string>if (obj_RiflemanSkills.canUpgradeFortification == true) {
     obj_RiflemanSkills.skills[3,0] = 1;
     obj_RiflemanSkills.experience -= obj_RiflemanSkills.xpNeeded[3];
-    obj_RiflemanSkills.xpNeeded[3] = 200;
+    obj_RiflemanSkills.xpNeeded[3] = -1;
     scr_updateXpNeeded();
     room_goto(global.previousRoom);
 } else {

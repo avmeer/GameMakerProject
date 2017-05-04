@@ -75,7 +75,7 @@
     obj_RiflemanSkills.skills[0,2] = 1;
     obj_RiflemanSkills.grenadeRadius = 100;
     obj_RiflemanSkills.experience -= obj_RiflemanSkills.xpNeeded[0];
-    obj_RiflemanSkills.xpNeeded[0] = 400;
+    obj_RiflemanSkills.xpNeeded[0] = -1;
     scr_updateXpNeeded();
     room_goto(global.previousRoom);
 } else {
